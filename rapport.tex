@@ -8,5 +8,109 @@
 
 \begin{document}
 \input{title.tex}
+\section{Resources}
+We have 6 persons available for completing the application. Every person has their own personal computer with 
+development tools for the \href{java runtime environment}{TODO:link}, the \href{PostgreSQL}{TODO:link} database, 
+and the \href{JSON}{TODO link} object interface.
+
+We estimate a budget of 0 NOK. 
+
+\section{Time and budget estimate}
+Short introduction here
+\subsection{Time estimate}
+We have estimated 18 workdays of 8 hours, with 6 developers. This gives us $864$ work hours.
+
+
+\subsection{Budget estimate}
+
+
+\section{Deadlines}
+The absolute deadlines are required from our customer(the exercise). 
+\begin{table}[h]
+    \begin{center}
+    \caption{Deadlines} 
+    \label{deadline}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\ 
+        \hline
+        $Task$ & $Due by date$\\
+        \hline 
+    PU1  Prosjektplan a && 2.mars\\
+    PU2  Systemtestplan kapittel 4.1 i boka && 2.mars\\
+    KTN  Prosjektplan kapittel 6.3.1 i boka && 3.mars\\
+    DB   ER modell&& 6.mars\\
+    MMI  D2.1 og 2.2 && 7.mars\\
+    PU3  Overordnet Design && 9.mars\\
+    DB2  Logisk databaseskjema && 14.mars\\
+    MMI  del 3 && 14.mars\\
+    PU4  Implementasjon og testing && 21.mars\\
+    PU5  Dokumentasjon && 21.mars\\
+    KTN  working implementation && 24.mars\\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+
+
+
+\section{Responsibilities}
+We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
+client model and client view. 
+\subsection{Database}
+
+\subsection{Network communication}
+
+KTN Separate project
+Planning:12
+	Classediagram 4
+	Sequencediagram 6
+		-login 2
+		- send message from client 2
+		- logout 2
+	A short textual description of your design. 2
+
+Implementation and testing:22
+	Play/ learn JSON 4
+	Server and client:
+		Login function 6
+		Logout function 6
+		Send message 6
+	Extra functionality 0-24
+Extra testing:4
+	Many clients 4
+Total: 38
+
+KTN Common project:
+Implementation and testing: 60.
+	Communication between Server and clients 30
+		Send JSON objects to client logged in client. 
+        and retrieve them from the database
+		
+	Communication between clients and server passing JSON objects: 30
+		Create error if inconsistency and send back to client. 
+        and add them to the database if consistent
+Total: 60
+
+98 hours overall. 
+\subsection{Client model}
+
+\subsection{Client view}
+Time to make GUI:
+
+The group meets and discusses how we want the user interface to be: 12 hours
+Designing the user interface using paper models: 12 hours
+Show papermodel to studass and other group: 6
+Fix papermodel after feedback: 3 hours
+Consptual model: 6
+Screendesign: 12
+Construction design: 12
+	Programming of user interface: 
+	Login screen: 4
+	Main screen:
+		Appointment view: 16
+		Week view: 16
+		Other functionality 16
+
+Estimated time to make GUI: 115
 
 \end{document}
