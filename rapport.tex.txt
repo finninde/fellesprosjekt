@@ -1,0 +1,67 @@
+﻿\documentclass[a4paper, english, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\begin{document}
+\input{title.tex}
+\section{Resources}
+We have 6 persons available for completing the application. Every person has their own personal computer with 
+development tools for the \href{java runtime environment}{TODO:link}, the \href{PostgreSQL}{TODO:link} database, 
+and the \href{JSON}{TODO link} object interface.
+
+We estimate a budget of 0 NOK. 
+
+\section{Time and budget estimate}
+Short introduction here
+\subsection{Time estimate}
+We have estimated 18 workdays of 8 hours, with 6 developers. This gives us $864$ work hours.
+
+
+\subsection{Budget estimate}
+
+
+\section{Deadlines}
+The absolute deadlines are required from our customer(the exercise). 
+\begin{table}[h]
+    \begin{center}
+    \caption{Deadlines} 
+    \label{deadline}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\ 
+        \hline
+        $Task$ & $Due by date$\\
+        \hline 
+    PU1  Prosjektplan a && 2.mars\\
+    PU2  Systemtestplan kapittel 4.1 i boka && 2.mars\\
+    KTN  Prosjektplan kapittel 6.3.1 i boka && 3.mars\\
+    DB   ER modell&& 6.mars\\
+    MMI  D2.1 og 2.2 && 7.mars\\
+    PU3  Overordnet Design && 9.mars\\
+    DB2  Logisk databaseskjema && 14.mars\\
+    MMI  del 3 && 14.mars\\
+    PU4  Implementasjon og testing && 21.mars\\
+    PU5  Dokumentasjon && 21.mars\\
+    KTN  working implementation && 24.mars\\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+
+
+
+\section{Responsibilities}
+We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
+client model and client view. 
+\subsection{Database}
+
+\subsection{Network communication}
+
+\subsection{Client model}
+
+\subsection{Client view}
+
+\end{document}
