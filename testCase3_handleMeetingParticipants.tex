@@ -1,0 +1,36 @@
+\begin{testCase3_handleMeetingParticipants}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 3 \\ \hline
+Test item & Manage meeting participants and respond to invites. \\ \hline
+Approach & Appointment-creater opens an appointment \\ \hline
+Item pass/ fail criteria & All registered members are available to invite. \\ \hline
+Input data & 
+\begin*{itemize}
+	\item Participants the user wants to invite. 
+	\item Groups the user wants to invite. 
+\end{itemize}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item Participants and groups the user invited sees the new appointment in their calendar.
+	\item Responds are shown in the appointment.
+	\item A user can choose to hide rejected appointments
+\end{enumerate} \\ \hline
+Testing task &
+\begin{task steps}
+	\item 1. The user initiate edit or add appointment
+	\item 2. A popup window or panel is shown. 
+	\item 3. The user select participants from the user list and groups and invites. 
+	\item 4. Login as one of the invited users. 
+	\item 5. The appointment is shown in the calendar
+	\item 6. Reject the invite and hide the appointment
+	\item 7. Login as one of the group members invited
+	\item 8. The appointment is shown in the calendar
+	\item 9. Accept the invite.
+	\item 10. Login as the user in step 3. Check that the updated status from the participants are shown. 
+\end{task steps}	\\ \hline
+Necessary environmental requirements & More than two users exist, and one group.   \\ \hline
+References to user scenario, use case, sequence diagrams, and overall class diagram & None
+Any dependency between this test and the other tests defined & Login has to work, add or edit appointment  \\ \hline
+
+\end{testCase3_handleMeetingParticipants}

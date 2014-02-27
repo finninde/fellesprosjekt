@@ -1,0 +1,37 @@
+\begin{addAppointment}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 2 \\ \hline
+Test item & Add an appointment \\ \hline
+Approach & User initiate the add an appointment action \\ \hline
+Item pass/ fail criteria & An appointment is created and shown in the participants calendars, none of the others\\ \hline
+Input data & 
+\begin*{itemize}
+	\item Start-date and time
+	\item End-date and time
+	\item Description
+	\item (Optional) A list of participants
+	\item (Optional) A location or meeting room. 
+\end{itemize}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item The appointment is shown in the participants calendars.
+\end{enumerate} \\ \hline
+Testing task &
+\begin{task steps}
+	\item 1. The user initiate add appointment
+	\item 2. A popup window or panel is shown. 
+	\item 3. A user set a appointment name. 
+	\item 4. The user selects: start-date and time, end-date and time. 
+	\item 5. The user adds a description
+	\item 6. The user select participants
+	\item 7. The user select a location
+	\item 8. The user saves.
+	\item 9. The appointment is shown in the calendars
+	\item 10. Login as one of the participants and make sure the new appointment is shown. 
+\end{task steps}	\\ \hline
+Necessary environmental requirements & More than two user exist.   \\ \hline
+References to user scenario, use case, sequence diagrams, and overall class diagram & None
+Any dependent between this test and the other tests defined & Login has to work  \\ \hline
+
+\end{addAppointment}

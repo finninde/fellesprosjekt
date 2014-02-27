@@ -1,0 +1,30 @@
+\begin{alarm}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 14 \\ \hline
+Test item & Alarm \\ \hline
+Approach & User initiate the add alarm action \\ \hline
+Item pass/ fail criteria & The alarm alerts the user in the correct time.\\ \hline
+Input data & 
+\begin*{itemize}
+	\item An appointment the user is invited to
+	\item Alarm date and time
+	\item (Optional) Description
+\end{itemize}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item A alarm is added and executes correctly.
+\end{enumerate} \\ \hline
+Testing task &
+\begin{task steps}
+	\item 1. The user initiate edit appointment
+	\item 2. A popup window or panel is shown. 
+	\item 3. The user edits something.
+	\item 4. Add alarm that executes in one minute from current time and click save
+	\item 5. Wait for the alarm
+\end{task steps}	\\ \hline
+Necessary environmental requirements & A user exist as well as an appointment is created.   \\ \hline
+References to user scenario, use case, sequence diagrams, and overall class diagram & None
+Any dependent between this test and the other tests defined & Login has to work, add Appointment  \\ \hline
+
+\end{addAppointment}
