@@ -1,0 +1,44 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+
+\definecolor{Gray}{gray}{0.9}
+
+\begin{document}
+
+
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#13 \\ \hline
+Show different calendars in one view\\ \hline
+Approach & User chooses calendars from different users so they can be viewed in the same view \\ \hline
+Item pass/ fail criteria & If all the appointments for the different users shows correctly in one view, the test will pass\\ \hline
+Input data & 
+\begin*{itemize}
+	\item User testuser = Jonas
+	\item User testuser = Finn
+\end{itemize}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item Jonas and Finns appointment will show in the same calendar view. 
+\end{enumerate} \\ \hline
+Testing task & User chooses two calendars, and does the actions required to show them together \\ \hline
+Necessary environmental requirements & Two users have to be made and they both have to have made som appointments, some that both attends to and some that only one of them attends to\\ \hline
+Any dependent between this test and the other tests defined & #2, #3, #7, #10\\ \hline
+
+
+\end{tabularx}
+\subse
+
+
+\end{document}
