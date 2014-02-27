@@ -1,4 +1,5 @@
 .idea/
+*.fml
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -39,3 +40,5 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+TSWLatexianTemp*
