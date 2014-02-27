@@ -37,16 +37,16 @@
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
         <task id="0" name="Project planning" color="#8cb6ce" meeting="false" start="2014-02-24" duration="5" complete="0" expand="true"/>
-        <task id="17" name="KTN project plan" meeting="false" start="2014-02-28" duration="1" complete="0" expand="true"/>
-        <task id="3" name="Make ER-models" meeting="false" start="2014-03-03" duration="2" complete="0" expand="true"/>
-        <task id="4" name="Make paper interface" meeting="false" start="2014-03-03" duration="3" complete="0" expand="true"/>
-        <task id="5" name="Make report on paper interface" meeting="false" start="2014-03-06" duration="1" complete="0" expand="true"/>
-        <task id="6" name="Use case diagrams, sequencediagrams etc" meeting="false" start="2014-03-06" duration="2" complete="0" expand="true"/>
-        <task id="7" name="Make database scheme" meeting="false" start="2014-03-07" duration="3" complete="0" expand="true"/>
-        <task id="8" name="Screen design and construction of user interface" meeting="false" start="2014-03-10" duration="2" complete="0" expand="true"/>
-        <task id="9" name="Implementation and testing" meeting="false" start="2014-03-11" duration="8" complete="0" expand="true"/>
-        <task id="10" name="Documentation" meeting="false" start="2014-02-24" duration="20" complete="0" expand="true"/>
-        <task id="11" name="Working implementation of Chat client" meeting="false" start="2014-03-05" duration="8" complete="0" expand="true"/>
+        <task id="17" name="KTN project plan" color="#8cb6ce" meeting="false" start="2014-02-28" duration="1" complete="0" expand="true"/>
+        <task id="3" name="Make ER-models" color="#8cb6ce" meeting="false" start="2014-03-03" duration="2" complete="0" expand="true"/>
+        <task id="4" name="Make paper interface" color="#8cb6ce" meeting="false" start="2014-03-03" duration="3" complete="0" expand="true"/>
+        <task id="5" name="Make report on paper interface" color="#8cb6ce" meeting="false" start="2014-03-06" duration="1" complete="0" expand="true"/>
+        <task id="6" name="Use case diagrams, sequencediagrams etc" color="#8cb6ce" meeting="false" start="2014-03-06" duration="2" complete="0" expand="true"/>
+        <task id="7" name="Make database scheme" color="#8cb6ce" meeting="false" start="2014-03-07" duration="3" complete="0" expand="true"/>
+        <task id="8" name="Screen design and construction of user interface" color="#8cb6ce" meeting="false" start="2014-03-10" duration="2" complete="0" expand="true"/>
+        <task id="9" name="Implementation and testing" color="#8cb6ce" meeting="false" start="2014-03-11" duration="8" complete="0" expand="true"/>
+        <task id="10" name="Documentation" color="#8cb6ce" meeting="false" start="2014-02-24" duration="20" complete="0" expand="true"/>
+        <task id="11" name="Working implementation of Chat client" color="#8cb6ce" meeting="false" start="2014-03-05" duration="8" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Jonas" function="Default:0" contacts="" phone=""/>
@@ -58,11 +58,39 @@
     </resources>
     <allocations>
         <allocation task-id="0" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="0" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="3" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="5" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="5" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
