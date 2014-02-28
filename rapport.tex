@@ -90,6 +90,41 @@ The database section of the program will be divided as follows:
 \subsection{Network communication}
 Network communication consists of the part of the server communicating with both clients and the database. It is vital that the server can lock resources, and still queue requests from clients. In table \ref{Network} we have a look at how many work hours that will be allocated to this part of the system.
 
+\subsection{Network communication}
+\begin{table}[h]
+    \begin{center}
+    \caption{Computer networking work breakdown schedule}
+    \label{Network}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\
+        \hline
+        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
+        \hline
+Creating a class diagram & 4 \\
+Sequence diagram for login, send message from client and logout. & 6 \\
+A short textual description of the design & 2 \\
+Play with JSON & 6 \\
+Server and client login & 6\\
+Server and client logout & 6\\
+Extra functionality & 0-24 \\
+System integration & 10 \\
+Test many clients & 4 \\
+Overall computer networking separate project & 44 \\
+\hline
+Planning server to client & 6 \\
+Planning client to server & 6 \\
+Server to clients, Master & 10 \\
+Server and clients, Threads sending JSON objects to logged in clients & 16\\
+Clients to server, Master & 10\\
+Clients to server, Check for inconsistency & 10\\
+Clients to server, multiple Threads & 10\\
+Overall computer networking common project total& 58 \\
+\hline
+Overall computer networking total & 102 \\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
 
 
 \subsection{Client model}
@@ -121,7 +156,7 @@ The client model can be separated in to several smaller problems that are easier
 
 
 \subsection{Client view}
-Time to make GUI:
+The client view is the way the user interacts with the system. It features an easy to use interface that 
 
 \begin{table}[h]
     \begin{center}
@@ -150,43 +185,8 @@ Time to make GUI:
 
 
 \end{document}
-\subsection{Network communication}
-\begin{table}[h]
-    \begin{center}
-    \caption{Computer networking work breakdown schedule}
-    \label{Network}
-    \vspace{0,5cm}
-    \begin{tabular}{ll} \\
-        \hline
-        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
-        \hline
-Planning & Creating a class diagram & 4 & 4 \\
-Planning & Sequencediagram for login, send message from client and logout. & 6 & 10 \\
-Planning & A short textual description of the design & 2 & 12 \\
-Planning & Total & 12 & 12 \\
-Implementation and testing & Play with JSON & 6 & 18 \\
-Implementation and testing & Server and client login & 6 & 24 \\
-Implementation and testing & Server and client logout & 6 & 30 \\
-Implementation and testing & Extra functionality & 0-24 & 30 \\
-Implementation and testing & System integratition & 10 & 40 \\
-Implementation and testing & Total & 28 & 40 \\
-Extra testing & Test many clients & 4 & 44 \\
-Overall computer networking separate project & Total & 44 \\
------------ & ---------- & -- & -- \\
-Planning & Server to client & 6 & 6 \\
-Planning & Client to server & 6 & 12 \\
-Planning & Total & 12 & 12 \\
-Implementation and testing & Server to clients, Master & 10 & 22 \\
-Implementation and testing & Server and clients, Threads sending JSON objects to logged in clients & 16 & 28 \\
-Implementation and testing & Clients to server, Master & 10 & 38 \\
-Implementation and testing & Clients to server, Check for inconsistency & 10 & 48 \\
-Implementation and testing & Clients to server, multiple Threads & 10 & 58 \\
-Implementation and testing & Total & 46 & 58 \\
-Overall computer networking common project & Total & 58 & 58 \\
-Overall computer networking & Total & 102 & 102 \\
-        \hline
-    \end{tabular}
-    \end{center}
-\end{table}
+
+
+
 
 
