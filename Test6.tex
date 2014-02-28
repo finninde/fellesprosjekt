@@ -1,0 +1,44 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+
+\definecolor{Gray}{gray}{0.9}
+
+\begin{document}
+
+
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#6 \\ \hline
+Book meeting room\\ \hline
+Approach & User tries to book a meetingroom when making an appointment \\ \hline
+Item pass/ fail criteria & If user is able to book the room while it's available, and not show booked rooms the test will pass. Else it will fail.\\ \hline
+Input data & 
+\begin*{itemize}
+	\item String room = Strossa
+	\item String time = 11:00 - 13:00
+\end{itemize}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item The user books the selected room. 
+\end{enumerate} \\ \hline
+Testing task & User makes an appointment, and selects a available meeting room.\\ \hline
+Necessary environmental requirements & Some meeting rooms has to be registered in the system. We need both rooms that are available and booked, so we can check that we cannot book already booked rooms \\ \hline
+Any dependent between this test and the other tests defined & #2\\ \hline
+
+
+\end{tabularx}
+\subse
+
+
+\end{document}
