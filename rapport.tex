@@ -9,20 +9,22 @@
 \begin{document}
 \input{title.tex}
 \section{Resources}
-We have 6 persons available for completing the application. Every person has their own personal computer with  development tools for the \href{http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html}{java runtime environment}, the \href{http://www.postgresql.org/}{postgreSQL} database, 
-and the \href{http://json.org/}{JSON} object interface.
-The budget for our project is limited to the work hours specified in time estimate.
+We have 6 persons available for completing the application. Every person has their own personal computer with 
+development tools for the \href{java runtime environment}{TODO:link}, the \href{PostgreSQL}{TODO:link} database, 
+and the \href{JSON}{TODO link} object interface.
+We do not intend to spend any money on this project. 
 
 \section{Time and budget estimate}
-Based on the resources we have at our disposal we have made the following time and budget estimates.
-Since this project is a school exercise labour is free. Nonetheless we have put together a budget consisting of our work hours and a fictive salary of $849,90 NOK$. Making the salary budget a total of $\approx 734300 NOK$. In addition to creating a calendar, we have also been given a separate project in TTM4100 which we have included here, and will take some of the total work time.
-We have estimated a total monetary spending budget of 0 NOK, because we are using free software and the developers personal computers. It is highly unlikely that we will pay for any new software or hardware during this project. 
-
+Based on the resources we have at our disposal we have made the following time and budget estimates. In addition to creating a calendar, we have also been given a separate project in TTM4100 which we have included here.
+\subsection{Time estimate}
 We have estimated 18 workdays of 8 hours, with 6 developers. This gives us $864$ work hours.
 
-\section{Deadlines}
-The absolute deadlines are required from our customer(the exercise) are shown in table \ref{deadline}.
 
+\subsection{Budget estimate}
+We have estimated a total monetary spending budget of 0 NOK, because we are using free software and the developers personal computers. It is highly unlikely that we will pay for any new software or hardware during this project. 
+
+\section{Deadlines}
+The absolute deadlines are required from our customer(the exercise). 
 \begin{table}[h]
     \begin{center}
     \caption{Deadlines} 
@@ -51,11 +53,13 @@ The absolute deadlines are required from our customer(the exercise) are shown in
 
 
 \section{Responsibilities}
-We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, client model and client view.  There is also a person responsible for human resources, and a union representative chosen democratically by the group. The human resource responsible has taken on him to create a friendly work environment and to plan fun excursions.
-
+We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
+client model and client view. 
 \subsection{Database}
 The database will hold every piece of information that the program needs to save over a longer time period. 
 
+
+The database section of the program will be divided as follows and the time estimates will be:
 
 \begin{table}[h]
     \begin{center}
@@ -72,12 +76,12 @@ The database will hold every piece of information that the program needs to save
     Create the needed structure in SQL & 16 hours\\
     Implement JDBC & 8 hours\\
     Implement needed methods & 16 hours\\
-	\hline \\
-	Total & 68
         \hline
     \end{tabular}
     \end{center}
 \end{table}
+
+Total estimated time for implementation of the basic database features will be 68 hours.
 
 \section{Responsibilities}
 We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
@@ -88,75 +92,11 @@ The database section of the program will be divided as follows:
 
 
 \subsection{Network communication}
-Network communication consists of the part of the server communicating with both clients and the database. It is vital that the server can lock resources, and still queue requests from clients. In table \ref{Network} we have a look at how many work hours that will be allocated to this part of the system.
-
-\subsection{Network communication}
-\begin{table}[h]
-    \begin{center}
-    \caption{Computer networking work breakdown schedule}
-    \label{Network}
-    \vspace{0,5cm}
-    \begin{tabular}{ll} \\
-        \hline
-        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
-        \hline
-Creating a class diagram & 4 \\
-Sequence diagram for login, send message from client and logout. & 6 \\
-A short textual description of the design & 2 \\
-Play with JSON & 6 \\
-Server and client login & 6\\
-Server and client logout & 6\\
-Extra functionality & 0-24 \\
-System integration & 10 \\
-Test many clients & 4 \\
-Overall computer networking separate project & 44 \\
-\hline
-Planning server to client & 6 \\
-Planning client to server & 6 \\
-Server to clients, Master & 10 \\
-Server and clients, Threads sending JSON objects to logged in clients & 16\\
-Clients to server, Master & 10\\
-Clients to server, Check for inconsistency & 10\\
-Clients to server, multiple Threads & 10\\
-Overall computer networking common project total& 58 \\
-\hline
-Overall computer networking total & 102 \\
-        \hline
-    \end{tabular}
-    \end{center}
-\end{table}
-
 
 \subsection{Client model}
-The client model can be separated in to several smaller problems that are easier time estimated as parts. The sum of these makes the total time estimate of the clients model as seen in table \ref{clientmodel}. The model will be written in java, and handle json objects from the server. It will also provide a fully fledged API for the GUI\footnote{graphical unit inteface}. 
-
- \begin{table}[h]
-    \begin{center}
-    \caption{Client model time estimate} 
-    \label{clientmodel}
-    \vspace{0,5cm}
-    \begin{tabular}{ll} \\ 
-        \hline
-        Task & Estimated hours\\
-        \hline 
-	Creating login functionality & 7 \\
-	Parsing json objects to model & 8 \\
-	Define model and API structure\footnote{Requires a lot of communication with the design responsible}  & 12\\
-	Create json objects based on the model & 8 \\
-	Creating vital functions and objects & 16 \\
-	Create unit tests & 6 \\
-	Optimize the notify function\footnote{Both to UI and server} & 15 \\	
-        \hline
-	Sum & 72\\
-	\hline
-    \end{tabular}
-    \end{center}
-\end{table}
-
-
 
 \subsection{Client view}
-The client view is the way the user interacts with the system. It features an easy to use interface that 
+Time to make GUI:
 
 \begin{table}[h]
     \begin{center}
@@ -186,7 +126,62 @@ The client view is the way the user interacts with the system. It features an ea
 
 \end{document}
 
+\subsection{Network communication}
+\begin{table}[h]
+    \begin{center}
+    \caption{Computer networking work breakdown schedule} 
+    \label{Network}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\ 
+        \hline
+        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
+        \hline 
+	Creating a class diagram & 4  \\
+	Sequence diagram for login, send message from client and logout. & 6 \\
+	A short textual description of the design & 2 \\
+	Play with JSON & 6 \\
+	Server and client login & 6\\ 
+	Server and client logout & 6\\
+	Extra functionality & 0-24 \\
+	System integration & 10 \\
+	Test many clients & 4 \\
+	Overall computer networking separate project & 44 \\ 
+	\hline
+	Planning server to client & 6 \\
+	Planning client to server & 6  \\
+	Server to clients, Master & 10 \\
+	Server and clients, Threads sending JSON objects to logged in clients & 16\\
+	Clients to server, Master & 10\\
+	Clients to server, Check for inconsistency & 10\\
+	Clients to server, multiple Threads & 10\\
+	Overall computer networking common project total& 58 \\
+	\hline
+	Overall computer networking total & 102 \\ 
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
 
 
+\subsection{Client model}
 
+\subsection{Client view}
+Time to make GUI:
 
+The group meets and discusses how we want the user interface to be: 12 hours
+Designing the user interface using paper models: 12 hours
+Show papermodel to studass and other group: 6
+Fix papermodel after feedback: 3 hours
+Consptual model: 6
+Screendesign: 12
+Construction design: 12
+	Programming of user interface: 
+	Login screen: 4
+	Main screen:
+		Appointment view: 16
+		Week view: 16
+		Other functionality 16
+
+Estimated time to make GUI: 115
+
+\end{document}

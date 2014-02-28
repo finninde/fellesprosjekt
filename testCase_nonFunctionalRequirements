@@ -1,0 +1,110 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+
+\definecolor{Gray}{gray}{0.9}
+
+\begin{document}
+
+
+\section{Non functional tests}
+
+\subsection{Response time}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 15 \\ \hline
+Test item & Response time \\ \hline
+Approach & The user logs in with a good connection \\ \hline
+Item pass/ fail criteria & The opening site shows within 1000ms\\ \hline
+Input data & 
+username and password\\ \hline
+Expected result & 
+Correct data displayed within 1000ms \\ \hline
+Testing task & Login \\ \hline
+Any dependency between this test and the other tests defined & Login \\ \hline
+
+\end{tabularx}
+
+\subsection{Server running time}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 16 \\ \hline
+Test item & Server running time \\ \hline
+Approach & Have a server up and running \\ \hline
+Item pass/ fail criteria & The server shuts down within a week\\ \hline
+Input data & None\\ \hline
+Expected result & 
+No downtime at all\\ \hline
+Testing task & Have the server up and running \\ \hline
+\end{tabularx}
+
+\subsection{Dataloss}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 17 \\ \hline
+Test item & Dataloss \\ \hline
+Approach & Register appointment and logout \\ \hline
+Item pass/ fail criteria & All data is stored. \\ \hline
+Input data & 
+\begin{itemize}
+	\item Username and password
+    \item Appointment
+\end{itemize}\\ \hline
+Expected result & 
+No dataloss when logging out and without logging out.  \\ \hline
+Testing task &
+\begin{enumerate}
+    \item Login and register an appointment
+    \item Logout
+    \item Shutdown the computer
+    \item Login as the same user
+    \item Make sure the the data is still saved
+    \item Register or edit an appointment
+    \item Shutdown without logging out. 
+    \item Open the application again and login
+\end{enumerate}\\ \hline
+    
+Any dependency between this test and the other tests defined & Login and  add Appointment. \\ \hline
+
+\end{tabularx}
+
+\subsection{Multiple clients}
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 18 \\ \hline
+Test item & Multiple clients \\ \hline
+Approach & Multiple users logged in at once\\ \hline
+Item pass/ fail criteria & System crash, high response time, wrong data \\ \hline
+Input data & 10 user loggin and operating at the same time\\ \hline
+Expected result & 
+ No different functionality than one user operating, except possible a little longer response time (200-500ms extra is ok)\\ \hline
+Testing task &
+\begin{enumerate}
+    \item Login as 10 different users
+    \item Have one user register an appointment
+    \item Have one user checking others people calendars
+    \item Have one user responding to an appointment invitation
+\end{enumerate}\\ \hline
+    
+Any dependency between this test and the other tests defined & Login, see others calendar and  add Appointment.  \\ \hline
+
+\end{tabularx}
+
+
+\end{document}
