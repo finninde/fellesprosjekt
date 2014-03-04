@@ -71,7 +71,7 @@
 <connection connection_side="1" direction="1" object_id="6" relation_point_x="37" relation_point_y="176"/>
 </line>
 <line cardinality_string="(1,n)" has_u="false" id="10" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="3" direction="1" object_id="1" relation_point_x="310" relation_point_y="97"/>
+<connection connection_side="3" direction="1" object_id="1" relation_point_x="327" relation_point_y="97"/>
 <connection connection_side="2" direction="0" object_id="9" relation_point_x="188" relation_point_y="125"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="11" is_weak="false" role="" style="0" turned="false">
@@ -113,5 +113,9 @@
 <line cardinality_string="(0,n)" has_u="false" id="24" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="0" direction="0" object_id="2" relation_point_x="527" relation_point_y="62"/>
 <connection connection_side="2" direction="0" object_id="22" relation_point_x="461" relation_point_y="29"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="25" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="3" direction="1" object_id="1" relation_point_x="294" relation_point_y="97"/>
+<connection connection_side="2" direction="0" object_id="19" relation_point_x="179" relation_point_y="192"/>
 </line>
 </diagram>
