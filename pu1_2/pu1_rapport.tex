@@ -8,7 +8,7 @@
 \usepackage{float}
 
 \begin{document}
-\input{../title.tex}
+\input{../titlep1.tex}
 \section{Resources}
 We have 6 persons available for completing the application. Every person has their own personal computer with  development tools for the \href{http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html}{java runtime environment}, the \href{http://www.postgresql.org/}{postgreSQL} database, 
 and the \href{http://json.org/}{JSON} object interface.
@@ -74,7 +74,7 @@ The database will hold every piece of information that the program needs to save
     Implement JDBC & 8 hours\\
     Implement needed methods & 16 hours\\
     \hline 
-    Total & 68
+    Total & 68 hours \\
     \hline
     \end{tabular}
     \end{center}
@@ -134,11 +134,11 @@ The client model can be separated in to several smaller problems that are easier
         \hline 
     Creating login functionality & 7 \\
     Parsing json objects to model & 8 \\
-    Define model and API structure\footnote{Requires a lot of communication with the design responsible}  & 12\\
+    Define model and API structure  & 12\\
     Create json objects based on the model & 8 \\
     Creating vital functions and objects & 16 \\
     Create unit tests & 6 \\
-    Optimize the notify function\footnote{Both to UI and server} & 15 \\    
+    Optimize the notify function & 15 \\    
         \hline
     Sum & 72\\
     \hline
@@ -176,15 +176,51 @@ The client view is the way the user interacts with the system. It features an ea
     \end{center}
 \end{table}
 \section{Work load distribution as gantt diagram}
-The work load is shown in figure \ref{gantt}
+We are planning on rotating the tasks between people. The persons responsible are listed in table \ref{responsible}.
+\begin{table}[h]
+    \begin{center}
+    \caption{Responsibilities} 
+    \label{responsible}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\ 
+        \hline
+        $Person$ & $Responsibilities$\\
+        \hline 
+        Espen Albert & Network communication\\
+        Finn Inderhaug Holme & Client model\\
+        Kristoffer Kradalby & Database \\
+        Jonas André Dalseth & Client ciew, human resources \\
+        Andreas Wien & Union represntative\\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+Espen is responsible for the KTN separate project. He will be rotating between the KTN project and the other projects. He will take turns working with different parts of the project for example
 
-\begin{figure}[h!] % vi setter inn sånne specifiers
-    \begin{center} % sånn nå er den riktig :D jøss :P 
+\begin{itemize}
+\item monday: KTN with Jonas.
+\item tuesday: GUI with Jonas. 
+\item wednesday: KTN with Kristoffer. 
+\item thursday: Database with kristoffer. 
+\end{itemize}
+The documentation will be an ongoing project since day one. We will log hours and do documentation all the way. The work load is shown in figure \ref{gantt}
+
+\begin{figure}[h!] 
+    \begin{center} 
     	\includegraphics[width=15cm]{GanttDiagram.png}
 		\caption{Gantt diagram}
 	\label{gantt}
 	\end{center}
 \end{figure}
 
+\section{Risk analysis}
+Our simple risk analysis is shown in figure \ref{risk}. The overall workload distribution is way below the $860$ hours. We have accounted for pretty much everything not going as planned. 
+\begin{figure}[h!] % 
+    \begin{center} %
+    	\includegraphics[width=8cm]{Risikoanalyse.png}
+		\caption{Risk analysis}
+	\label{risk}
+	\end{center}
+\end{figure}
 
 \end{document}
