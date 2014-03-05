@@ -23,7 +23,7 @@ We have estimated 18 workdays of 8 hours, with 6 developers. This gives us $864$
 \section{Deadlines}
 The absolute deadlines are required from our customer(the exercise) are shown in table \ref{deadline}.
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Deadlines} 
     \label{deadline}
@@ -54,10 +54,10 @@ The absolute deadlines are required from our customer(the exercise) are shown in
 We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, client model and client view.  There is also a person responsible for human resources, and a union representative chosen democratically by the group. The human resource responsible has taken on him to create a friendly work environment and to plan fun excursions.
 
 \subsection{Database}
-The database will hold every piece of information that the program needs to save over a longer time period. 
+The database will hold every piece of information that the program needs to save over a longer time period. The work is divided as shown in table \ref{database}
 
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Database section and amount of time} 
     \label{database}
@@ -72,33 +72,25 @@ The database will hold every piece of information that the program needs to save
     Create the needed structure in SQL & 16 hours\\
     Implement JDBC & 8 hours\\
     Implement needed methods & 16 hours\\
-    \hline \\
+    \hline 
     Total & 68
-        \hline
+    \hline
     \end{tabular}
     \end{center}
 \end{table}
-
-\section{Responsibilities}
-We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
-client model and client view. 
-\subsection{Database}
-The database section of the program will be divided as follows:
-
-
 
 \subsection{Network communication}
 Network communication consists of the part of the server communicating with both clients and the database. It is vital that the server can lock resources, and still queue requests from clients. In table \ref{Network} we have a look at how many work hours that will be allocated to this part of the system.
 
 \subsection{Network communication}
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Computer networking work breakdown schedule}
     \label{Network}
     \vspace{0,5cm}
     \begin{tabular}{ll} \\
         \hline
-        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
+        $Task$  & $Estimated hours$ \\
         \hline
 Creating a class diagram & 4 \\
 Sequence diagram for login, send message from client and logout. & 6 \\
@@ -130,7 +122,7 @@ Overall computer networking total & 102 \\
 \subsection{Client model}
 The client model can be separated in to several smaller problems that are easier time estimated as parts. The sum of these makes the total time estimate of the clients model as seen in table \ref{clientmodel}. The model will be written in java, and handle json objects from the server. It will also provide a fully fledged API for the GUI\footnote{graphical unit inteface}. 
 
- \begin{table}[h]
+ \begin{table}[h!]
     \begin{center}
     \caption{Client model time estimate} 
     \label{clientmodel}
@@ -156,9 +148,9 @@ The client model can be separated in to several smaller problems that are easier
 
 
 \subsection{Client view}
-The client view is the way the user interacts with the system. It features an easy to use interface that 
+The client view is the way the user interacts with the system. It features an easy to use interface communicating with the clients model. The workload is shown in table \ref{UI}.
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Time to design the user interface} 
     \label{UI}
@@ -182,13 +174,16 @@ The client view is the way the user interacts with the system. It features an ea
     \end{tabular}
     \end{center}
 \end{table}
+\section{Work load distribution as gantt diagram}
+The work load is shown in figure \ref{gantt}
+
+\begin{figure}[h!] % vi setter inn sånne specifiers
+    \begin{center} % sånn nå er den riktig :D jøss :P 
+    	\includegraphics[width=15cm]{GanttDiagram.png}
+		\caption{Gantt diagram}
+	\label{gantt}
+	\end{center}
+\end{figure}
 
 
 \end{document}
-
-
-
-
-
-
-
