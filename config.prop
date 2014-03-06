@@ -1,0 +1,5 @@
+dbname=calendar
+dbhost=localhost
+dbport=3306
+dbuser=calendar
+dbpass=wawwwawiwa
