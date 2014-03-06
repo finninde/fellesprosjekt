@@ -47,3 +47,5 @@ TSWLatexianTemp*
 *.log
 *.gz
 *.DS_Store
+*.out
+
