@@ -5,9 +5,10 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{float}
 
 \begin{document}
-\input{title.tex}
+\input{../titlep1.tex}
 \section{Resources}
 We have 6 persons available for completing the application. Every person has their own personal computer with  development tools for the \href{http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html}{java runtime environment}, the \href{http://www.postgresql.org/}{postgreSQL} database, 
 and the \href{http://json.org/}{JSON} object interface.
@@ -23,7 +24,7 @@ We have estimated 18 workdays of 8 hours, with 6 developers. This gives us $864$
 \section{Deadlines}
 The absolute deadlines are required from our customer(the exercise) are shown in table \ref{deadline}.
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Deadlines} 
     \label{deadline}
@@ -54,10 +55,10 @@ The absolute deadlines are required from our customer(the exercise) are shown in
 We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, client model and client view.  There is also a person responsible for human resources, and a union representative chosen democratically by the group. The human resource responsible has taken on him to create a friendly work environment and to plan fun excursions.
 
 \subsection{Database}
-The database will hold every piece of information that the program needs to save over a longer time period. 
+The database will hold every piece of information that the program needs to save over a longer time period. The work is divided as shown in table \ref{database}
 
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Database section and amount of time} 
     \label{database}
@@ -72,33 +73,25 @@ The database will hold every piece of information that the program needs to save
     Create the needed structure in SQL & 16 hours\\
     Implement JDBC & 8 hours\\
     Implement needed methods & 16 hours\\
-    \hline \\
-    Total & 68
-        \hline
+    \hline 
+    Total & 68 hours \\
+    \hline
     \end{tabular}
     \end{center}
 \end{table}
-
-\section{Responsibilities}
-We will divide the responsibility for the completion of the exercise in 4 parts; the database, network communication, 
-client model and client view. 
-\subsection{Database}
-The database section of the program will be divided as follows:
-
-
 
 \subsection{Network communication}
 Network communication consists of the part of the server communicating with both clients and the database. It is vital that the server can lock resources, and still queue requests from clients. In table \ref{Network} we have a look at how many work hours that will be allocated to this part of the system.
 
 \subsection{Network communication}
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Computer networking work breakdown schedule}
     \label{Network}
     \vspace{0,5cm}
     \begin{tabular}{ll} \\
         \hline
-        $Task$ & $Subtask & $Estimated hours$ & $ Overall hours\\
+        $Task$  & $Estimated hours$ \\
         \hline
 Creating a class diagram & 4 \\
 Sequence diagram for login, send message from client and logout. & 6 \\
@@ -130,7 +123,7 @@ Overall computer networking total & 102 \\
 \subsection{Client model}
 The client model can be separated in to several smaller problems that are easier time estimated as parts. The sum of these makes the total time estimate of the clients model as seen in table \ref{clientmodel}. The model will be written in java, and handle json objects from the server. It will also provide a fully fledged API for the GUI\footnote{graphical unit inteface}. 
 
- \begin{table}[h]
+ \begin{table}[h!]
     \begin{center}
     \caption{Client model time estimate} 
     \label{clientmodel}
@@ -141,11 +134,11 @@ The client model can be separated in to several smaller problems that are easier
         \hline 
     Creating login functionality & 7 \\
     Parsing json objects to model & 8 \\
-    Define model and API structure\footnote{Requires a lot of communication with the design responsible}  & 12\\
+    Define model and API structure  & 12\\
     Create json objects based on the model & 8 \\
     Creating vital functions and objects & 16 \\
     Create unit tests & 6 \\
-    Optimize the notify function\footnote{Both to UI and server} & 15 \\    
+    Optimize the notify function & 15 \\    
         \hline
     Sum & 72\\
     \hline
@@ -156,9 +149,9 @@ The client model can be separated in to several smaller problems that are easier
 
 
 \subsection{Client view}
-The client view is the way the user interacts with the system. It features an easy to use interface that 
+The client view is the way the user interacts with the system. It features an easy to use interface communicating with the clients model. The workload is shown in table \ref{UI}.
 
-\begin{table}[h]
+\begin{table}[h!]
     \begin{center}
     \caption{Time to design the user interface} 
     \label{UI}
@@ -182,13 +175,66 @@ The client view is the way the user interacts with the system. It features an ea
     \end{tabular}
     \end{center}
 \end{table}
+\section{Work load distribution as gantt diagram}
+We are planning on rotating the tasks between people. The persons responsible are listed in table \ref{responsible}.
+\begin{table}[h]
+    \begin{center}
+    \caption{Responsibilities} 
+    \label{responsible}
+    \vspace{0,5cm}
+    \begin{tabular}{ll} \\ 
+        \hline
+        $Person$ & $Responsibilities$\\
+        \hline 
+        Espen Albert & Network communication\\
+        Finn Inderhaug Holme & Client model\\
+        Kristoffer Kradalby & Database \\
+        Jonas André Dalseth & Client ciew, human resources \\
+        Andreas Wien & Union represntative\\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+Espen is responsible for the KTN separate project. He will be rotating between the KTN project and the other projects. He will take turns working with different parts of the project for example
+
+\begin{itemize}
+\item monday: KTN with Jonas.
+\item tuesday: GUI with Jonas. 
+\item wednesday: KTN with Kristoffer. 
+\item thursday: Database with kristoffer. 
+\end{itemize}
+The documentation will be an ongoing project since day one. We will log hours and do documentation all the way. The work load is shown in figure \ref{gantt}
+
+\begin{figure}[h!] 
+    \begin{center} 
+    	\includegraphics[width=15cm]{GanttDiagram.png}
+		\caption{Gantt diagram}
+	\label{gantt}
+	\end{center}
+\end{figure}
+
+\section{Risk analysis}
+Our simple risk analysis is shown in figure \ref{risk}. The overall workload distribution is way below the $860$ hours. We have accounted for pretty much everything not going as planned. 
+\begin{figure}[h!] % 
+    \begin{center} %
+    	\includegraphics[width=8cm]{Risikoanalyse.png}
+		\caption{Risk analysis}
+	\label{risk}
+	\end{center}
+\end{figure}
+
+                Procrastination , Focus on the task ahead, take brakes when needed , Extra work hours \\
+        Hardware error , Only use stable packages, backup regularly , Loss of work \\
+        System integration , Good communication between programmers , Extra work hours to resolve conflicts \\
+        Illness , Vitamin c, don't overwork, enough sleep , take a day off\\
+        Bad communication , have meetings, do social events together , extra hours due to miscommunication \\
+        Loss of programmers due to serious illness , N/A , Talk to undass, lower goals \\
+        Git hub down , keep backups , switch to PVV's gitlab \\
+        People quitting , be nice to them , Talk to undass, lower goals\\
+        Low skills , Read curriculum in courses , Help each other, or ask studass \\
+        Fail to plan , We have several hours in reserve that can be used , Ask undass, lower goals\\
+        
+
 
 
 \end{document}
-
-
-
-
-
-
-

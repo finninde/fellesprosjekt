@@ -1,16 +1,45 @@
-\documentclass[a4paper, english, 12pt]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8x]{inputenc}
 \usepackage[norsk]{babel}
-\usepackage{mathtools}
-\usepackage{hyperref}
-\usepackage{listings}
+\usepackage{natbib}
 \usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+
+
+\definecolor{Gray}{gray}{0.9}
 
 \begin{document}
-\input{title.tex}
+\input{../title.tex}
 
-\section{Test case}
-\subsection{Test case 2:Add Appointment}
+\section{Functional tests}
+The following are functional tests.
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#1 \\ \hline
+Log in\\ \hline
+Approach & User tries to log in using his username and password \\ \hline
+Item pass/ fail criteria & If user gets signed in correctly the test will pass. Else it will fail\\ \hline
+Input data &
+\begin*{itemize}
+\item String username = Gunnar
+\item String password = baconpower
+\end{itemize}\\ \hline
+Expected result &
+\begin{enumerate}
+\item The user gets the permission to log in
+\end{enumerate} \\ \hline
+Testing task & User enters username, user enter password and the user press the log in button \\ \hline
+Necessary environmental requirements & The user has to be registered in the system, as well as having a password \\ \hline
+Any dependent between this test and the other tests defined & No\\ \hline
+\end{tabularx}
+
+
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
@@ -18,37 +47,36 @@ Test ID & 2 \\ \hline
 Test item & Add an appointment \\ \hline
 Approach & User initiate the add an appointment action \\ \hline
 Item pass/ fail criteria & An appointment is created and shown in the participants calendars, none of the other users calendar\\ \hline
-Input data & 
-\begin*{inputData}
-	\item Start-date and time
-	\item End-date and time
-	\item Description
-	\item (Optional) A list of participants
-	\item (Optional) A location or meeting room. 
-\end{inputData}\\ \hline
-Expected result & 
+Input data &
 \begin{enumerate}
-	\item The appointment with correct timeframe, description and other info is shown in the invited users calendars.
+\item Start-date and time
+\item End-date and time
+\item Description
+\item (Optional) A list of participants
+\item (Optional) A location or meeting room.
+\end{enumerate}\\ \hline
+Expected result &
+\begin{enumerate}
+\item The appointment with correct timeframe, description and other info is shown in the invited users calendars.
 \end{enumerate} \\ \hline
 Testing task &
-\begin{task steps}
-	\item 1. The user initiate add appointment
-	\item 2. A popup window or panel is shown. 
-	\item 3. A user set a appointment name. 
-	\item 4. The user selects: start-date and time, end-date and time. 
-	\item 5. The user adds a description
-	\item 6. The user select participants
-	\item 7. The user select a location
-	\item 8. The user saves.
-	\item 9. The appointment is shown in the calendars
-	\item 10. Login as one of the participants and make sure the new appointment is shown and correct.  
-	\item 11. Login as a user who isn't invited, check that the newly created appointment doesn't show. 
-\end{task steps}	\\ \hline
-Necessary environmental requirements & More than two user exist.   \\ \hline
-Any dependency between this test and the other tests defined & Login has to work  \\ \hline
+\begin{enumerate}
+\item 1. The user initiate add appointment
+\item 2. A popup window or panel is shown.
+\item 3. A user set a appointment name.
+\item 4. The user selects: start-date and time, end-date and time.
+\item 5. The user adds a description
+\item 6. The user select participants
+\item 7. The user select a location
+\item 8. The user saves.
+\item 9. The appointment is shown in the calendars
+\item 10. Login as one of the participants and make sure the new appointment is shown and correct.
+\item 11. Login as a user who isn't invited, check that the newly created appointment doesn't show.
+\end{enumerate}	\\ \hline
+Necessary environmental requirements & More than two user exist. \\ \hline
+Any dependency between this test and the other tests defined & Login has to work \\ \hline
 
 \end{tabularx}
-\subsection{Test case 3 Manage meeting participants and respond to invites}
 
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
@@ -57,36 +85,35 @@ Test ID & 3 \\ \hline
 Test item & Manage meeting participants and respond to invites. \\ \hline
 Approach & Appointment-creater opens an appointment \\ \hline
 Item pass/ fail criteria & All registered members are available to invite. \\ \hline
-Input data & 
-\begin{inputData}
-	\item Participants the user wants to invite. 
-	\item Groups the user wants to invite. 
-\end{inputData}\\ \hline
-Expected result & 
+Input data &
 \begin{enumerate}
-	\item Participants and groups the user invited sees the new appointment in their calendar.
-	\item Responds are shown in the appointment.
-	\item A user can choose to hide rejected appointments
+\item Participants the user wants to invite.
+\item Groups the user wants to invite.
+\end{enumerate}\\ \hline
+Expected result &
+\begin{enumerate}
+\item Participants and groups the user invited sees the new appointment in their calendar.
+\item Responds are shown in the appointment.
+\item A user can choose to hide rejected appointments
 \end{enumerate} \\ \hline
 Testing task &
-\begin{task steps}
-	\item 1. The user initiate edit or add appointment
-	\item 2. A popup window or panel is shown. 
-	\item 3. The user select participants from the user- and group-list and invite them.
-	\item 4. Login as one of the invited users. 
-	\item 5. The appointment is shown in the calendar
-	\item 6. Reject the invite and hide the appointment
-	\item 7. Login as one of the group members invited
-	\item 8. The appointment is shown in the calendar
-	\item 9. Accept the invite.
-	\item 10. Login as the user in step 3. Check that the updated status from the participants are shown. 
-\end{task steps}	\\ \hline
-Necessary environmental requirements & More than two users exist, and one group.   \\ \hline
-Any dependency between this test and the other tests defined & Login has to work, add or edit appointment  \\ \hline
+\begin{enumerate}
+\item 1. The user initiate edit or add appointment
+\item 2. A popup window or panel is shown.
+\item 3. The user select participants from the user- and group-list and invite them.
+\item 4. Login as one of the invited users.
+\item 5. The appointment is shown in the calendar
+\item 6. Reject the invite and hide the appointment
+\item 7. Login as one of the group members invited
+\item 8. The appointment is shown in the calendar
+\item 9. Accept the invite.
+\item 10. Login as the user in step 3. Check that the updated status from the participants are shown.
+\end{enumerate}	\\ \hline
+Necessary environmental requirements & More than two users exist, and one group. \\ \hline
+Any dependency between this test and the other tests defined & Login has to work, add or edit appointment \\ \hline
 
 \end{tabularx}
 
-\subsection{Testcase 4: Edit Appointment}
 
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
@@ -95,71 +122,214 @@ Test ID & 4 \\ \hline
 Test item & Edit appointment \\ \hline
 Approach & User initiate the edit an appointment action \\ \hline
 Item pass/ fail criteria & All of the appointment fields can be edited.\\ \hline
-Input data & 
+Input data &
 \begin{itemize}
-	\item An appointment with participants
+\item An appointment with participants
 \end{itemize}\\ \hline
-Expected result & 
+Expected result &
 \begin{enumerate}
-	\item The appointment is updated and all participants are notified
+\item The appointment is updated and all participants are notified
 \end{enumerate} \\ \hline
 Testing task &
-\begin{task steps}
-	\item 1. The user initiate edit appointment
-	\item 2. A popup window or panel is shown. 
-	\item 3. The user edits something.
-	\item 4. Login as one of the participants and make sure he is notified. 
-\end{task steps}	\\ \hline
-Necessary environmental requirements & More than two user exist as well as an appointment is created.   \\ \hline
-Any dependent between this test and the other tests defined & Login has to work, add Appointment  \\ \hline
+\begin{enumerate}
+\item 1. The user initiate edit appointment
+\item 2. A popup window or panel is shown.
+\item 3. The user edits something.
+\item 4. Login as one of the participants and make sure he is notified.
+\end{enumerate}	\\ \hline
+Necessary environmental requirements & More than two user exist as well as an appointment is created. \\ \hline
+Any dependent between this test and the other tests defined & Login has to work, add Appointment \\ \hline
 
 \end{tabularx}
-
-\subsection{Testcase 14: Alarm}
 
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
-Test ID & 14 \\ \hline
-Test item & Alarm \\ \hline
-Approach & User initiate the add alarm action \\ \hline
-Item pass/ fail criteria & The alarm alerts the user in the correct time.\\ \hline
-Input data & 
-\begin{itemize}
-	\item An appointment the user is invited to
-	\item Alarm date and time
-	\item (Optional) Description
+Test ID & \#5 \\ \hline
+Delete appointment\\ \hline
+Approach & User tries to delete an appointment \\ \hline
+Item pass/ fail criteria & If the appointment gets deleted correctly for all users, the test will pass\\ \hline
+Input data &
+\begin*{itemize}
+\item mouseclick on deletebutton
 \end{itemize}\\ \hline
-Expected result & 
+Expected result &
 \begin{enumerate}
-	\item A alarm is added and executes correctly.
+\item The appointment will be deleted for all users
 \end{enumerate} \\ \hline
-Testing task &
-\begin{task steps}
-	\item 1. The user initiate edit appointment
-	\item 2. A popup window or panel is shown. 
-	\item 3. Add alarm that executes in one minute from current time and click save
-	\item 5. Wait for the alarm
-\end{task steps}	\\ \hline
-Necessary environmental requirements & A user exist as well as an appointment is created.   \\ \hline
-Any dependent between this test and the other tests defined & Login has to work, add Appointment  \\ \hline
+Testing task & User selects an appointment and deletes it\\ \hline
+Necessary environmental requirements & A test appointmend have to exist \\ \hline
+Any dependent between this test and the other tests defined & Test #2\\ \hline
+
 
 \end{tabularx}
 
-\section{Non functional tests}
 
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#6 \\ \hline
+Book meeting room\\ \hline
+Approach & User tries to book a meetingroom when making an appointment \\ \hline
+Item pass/ fail criteria & If user is able to book the room while it's available, and not show booked rooms the test will pass. Else it will fail.\\ \hline
+Input data &
+\begin*{itemize}
+\item String room = Strossa
+\item String time = 11:00 - 13:00
+\end{itemize}\\ \hline
+Expected result &
+\begin{enumerate}
+\item The user books the selected room.
+\end{enumerate} \\ \hline
+Testing task & User makes an appointment, and selects a available meeting room.\\ \hline
+Necessary environmental requirements & Some meeting rooms has to be registered in the system. We need both rooms that are available and booked, so we can check that we cannot book already booked rooms \\ \hline
+Any dependent between this test and the other tests defined & #2\\ \hline
+
+
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \# 7 \\ \hline
+Test item & Book meeting room \\ \hline
+Approach & Possibility to book a meeting room from availible rooms. Calendar will create a list of non-booked meeting rooms for the selected timeframe. User can pick a room from this list. Booked meeting rooms will be made availible if an appointment is deleted or cancelled.\\ \hline
+Item pass/ fail criteria & When creating an appointment the user is be able to book a meeting room from a list of availible meeting rooms. The list will only contain non-booked meeting rooms, and will be updated accordingly when a room is booked or made availible.\\ \hline
+Input data &
+\begin{itemize}
+\item Desired timeframe
+\item List of rooms
+\item Cancel appointment
+\item Delete appointment
+\end{itemize}\\ \hline
+Expected result &
+The user will be shown a list of availible rooms for the selected timeframe. The user can book a room from the list. The calendar will remove the booking from the list if the appointment is cancelled or deleted from the calendar.\\ \hline
+Testing task &
+\begin{enumerate}
+    \item The user inputs the desired timeframe.
+    \item The user books a meeting room from the returned list of availible rooms.
+    \item The user cancels the meeting.
+    \item The user deletes the meeting.
+\end{enumerate}\\ \hline
+Necessary environmental requirements & The user must be logged into the system. The user is in the process of making an appointment. \\ \hline
+Any dependency between this test and the other tests defined & Tests 1,2, and 5. \\ \hline
+
+\end{tabularx}
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#8 \\ \hline
+Test item & Visibility \\ \hline
+Approach & The calendar client should show a weekly calendar with all appointments in the employees personal calendar. Changing weeks should be easy. \\ \hline
+Item pass/ fail criteria & When looking at the calendar all appointments will be shown on a week by week basis. It's possible to navigate between weeks. \\ \hline
+Input data & Show selected week\\ \hline
+Expected result & The client should show a week view of the calendar. The user should be able to navigate between weeks. \\ \hline
+Testing task &
+\begin{enumerate}
+    \item The client shows the users appointment this week.
+    \item The user can select a different week and see the appointments for that week.
+\end{enumerate}
+\\ \hline
+Necessary environmental requirements & The user must be logged into the system. \\ \hline
+Any dependency between this test and the other tests defined & Tests 1 and 7. \\ \hline
+
+
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#9 \\ \hline
+Test item & Track appointment requests \\ \hline
+Approach & The calendar client should indicate in the weekly calendar if your appointment is waiting for reply from one or more participants; if one or more have denied your meeting request; if everyone have accepted your meeting request. \\ \hline
+Item pass/ fail criteria & When viewing a week there will be an indication ///somewhere/// that shows replies from the other participants. (Appointment indicated in colour, i.e.: green if everyone will participate, yellow if missing replies?) \\ \hline
+Input data & Show selected week\\ \hline
+Expected result & The client should show a week view of the calendar. Replies should be indicated on appointment? \\ \hline
+Testing task &
+\begin{enumerate}
+    \item The client gives an indication in the week calendar if an appointment is waiting for other participants to reply.
+    \item The client gives an indication in the week calendar if an appointment has been denied by one or more participants.
+    \item The client gives an indication in the week calendar if an appointment has been accepted by all participants.
+\end{enumerate}
+Necessary environmental requirements & The user must be logged into the system. There must be one or more appointments created. \\ \hline
+Any dependency between this test and the other tests defined & Tests 1, 8, 9 and 11. \\ \hline
+
+
+\end{tabularx}
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & \#10 \\ \hline
+Show different calendars in one view\\ \hline
+Approach & User chooses calendars from different users so they can be viewed in the same view \\ \hline
+Item pass/ fail criteria & If all the appointments for the different users shows correctly in one view, the test will pass\\ \hline
+Input data &
+\begin{itemize}
+\item User testuser = Jonas
+\item User testuser = Finn
+\end{itemize}\\ \hline
+Expected result &
+\begin{enumerate}
+\item Jonas and Finns appointment will show in the same calendar view.
+\end{enumerate} \\ \hline
+Testing task & User chooses two calendars, and does the actions required to show them together \\ \hline
+Necessary environmental requirements & Two users have to be made and they both have to have made som appointments, some that both attends to and some that only one of them attends to\\ \hline
+Any dependent between this test and the other tests defined & #2, #3, #7, #10\\ \hline
+
+
+\end{tabularx}
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Test ID & 11 \\ \hline
+Test item & Alarm \\ \hline
+Approach & User initiate the add alarm action \\ \hline
+Item pass/ fail criteria & The alarm alerts the user in the correct time.\\ \hline
+Input data &
+\begin{itemize}
+\item An appointment the user is invited to
+\item Alarm date and time
+\item (Optional) Description
+\end{itemize}\\ \hline
+Expected result &
+\begin{enumerate}
+\item A alarm is added and executes correctly.
+\end{enumerate} \\ \hline
+Testing task &
+\begin{enumerate}
+\item 1. The user initiate edit appointment
+\item 2. A popup window or panel is shown.
+\item 3. Add alarm that executes in one minute from current time and click save
+\item 5. Wait for the alarm
+\end{enumerate}	\\ \hline
+Necessary environmental requirements & A user exist as well as an appointment is created. \\ \hline
+Any dependent between this test and the other tests defined & Login has to work, add Appointment \\ \hline
+
+\end{tabularx}
+
+\newpage
+
+\section{Non functional tests}
+The following are non functional tests.
 \subsection{Response time}
 
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
-Test ID & 15 \\ \hline
+Test ID & 12 \\ \hline
 Test item & Response time \\ \hline
 Approach & The user logs in with a good connection \\ \hline
 Item pass/ fail criteria & The opening site shows within 1000ms\\ \hline
-Input data & 
+Input data &
 username and password\\ \hline
-Expected result & 
+Expected result &
 Correct data displayed within 1000ms \\ \hline
 Testing task & Login \\ \hline
 Any dependency between this test and the other tests defined & Login \\ \hline
@@ -171,12 +341,12 @@ Any dependency between this test and the other tests defined & Login \\ \hline
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
-Test ID & 16 \\ \hline
+Test ID & 13 \\ \hline
 Test item & Server running time \\ \hline
 Approach & Have a server up and running \\ \hline
 Item pass/ fail criteria & The server shuts down within a week\\ \hline
 Input data & None\\ \hline
-Expected result & 
+Expected result &
 No downtime at all\\ \hline
 Testing task & Have the server up and running \\ \hline
 \end{tabularx}
@@ -186,17 +356,17 @@ Testing task & Have the server up and running \\ \hline
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
-Test ID & 17 \\ \hline
+Test ID & 14 \\ \hline
 Test item & Dataloss \\ \hline
 Approach & Register appointment and logout \\ \hline
 Item pass/ fail criteria & All data is stored. \\ \hline
-Input data & 
+Input data &
 \begin{itemize}
-	\item Username and password
-    \item Appointment
+\item Username and password
+ \item Appointment
 \end{itemize}\\ \hline
-Expected result & 
-No dataloss when logging out and without logging out.  \\ \hline
+Expected result &
+No dataloss when logging out and without logging out. \\ \hline
 Testing task &
 \begin{enumerate}
     \item Login and register an appointment
@@ -205,11 +375,11 @@ Testing task &
     \item Login as the same user
     \item Make sure the the data is still saved
     \item Register or edit an appointment
-    \item Shutdown without logging out. 
+    \item Shutdown without logging out.
     \item Open the application again and login
 \end{enumerate}\\ \hline
     
-Any dependency between this test and the other tests defined & Login and  add Appointment. \\ \hline
+Any dependency between this test and the other tests defined & Login and add Appointment. \\ \hline
 
 \end{tabularx}
 
@@ -219,12 +389,12 @@ Any dependency between this test and the other tests defined & Login and  add Ap
 \begin{tabularx}{\textwidth}{ |X|X| }
 \hline
 \rowcolor{Gray}
-Test ID & 18 \\ \hline
+Test ID & 15 \\ \hline
 Test item & Multiple clients \\ \hline
 Approach & Multiple users logged in at once\\ \hline
 Item pass/ fail criteria & System crash, high response time, wrong data \\ \hline
 Input data & 10 user loggin and operating at the same time\\ \hline
-Expected result & 
+Expected result &
  No different functionality than one user operating, except possible a little longer response time (200-500ms extra is ok)\\ \hline
 Testing task &
 \begin{enumerate}
@@ -234,8 +404,11 @@ Testing task &
     \item Have one user responding to an appointment invitation
 \end{enumerate}\\ \hline
     
-Any dependency between this test and the other tests defined & Login, see others calendar and  add Appointment.  \\ \hline
+Any dependency between this test and the other tests defined & Login, see others calendar and add Appointment. \\ \hline
 
 \end{tabularx}
+
+
+
 
 \end{document}

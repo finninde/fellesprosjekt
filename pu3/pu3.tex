@@ -8,10 +8,13 @@
 \usepackage{mathtools}
 \usepackage{tabularx}
 \usepackage{color, colortbl}
+\usepackage{float}
 
 \definecolor{Gray}{gray}{0.9}
 
 \begin{document}
+\input{../title.tex}
+
 
 \section{Use case}
 \begin{figure}[h!] 
@@ -105,6 +108,8 @@ Possible errors &
 \end{scenario} \\ \hline
 \end{tabularx}
 
+\newpage
+
 \section{Sequence diagram}
 \begin{figure}[h!] 
     \begin{center}  
@@ -137,6 +142,8 @@ Possible errors &
     \label{class}
     \end{center}
 \end{figure}
+
+\newpage
 
 \section{System structure}
 The system will be implemented in a server/client configuration where each user need their own client on their own computer and the server is hosted on its own computer. The server-side is the only piece of the software that interacts with the database. All the information from every client is saved in the database. Between the client and the server, the information is sent formatted as JSON. The frontend will be written in Java Swing.
