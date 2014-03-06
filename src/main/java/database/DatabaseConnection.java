@@ -2,7 +2,6 @@ package database;
 
 import database.repository.DatabaseProperties;
 
-import java.beans.Statement;
 import java.sql.*;
 
 /**
