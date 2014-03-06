@@ -16,7 +16,7 @@ public class DatabaseProperties {
     private String dbuser;
     private String dbpass;
 
-    public DatabaseProperties() throws FileNotFoundException {
+    public DatabaseProperties(){
         Properties properties = new Properties();
 
         try {
@@ -24,7 +24,7 @@ public class DatabaseProperties {
 
             this.dbname = properties.getProperty("dbname");
             this.dbhost = properties.getProperty("dbhost");
-            this.dbpass = properties.getProperty("dbport");
+            this.dbport = properties.getProperty("dbport");
             this.dbuser = properties.getProperty("dbuser");
             this.dbpass = properties.getProperty("dbpass");
 

@@ -23,27 +23,27 @@ public class Appointment {
     }
 
     public boolean addUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean addGroup() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeGroup() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public void alertChanges() {
-        throw new NotYetImplementedException();
+        System.out.println("dummy");
     }
 
     public boolean deleteAppointment() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public String getTitle() {
