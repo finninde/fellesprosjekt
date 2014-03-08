@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface UserService {
 
     public ArrayList<User> getUsers();
+    public User getUser(String username);
 
     public void addUser(User user);
 

@@ -38,6 +38,26 @@ public class UserRepository implements UserService {
     }
 
     @Override
+    public User getUser(String username) {
+        User user = null;
+        String sql = "SELECT * FROM USER WHERE USERNAME = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getString("USERNAME"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setName(rs.getString("NAME"));
+                user.setEmail(rs.getString("EMAIL"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return user;
+    }
+
+    @Override
     public void addUser(User user) {
         String sql = "INSERT INTO USER (USERNAME, PASSWORD, NAME, EMAIL) VALUES (?,?,?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {

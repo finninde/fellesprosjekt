@@ -1,11 +1,8 @@
 package database;
 
 import database.repository.DatabaseProperties;
-import database.repository.UserRepository;
-import helperclasses.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -39,26 +36,6 @@ public class DatabaseConnection {
 
         }
         return connectionInstance;
-    }
-
-    public static void main(String args[]) {
-        DatabaseConnection instance = new DatabaseConnection();
-        Connection con = instance.getConnectionInstance();
-
-        //Testing stuff
-
-        UserService us = new UserRepository();
-        User derp = new User("merp");
-        derp.setEmail("derp@derp.no");
-        derp.setName("Derp Merpsen");
-        derp.setPassword("Herpaderp");
-
-        us.addUser(derp);
-
-
-        ArrayList<User> users = us.getUsers();
-        System.out.println(users.get(0).getName());
-
     }
 
 }
