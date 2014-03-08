@@ -57,7 +57,7 @@ public class DatabaseConnection {
 
 
         ArrayList<User> users = us.getUsers();
-        System.out.println(users.toString());
+        System.out.println(users.get(0).getName());
 
     }
 

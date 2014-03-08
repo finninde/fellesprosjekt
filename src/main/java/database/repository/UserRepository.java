@@ -45,7 +45,7 @@ public class UserRepository implements UserService {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getName());
             statement.setString(4, user.getEmail());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
