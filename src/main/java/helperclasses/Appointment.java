@@ -8,9 +8,6 @@ import java.util.ArrayList;
 public class Appointment {
 
     private String title;
-
-
-
     private String description;
     private TimeFrame timeFrame;
     private ArrayList<User> participants;
@@ -67,6 +64,11 @@ public class Appointment {
     }
 
     public void changeTimeFrame(TimeFrame timeFrame) {
+        this.timeFrame = timeFrame;
+    }
+
+
+    public void setTimeFrame(TimeFrame timeFrame) {
         this.timeFrame = timeFrame;
     }
 
