@@ -15,8 +15,6 @@ package helperclasses;
         import javax.mail.internet.InternetAddress;
         import javax.mail.internet.MimeMessage;
 
-        import GUI.ErrorMessage;
-
 public class SendMail {
 
     public SendMail(String farmer_mail, String farmer_name, String timestamp, String sheepId, String sheepX, String sheepY) {
@@ -60,7 +58,7 @@ public class SendMail {
             System.out.println("Done");
 
         } catch (Exception e) {
-            ErrorMessage errorMsg = new ErrorMessage("","Invalid E-mail!");
+            //insert error message
         }
     }
 }
