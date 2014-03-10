@@ -11,11 +11,11 @@ public class Group {
     private ArrayList<User> users;
 
     public boolean addUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public String getGroupName() {

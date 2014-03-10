@@ -12,11 +12,11 @@ public class MeetingRoom {
     private ArrayList<TimeFrame> reservations;
 
     public boolean addReservation() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeReservation() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public String getRoom() {
