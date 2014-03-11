@@ -18,6 +18,8 @@ public class User {
         this.username = username;
 
     }
+    //Extra dummy constructor for Json
+    public User() {}
 
     private String username;
 
@@ -59,5 +61,10 @@ public class User {
 
     public void setAlarms(ArrayList<Alarm> alarms) {
         this.alarms = alarms;
+    }
+
+    public String toString() {
+        return "User [username=" + username + ", name=" + name
+                + ", email=" + email+ ", alarms=" + alarms + "]";
     }
 }
