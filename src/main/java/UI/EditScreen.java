@@ -1,6 +1,8 @@
 package calendar;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +27,33 @@ public class EditScreen extends Application {
 
     public void start (Stage editStage){
 
+        ObservableList<String> timeOptions = FXCollections.observableArrayList(
+                "00:00",
+                "01:00",
+                "02:00",
+                "03:00",
+                "04:00",
+                "05:00",
+                "06:00",
+                "07:00",
+                "08:00",
+                "09:00",
+                "10:00",
+                "11:00",
+                "12:00",
+                "13:00",
+                "14:00",
+                "15:00",
+                "16:00",
+                "17:00",
+                "18:00",
+                "19:00",
+                "20:00",
+                "21:00",
+                "22:00",
+                "23:00"
+        );
+
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
@@ -34,8 +63,8 @@ public class EditScreen extends Application {
         editGrid.add(eventName, 0, 0);
 
         Label date = new Label("Date");
-        TextField fromDate = new TextField("from");
-        TextField toDate = new TextField("to");
+        SimpleCalendar fromDate = new SimpleCalendar();
+        SimpleCalendar toDate = new SimpleCalendar();
         editGrid.add(date,0,1);
         editGrid.add(fromDate,1,1);
         editGrid.add(toDate,2,1);
@@ -77,14 +106,16 @@ public class EditScreen extends Application {
         editGrid.add(addRemoveGroup, 0, 8);
         editGrid.add(editGroups, 1, 8);
 
-        Button commitButton = new Button();
-        Button cancelButton = new Button();
+        Button commitButton = new Button("Commit");
+        Button cancelButton = new Button("Cancel");
         editGrid.add(commitButton,0,9);
         editGrid.add(cancelButton,1,9);
 
         editStage.setTitle("Edit");
         editStage.setScene(new Scene(editGrid, 300, 700));
         editStage.show();
+
+        //
     }
 
     public static void main(String[] args){
