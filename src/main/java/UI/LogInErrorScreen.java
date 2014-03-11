@@ -1,4 +1,4 @@
-package calendar;
+package UI;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
