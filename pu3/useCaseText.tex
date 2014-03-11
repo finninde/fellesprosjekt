@@ -1,0 +1,99 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+
+\definecolor{Gray}{gray}{0.9}
+
+\begin{document}
+
+
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Use case &  Create appointment \\ \hline
+Preconditions & Logged in \\ \hline
+Steps & 
+\begin{enumerate}
+	\item User activates create appointment
+	\item Title
+	\item From time (date and time)
+	\item To time (date and time)
+	\item Optional: Location
+	\item Optional: Description
+	\item Optional: Select room
+	\item Optional: Select participants
+	\item Optional: Select groups
+	\item Optional: Alarm
+	\item Commit
+\end{enumerate}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item The appointment is created and shown in the calendar.
+	\item All participants invited gets notified. 
+\end{enumerate} \\ \hline
+Possible errors & Users input a invalid value in from or to time. Reset from time and to time. \\ \hline
+
+
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Use case &  Manage meeting participants \\ \hline
+Preconditions & Logged in and appointment selected \\ \hline
+Steps & 
+\begin{enumerate}
+	\item User activates create appointment
+	\item Title
+	\item From time (date and time)
+	\item To time (date and time)
+	\item Optional: Location
+	\item Optional: Description
+	\item Optional: Select room
+	\item Optional: Select participants
+	\item Optional: Select groups
+	\item Optional: Alarm
+	\item Commit
+\end{enumerate}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item The appointment is created and shown in the calendar.
+	\item All participants invited gets notified. 
+\end{enumerate} \\ \hline
+Possible errors & Users input a invalid value in from or to time. Reset from time and to time. \\ \hline
+
+
+\end{tabularx}
+
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\rowcolor{Gray}
+Use case &  Edit appointment \\ \hline
+Preconditions & Logged in and an appointment the user has created is selected \\ \hline
+Steps & 
+\begin{enumerate}
+	\item User edits some of the fields in the appointment. (E.g. from time, end time, title, location, description, room)
+	\item User clicks Commit
+\end{enumerate}\\ \hline
+Expected result & 
+\begin{enumerate}
+	\item The appointment is changed as expected. 
+	\item The invited users get notified and can choose to accept or decline.
+\end{enumerate} \\ \hline
+Possible errors & 
+\begin{scenario}
+	\item Users input a invalid value in from or to time. >>Reset from time and to time.
+	\item Users changes timeperiod, but the meeting room is occupied. >> Automatically assign a new meeting room for the user.
+\end{scenario} \\ \hline
+\end{tabularx}
+\end{document}

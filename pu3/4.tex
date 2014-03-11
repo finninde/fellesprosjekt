@@ -1,0 +1,23 @@
+\subsection{System structure}
+The system will be implemented in a server/client configuration where each user need their own client on their own computer and the server is hosted on its own computer. The server-side is the only piece of the software that interacts with the database. All the information from every client is saved in the database. Between the client and the server, the information is sent formatted as JSON. The frontend will be written in Java Swing.
+
+\subsubsection{User}
+The User class is one of the more important classes in the system, it defines the way our users are handled. Every user will have a username, password, name and email. They also have a list of alarms that is related to the user.
+
+\subsubsection{Appointment}
+The Appointment class is where we implement how every appointment is handled. An appointment has a id, title, description, timeframe, owner, participants and room/location. The room/location is mainly based on the need for a meeting room.
+
+\subsubsection{MeetingRoom}
+The MeetingRoom class is where we handle the meeting rooms. It is a basic class which only holds information about id, room, capacity and reservations.
+
+\subsubsection{Group}
+Group is a class what collects users in groups, it only contains an id, groupname and a list of users.
+
+\subsubsection{Alarm}
+Alarm is a little class that holds the date and time information about when a alarm should be executed.
+
+\subsubsection{TimeFrame}
+TimeFrame is a class that holds the duration of time. It has a startdate and an enddate, it can provide the duration of itself. It is mainly used to set time for appointments and reserve meeting rooms.
+
+
+

@@ -1,5 +1,6 @@
 .idea/
 *.fml
+*.iml
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -42,3 +43,10 @@ local.properties
 *.launch
 
 TSWLatexianTemp*
+*.aux
+*.log
+*.gz
+*.DS_Store
+*.out
+
+.vagrant/
