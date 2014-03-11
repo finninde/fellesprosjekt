@@ -12,8 +12,7 @@ public class MeetingRoom {
     private Integer capacity;
     private ArrayList<TimeFrame> reservations;
 
-    public MeetingRoom(Integer id) {
-        this.id = id;
+    public MeetingRoom() {
     }
 
     public boolean addReservation() {

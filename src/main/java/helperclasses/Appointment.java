@@ -20,8 +20,9 @@ public class Appointment {
         this.title = title;
     }
 
-    public boolean addUser() {
-        return false;
+    public void addUser(User user) {
+        if (this.participants == null) this.participants = new ArrayList<User>();
+        this.participants.add(user);
     }
 
     public boolean removeUser() {

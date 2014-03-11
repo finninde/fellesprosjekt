@@ -1,9 +1,13 @@
 package database;
 
 import database.repository.AppointmentRepository;
+import database.repository.MeetingRoomRepository;
 import database.repository.UserRepository;
+import helperclasses.Appointment;
+import helperclasses.MeetingRoom;
 import helperclasses.TimeFrame;
 import helperclasses.User;
+import javafx.application.Application;
 import org.joda.time.DateTime;
 
 import java.sql.Connection;
@@ -39,15 +43,36 @@ public class Populate {
 
 
 //        ArrayList<User> users = us.getUsers();
-        User user = us.getUser("kradalby");
-        System.out.println(user.getEmail());
-
+//        User user = us.getUser("kradalby");
+//        User user2 = us.getUser("espen");
+//        System.out.println(user.getEmail());
+//
         AppointmentService as = new AppointmentRepository();
+//        MeetingRoomService mrs = new MeetingRoomRepository();
+//
+//        MeetingRoom mr = new MeetingRoom();
+//        mr.setRoom("p336");
+//        mr.setCapacity(5);
+//
+//        mrs.addMeetingRoom(mr);
+//
+//
+//
+//
+//        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
+//        Appointment app = new Appointment("Test");
+//        app.setTimeFrame(tf);
+//        app.setOwner(user);
+//        app.setRoom(mr);
+//        app.setDescription("DERPDERMAEGDFG");
+//        app.addUser(user2);
+//
+//        as.addAppointment(app);
+//
+//        System.out.println(app.getId());
 
-        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
-        as.addTimeFrame(tf);
-        System.out.println(tf.getId());
-
+        Appointment app = as.getAppointment(4);
+        System.out.println(app.getParticipants().get(0).getUsername());
 
 
 

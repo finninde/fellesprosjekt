@@ -21,7 +21,8 @@ public class MeetingRoomRepository implements MeetingRoomService {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                mr = new MeetingRoom(rs.getInt("ID"));
+                mr = new MeetingRoom();
+                mr.setId(rs.getInt("ID"));
                 mr.setCapacity(rs.getInt("CAPACITY"));
                 mr.setRoom(rs.getString("ROOM"));
             }

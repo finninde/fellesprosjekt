@@ -3,6 +3,7 @@ package database.repository;
 import com.mysql.jdbc.Statement;
 import database.AppointmentService;
 import database.DatabaseConnection;
+import database.MeetingRoomService;
 import database.UserService;
 import helperclasses.Appointment;
 import helperclasses.TimeFrame;
@@ -24,7 +25,7 @@ public class AppointmentRepository implements AppointmentService {
 
     @Override
     public void addAppointment(Appointment appointment) {
-        String sql = "INSERT INTO USER (DESCRIPTION, LOCATION, OWNER, TIMEFRAMEID, MEETINGROOMID, TITLE) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO APPOINTMENT (DESCRIPTION, LOCATION, OWNER, TIMEFRAMEID, MEETINGROOMID, TITLE) VALUES (?,?,?,?,?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, appointment.getDescription());
             statement.setString(2, appointment.getLocation());
@@ -37,6 +38,7 @@ public class AppointmentRepository implements AppointmentService {
             ResultSet key = statement.getGeneratedKeys();
             key.next();
             appointment.setId(key.getInt(1));
+            addParticipants(appointment.getParticipants(), appointment);
 
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -66,7 +68,9 @@ public class AppointmentRepository implements AppointmentService {
             statement.setString(1, user.getUsername());
             statement.setInt(2, appointment.getId());
             statement.setString(3, "Invited");
+            System.out.println(statement.toString());
             statement.executeUpdate();
+
 
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -84,19 +88,21 @@ public class AppointmentRepository implements AppointmentService {
     @Override
     public Appointment getAppointment(int id) {
         UserService us = new UserRepository();
+        MeetingRoomService mrs = new MeetingRoomRepository();
         Appointment appointment = null;
-        String sql = "SELECT a.TITLE, a.DESCRIPTION, a.LOCATION, a.OWNER, t.STARTDATE, t.ENDDATE FROM APPLICATION a, TIMEFRAME t WHERE a.ID = ? AND a.TIMEFRAMEID = t.ID";
+        String sql = "SELECT a.ID, a.TITLE, a.DESCRIPTION, a.LOCATION, a.OWNER, a.MEETINGROOMID, t.STARTDATE, t.ENDDATE FROM APPOINTMENT a, TIMEFRAME t WHERE a.ID = ? AND a.TIMEFRAMEID = t.ID";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 appointment = new Appointment(rs.getString("a.TITLE"));
+                appointment.setId(rs.getInt("a.ID"));
                 appointment.setDescription(rs.getString("a.DESCRIPTION"));
                 appointment.setLocation(rs.getString("a.LOCATION"));
                 appointment.setOwner(us.getUser(rs.getString("a.OWNER")));
-                appointment.setTimeFrame(new TimeFrame(new DateTime("t.STARTDATE"), new DateTime("t.ENDDATE")));
-                //appointment.setParticipants();
-                //appointment.setRoom();
+                appointment.setTimeFrame(new TimeFrame(new DateTime(rs.getDate("t.STARTDATE")), new DateTime(rs.getDate("t.ENDDATE"))));
+                appointment.setParticipants(getParticipants(appointment));
+                appointment.setRoom(mrs.getMeetingRoom(rs.getInt("a.MEETINGROOMID")));
 
             }
         } catch (SQLException e) {
