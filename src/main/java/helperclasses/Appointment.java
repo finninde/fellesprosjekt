@@ -14,6 +14,7 @@ public class Appointment {
     private User owner;
     private MeetingRoom room;
     private String location;
+    private int id;
 
     public Appointment(String title) {
         this.title = title;
@@ -102,5 +103,13 @@ public class Appointment {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

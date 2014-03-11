@@ -7,9 +7,14 @@ import java.util.ArrayList;
  */
 public class MeetingRoom {
 
+    private Integer id;
     private String room;
     private Integer capacity;
     private ArrayList<TimeFrame> reservations;
+
+    public MeetingRoom(Integer id) {
+        this.id = id;
+    }
 
     public boolean addReservation() {
         return false;
@@ -33,5 +38,13 @@ public class MeetingRoom {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

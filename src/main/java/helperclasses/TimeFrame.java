@@ -8,8 +8,9 @@ import org.joda.time.Duration;
  */
 public class TimeFrame {
 
-    DateTime startDate;
-    DateTime endDate;
+    private Integer id;
+    private DateTime startDate;
+    private DateTime endDate;
 
     public TimeFrame(DateTime startDate, DateTime endDate) {
         this.startDate = startDate;
@@ -19,5 +20,29 @@ public class TimeFrame {
     public Duration getDuration() {
         Duration duration = new Duration(this.startDate, this.endDate);
         return duration;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public DateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(DateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public DateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(DateTime endDate) {
+        this.endDate = endDate;
     }
 }
