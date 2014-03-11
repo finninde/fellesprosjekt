@@ -19,6 +19,8 @@ public class AlarmScreen extends Application{
     private Button okButton;
 
     private TextArea description;
+    private TextField date;
+    private TextField time;
 
     private Label descriptionLabel;
     private Label dateLabel;
@@ -35,23 +37,29 @@ public class AlarmScreen extends Application{
         description.setText("troll");
         description.setEditable(false);
         description.setMinWidth(200);
-        description.setMaxSize(200,80);
+        description.setMaxSize(200,50);
         editGrid.add(descriptionLabel, 0,0);
         editGrid.add(description, 1,0);
 
         dateLabel = new Label("Date:");
         /*DATE SHOULD COME FROM APPOINTMENT*/
-        //date.setMinWidth(200);
+        date = new TextField();
+        date.setEditable(false);
+        date.setText("insert DateTime");
+        date.setMinWidth(200);
 
         editGrid.add(dateLabel,0,1);
-        //editGrid.add(date, 1,1);
+        editGrid.add(date, 1,1);
 
         timeLabel = new Label("Time:");
         /*TIME SHOULD COME FROM APPOINTMENT*/
-        //time.setMinWidth(200);
+        time = new TextField();
+        time.setEditable(false);
+        time.setText("insert DateTime");
+        time.setMinWidth(200);
 
         editGrid.add(timeLabel, 0,2);
-        //editGrid.add(time, 1,2); 
+        editGrid.add(time, 1,2);
         
 
         okButton = new Button("OK");
