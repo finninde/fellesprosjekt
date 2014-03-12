@@ -20,6 +20,8 @@
     \end{center}
 \end{figure}
 
+\newpage
+
 \begin{figure}[h!] 
     \begin{center} 
         \includegraphics[width=8cm]{img/IMG_5600.png}
@@ -27,6 +29,18 @@
     \label{login}
     \end{center}
 \end{figure}
+This is the loginscreen. From here the user can enter the username and password. To log in, the user can press the ``Log in''-button.
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5612.JPG}
+        \caption{Log in error}
+    \label{loginerror}
+    \end{center}
+\end{figure}
+If the username and/or password i incorrect, this popup screen will appear. When the ``OK''-button is pressed, the error will close.
+
+\newpage
 
 \begin{figure}[h!] 
     \begin{center} 
@@ -36,6 +50,8 @@
     \end{center}
 \end{figure}
 
+This is the main screen. In this screen, the user can view his/her appoinments. By pressing the ``new  appointment'' - button, the user can make a new appointment. When pressing the arrow-buttons, the user can see the previous or next week. By pressing an appointment, the user can edit or view an appointment. The ``notification''-button make it possible to view the users notification.
+
 \begin{figure}[h!] 
     \begin{center} 
         \includegraphics[width=8cm]{img/IMG_5602.JPG}
@@ -43,6 +59,9 @@
     \label{edit}
     \end{center}
 \end{figure}
+In the edit-screen, the user can make new appointments/change the existing ones. Date, time, room and alarm can be set from a dropdown menu, while location and description is textfields where the user can enter text. By pressing the ``commit''-button, the appointment will be made.
+
+\newpage
 
 \begin{figure}[h!] 
     \begin{center} 
@@ -51,7 +70,51 @@
     \label{roomdropdown}
     \end{center}
 \end{figure}
+This is an example of a dropdown menu. In this one, the user reserves a room.
 
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5608.JPG}
+        \caption{Notification screen}
+    \label{notificationscreen}
+    \end{center}
+\end{figure}
+In the notification-window, the users appoiments are view. If the different appointmets are clicked, the user will be sendt directly to the appointment connected to the notification.
+
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5609.JPG}
+        \caption{View screen}
+    \label{view}
+    \end{center}
+\end{figure}
+In this screen the user can view an appointment, in addition make a response if she will attend or not, by using the ``Accept''-button og ``Decline''-button. By pressing cancel the window will close, and no changes will be made. If the user press the ``Hide from calendar''-button, the appointment will be hided from the users calendar.
+
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5610.JPG}
+        \caption{Show user}
+    \label{showuser}
+    \end{center}
+\end{figure}
+``Show user'' is a JComboBox where the user can view other users calendar by selecting the name of the other user in the JComboBox.
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5611.JPG}
+        \caption{Alarm popup}
+    \label{alarm}
+    \end{center}
+\end{figure}
+The alarm popup is a popup which appears when a alarm goes off. By pressing the ``OK''-button, the popup will close.
+
+\newpage
 
 \section{The task at hand}
 A usability test was performed to test the paperprototype. The tasks was as follows:
@@ -76,8 +139,9 @@ Ole Halvor Dahl
 
 
 
-\section{The test with student assistant}
-\subsection{Roles}
+\section{The test}
+\subsection{With studentassistant}
+\subsubsection*{Roles}
 \begin{itemize}
 \item Testleader: Jonas André Dalseth and Andreas Wien
 \item Observers: Jonas André Dalseth, Finn Inderby, Espen Albert
@@ -85,10 +149,10 @@ Ole Halvor Dahl
 \item Tester: Fredrik Winther Dahl
 \end{itemize}
 
-\subsection{Exectution}
+\subsubsection*{Exectution}
 The test with the student assistant wasn't very organized. First we thought we was just supposed to show him the paper model, so we didn't have any routines. Everybody on the group guided him through different scenarios, and we hadn't made any before we met him. After the test we asked him to fill out the SUS scheme and asked him what he thought about the system. We learned a lot about talking to him, and he told us how we should do it when we tested with the other group. 
-\section{The test with other group}
-\subsection{Roles}
+\subsection{With other group}
+\subsubsection*{Roles}
 \begin{itemize}
 \item Testleader: Jonas André Dalseth
 \item Wizard of Oz: Andreas Wien
@@ -96,10 +160,34 @@ The test with the student assistant wasn't very organized. First we thought we w
 \item Tester: Ole Halvor Dahl
 \end{itemize}
 
-\subsection{Execution}
+\subsubsection*{Execution}
 We met another group also working with the common project. The other group had chosen one person who would test our system. We chose one test leader, one "wizard of oz" and two people who wrote down the results from the test. The testleader presented how the test will work, what we are testing and how we are gonna do it. The test started, and the tester did the task presented above, without help from anyone of us. When the test was finished, he filled in a SUS diagram, and we asked him what he thought about the system.
 
 \section{Results}
+\subsection{With Student assistant}
+Our student assistant gave us a lot of valued response on both how we executed the test and how our system worked. The changes suggested to our execution were extremely helpful before our second testgroup, and included the following:
+\begin{enumerate}
+\item Select a test leader and a person to serve as your system.
+\item Test leader should introduce the test, pointing out that it's the system that's being tested. 
+\item Test subject should be given a set of scenarios or tasks to properly test the system. 
+\item Test subject should be informed that (s)he may abort the test at any time.
+\item Test subject should not be assisted in any way once the test starts.
+\item Only the test leader should hold a dialog with the test subject.
+\item The remaining members should be observing and noting any difficulties occuring during the test.
+\end{enumerate}
+
+The suggestions for the paper prototype included the following points:
+\begin{enumerate}
+\item The notifications popup was a bit difficult to understand because of a lack of division between elements in the list.
+\item There was no support for clicking at a desired time and date directly in the calendar to create a new appointment.
+\item When editing or creating an appointment the list of meeting rooms didn't show how many participants a room could hold.
+\item When editing or creating an appointment it's not intuitive how to add more members.
+\end{enumerate}
+
+\subsection{With other group}
+\begin{enumerate}
+\item The test subject could not find the dates for the weekdays in the calendar view.
+\end{enumerate}
 
 \section{Redesign}
 \begin{enumerate}
