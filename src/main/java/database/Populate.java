@@ -10,6 +10,7 @@ import helperclasses.User;
 import javafx.application.Application;
 import org.joda.time.DateTime;
 
+import java.lang.ref.WeakReference;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -43,12 +44,12 @@ public class Populate {
 
 
 //        ArrayList<User> users = us.getUsers();
-//        User user = us.getUser("kradalby");
-//        User user2 = us.getUser("espen");
+        User user = us.getUser("kradalby");
+        User user2 = us.getUser("espen");
 //        System.out.println(user.getEmail());
 //
         AppointmentService as = new AppointmentRepository();
-//        MeetingRoomService mrs = new MeetingRoomRepository();
+        MeetingRoomService mrs = new MeetingRoomRepository();
 //
 //        MeetingRoom mr = new MeetingRoom();
 //        mr.setRoom("p336");
@@ -59,7 +60,7 @@ public class Populate {
 //
 //
 //
-//        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
+        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
 //        Appointment app = new Appointment("Test");
 //        app.setTimeFrame(tf);
 //        app.setOwner(user);
@@ -71,12 +72,12 @@ public class Populate {
 //
 //        System.out.println(app.getId());
 
-        Appointment app = as.getAppointment(4);
-        System.out.println(app.getParticipants().get(0).getUsername());
+        ArrayList<Appointment> owner = us.getAppointmentsWhereUserIsOwner(user);
+        System.out.println(owner);
+        ArrayList<Appointment> participant = us.getAppointmentsWhereUserIsParticipant(user2);
+        System.out.println(participant);
 
-
-
-
+        System.out.println(owner.get(0).getTitle());
+        System.out.println(participant.get(0).getId());
     }
-
 }

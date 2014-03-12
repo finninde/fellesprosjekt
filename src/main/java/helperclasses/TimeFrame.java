@@ -3,6 +3,10 @@ package helperclasses;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kradalby on 05/03/14.
  */
@@ -11,10 +15,12 @@ public class TimeFrame {
     private Integer id;
     private DateTime startDate;
     private DateTime endDate;
+    private static List instances = new ArrayList();
 
     public TimeFrame(DateTime startDate, DateTime endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+        instances.add(new WeakReference(this));
     }
 
     public Duration getDuration() {
@@ -44,5 +50,9 @@ public class TimeFrame {
 
     public void setEndDate(DateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public static List getInstances() {
+        return instances;
     }
 }

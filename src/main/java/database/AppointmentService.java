@@ -1,6 +1,7 @@
 package database;
 
 import helperclasses.Appointment;
+import helperclasses.MeetingRoom;
 import helperclasses.TimeFrame;
 import helperclasses.User;
 

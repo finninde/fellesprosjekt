@@ -1,8 +1,11 @@
 package database.repository;
 
+import database.AppointmentService;
 import database.DatabaseConnection;
 import database.UserService;
+import helperclasses.Appointment;
 import helperclasses.User;
+import javafx.application.Application;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +58,49 @@ public class UserRepository implements UserService {
         }
 
         return user;
+    }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(User user) {
+        ArrayList<Appointment> apps = null;
+        AppointmentService as = new AppointmentRepository();
+        String sql = "select a.ID from USER u, APPOINTMENT a where u.USERNAME = a.OWNER and u.USERNAME = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, user.getUsername());
+            ResultSet rs = statement.executeQuery();
+            apps = new ArrayList<Appointment>();
+            while (rs.next()) {
+                Appointment app = as.getAppointment(rs.getInt("a.ID"));
+                apps.add(app);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return apps;
+
+    }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(User user) {
+        ArrayList<Appointment> apps = null;
+        AppointmentService as = new AppointmentRepository();
+        String sql = "select a.ID from USER u, APPOINTMENT a, PARTICIPANT p where u.USERNAME = p.USERID and a.ID = p.APPOINTMENTID and u.USERNAME = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, user.getUsername());
+            ResultSet rs = statement.executeQuery();
+            apps = new ArrayList<Appointment>();
+            while (rs.next()) {
+                Appointment app = as.getAppointment(rs.getInt("a.ID"));
+                apps.add(app);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return apps;
     }
 
     @Override

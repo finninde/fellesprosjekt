@@ -3,11 +3,15 @@ package database.repository;
 import com.mysql.jdbc.Statement;
 import database.DatabaseConnection;
 import database.MeetingRoomService;
+import helperclasses.Appointment;
 import helperclasses.MeetingRoom;
+import helperclasses.TimeFrame;
+import org.joda.time.DateTime;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -47,5 +51,24 @@ public class MeetingRoomRepository implements MeetingRoomService {
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+    }
+
+    @Override
+    public ArrayList<TimeFrame> getTimeFramesForMeetingRoom(MeetingRoom mr) {
+        ArrayList<TimeFrame> tfs = null;
+        String sql = "select t.ID, t.STARTDATE, t.ENDDATE from MEETINGROOM m, APPOINTMENT a, TIMEFRAME t where m.ID = a.MEETINGROOMID and a.TIMEFRAMEID = t.ID and m.ID = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setInt(1, mr.getId());
+            ResultSet rs = statement.executeQuery();
+            tfs = new ArrayList<TimeFrame>();
+            while (rs.next()) {
+                TimeFrame tf = new TimeFrame(new DateTime(rs.getDate("STARTDATE")), new DateTime(rs.getDate("ENDDATE")));
+                tfs.add(tf);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return tfs;
     }
 }
