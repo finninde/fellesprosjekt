@@ -1,11 +1,14 @@
 package database.repository;
 
+import com.mysql.jdbc.Statement;
 import database.AppointmentService;
 import database.DatabaseConnection;
 import database.UserService;
+import helperclasses.Alarm;
 import helperclasses.Appointment;
 import helperclasses.User;
 import javafx.application.Application;
+import org.joda.time.DateTime;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,6 +106,50 @@ public class UserRepository implements UserService {
         return apps;
     }
 
+//    @Override
+//    public Alarm getAlarm(int id) {
+//        Alarm alarm = null;
+//        String sql = "SELECT * FROM  ALARM WHERE ID = ?";
+//        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+//            statement.setInt(1, id);
+//            ResultSet rs = statement.executeQuery();
+//            while (rs.next()) {
+//                alarm = new Alarm();
+//                alarm.setUser();
+//                alarm.setAppointment();
+//                alarm.setExecuteAlarm();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
+//
+//        return alarm;
+//    }
+
+    @Override
+    public ArrayList<Alarm> getAllAlarmsForUser(User user) {
+        ArrayList<Alarm> alarms = null;
+        AppointmentService as = new AppointmentRepository();
+        String sql = "select * from ALARM where USERID = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, user.getUsername());
+            ResultSet rs = statement.executeQuery();
+            alarms = new ArrayList<Alarm>();
+            while (rs.next()) {
+                Alarm alarm = new Alarm();
+                alarm.setExecuteAlarm(new DateTime(rs.getDate("EXECUTEDATE")));
+                alarm.setAppointment(as.getAppointment(rs.getInt("APPOINTMENTID")));
+                alarm.setUser(user);
+                alarm.setId(rs.getInt("ID"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return alarms;
+    }
+
     @Override
     public void addUser(User user) {
         String sql = "INSERT INTO USER (USERNAME, PASSWORD, NAME, EMAIL) VALUES (?,?,?,?)";
@@ -115,5 +162,23 @@ public class UserRepository implements UserService {
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+    }
+
+    @Override
+    public void addAlarm(Alarm alarm) {
+        String sql = "INSERT INTO ALARM (USERID, APPOINTMENTID, EXECUTEDATE) VALUES (?,?,?)";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, alarm.getUser().getUsername());
+            statement.setInt(2, alarm.getAppointment().getId());
+            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.executeUpdate();
+            ResultSet key = statement.getGeneratedKeys();
+            key.next();
+            alarm.setId(key.getInt(1));
+
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 }

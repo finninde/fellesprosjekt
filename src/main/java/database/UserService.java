@@ -1,5 +1,6 @@
 package database;
 
+import helperclasses.Alarm;
 import helperclasses.Appointment;
 import helperclasses.User;
 
@@ -14,7 +15,10 @@ public interface UserService {
     public User getUser(String username);
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(User user);
     public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(User user);
+//    public Alarm getAlarm(int id);
+    public ArrayList<Alarm> getAllAlarmsForUser(User user);
 
     public void addUser(User user);
+    public void addAlarm(Alarm alarm);
 
 }
