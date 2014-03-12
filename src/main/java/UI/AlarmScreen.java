@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,51 +16,43 @@ import org.joda.time.DateTime;
  */
 public class AlarmScreen extends Application{
 
-    private GridPane editGrid;
     private Button okButton;
 
-    private TextArea description;
-    private TextField date;
-    private TextField time;
+    private Text description;
+    private Text date;
+    private Text time;
 
     private Label descriptionLabel;
     private Label dateLabel;
     private Label timeLabel;
 
     public void start(Stage alarmStage){
-        editGrid = new GridPane();
+        GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
 
-        description = new TextArea();
+        description = new Text();
         /* DESCRIPTION SHOULD COME FROM APPOINTMENT*/
         descriptionLabel = new Label("Description");
         description.setText("troll");
-        description.setEditable(false);
-        description.setMinWidth(200);
-        description.setMaxSize(200,50);
         editGrid.add(descriptionLabel, 0,0);
         editGrid.add(description, 1,0);
 
         dateLabel = new Label("Date:");
         /*DATE SHOULD COME FROM APPOINTMENT*/
-        date = new TextField();
-        date.setEditable(false);
+        date = new Text();
         date.setText("insert DateTime");
-        date.setMinWidth(200);
 
-        editGrid.add(dateLabel,0,1);
-        editGrid.add(date, 1,1);
+        editGrid.add(dateLabel,0,2);
+        editGrid.add(date, 1,2);
 
         timeLabel = new Label("Time:");
         /*TIME SHOULD COME FROM APPOINTMENT*/
-        time = new TextField();
-        time.setEditable(false);
+        time = new Text();
         time.setText("insert DateTime");
-        time.setMinWidth(200);
 
-        editGrid.add(timeLabel, 0,2);
-        editGrid.add(time, 1,2);
+        editGrid.add(timeLabel, 0,3);
+        editGrid.add(time, 1,3);
         
 
         okButton = new Button("OK");
@@ -76,7 +69,7 @@ public class AlarmScreen extends Application{
         okButtonPane.setVgap(25);
         okButtonPane.setHgap(50);
         okButtonPane.add(okButton, 1,0);
-        editGrid.add(okButtonPane, 1, 3);
+        editGrid.add(okButtonPane, 1,5);
 
 
         alarmStage.setTitle("Alarm!");
