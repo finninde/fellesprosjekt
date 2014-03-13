@@ -40,7 +40,7 @@ public class NotificationsScreen /*extends Application */{
                         new ViewScreen(new Stage());
                     }*/
                     new AlarmScreen(new Stage());                         //TODO THIS IS JUST A TEST
-                    Stage stage = (Stage) button.getScene().getWindow();  //TODO IF WE WANT TO CLOSE THE NOTIFICATIONS WINDOW
+                    Stage stage = (Stage) button.getScene().getWindow();  //TODO CLOSE WINDOW OR NOT?
                     stage.close();
                 }
             });
