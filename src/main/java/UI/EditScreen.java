@@ -1,6 +1,5 @@
-package calendar;
+package UI;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,24 +7,24 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-import java.awt.event.MouseAdapter;
 
 /**
  * Created by jonasandredalseth on 11.03.14.
  */
 public class EditScreen extends Application {
 
+    public EditScreen(){
+
+    }
+
     private TextField eventName;
     private TextField locationText;
-    private TextField descriptionText;
+    private TextArea descriptionText;
 
     private SimpleCalendar fromDate;
     private SimpleCalendar toDate;
@@ -72,13 +71,23 @@ public class EditScreen extends Application {
         stage.close();
     }
 
+
     private void commitButtonLogic(Stage stage){
         //TODO make logic for saving the content in the editscreen
-
+    /*    Appointment(this.eventName.getText());
+        Appointment.setLocation(this.locationText.getText());
+        Appointment.setDescription(this.descriptionText.getText());
+        Appointment.changeTimeFrame(); //TODO fix logic
+        Appointment.alertChanges(this.alarmCombo.getValue());
+        Appointment.setRoom(roomCombo.getValue());
+        Appointment.addUser(editUsers.getValue());
+        Appointment.addGroup(editGroups.getValue()); */
         stage.close();
     }
 
+
     public void start (final Stage editStage){
+
 
         timeOptions = FXCollections.observableArrayList(
                 "00:00", "01:00", "02:00", "03:00",
@@ -128,7 +137,6 @@ public class EditScreen extends Application {
         cancelButtonGrid.setHgap(10);
         editGrid.add(cancelButtonGrid,1,18);
 
-
         eventName = new TextField();
         eventName.setPromptText("Name of event");
         eventName.setMinWidth(200);
@@ -137,6 +145,7 @@ public class EditScreen extends Application {
         date = new Label("Date:");
         fromDate = new SimpleCalendar();
         toDate = new SimpleCalendar();
+
         editGrid.add(date,0,2);
         dateGrid.add(fromDate,0,0); //1,1
         dateGrid.add(toDate,1,0); //2,1
@@ -170,8 +179,9 @@ public class EditScreen extends Application {
         editGrid.add(roomCombo,1,8);
 
         descriptionLabel = new Label("Description:");
-        descriptionText = new TextField();
+        descriptionText = new TextArea();
         descriptionText.setPrefSize(160,90);
+        descriptionText.setWrapText(true);
         editGrid.add(descriptionLabel,0,11);
         editGrid.add(descriptionText,1,11);
 
@@ -217,6 +227,7 @@ public class EditScreen extends Application {
         editStage.setTitle("Edit");
         editStage.setScene(new Scene(editGrid, 285, 500));
         editStage.show();
+
 
     }
 
