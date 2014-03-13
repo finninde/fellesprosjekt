@@ -11,10 +11,11 @@ import javafx.stage.Stage;
 /**
  * Created by Wien on 12.03.14.
  */
-public class NotificationsScreen extends Application {
+public class NotificationsScreen /*extends Application */{
 
     Button button;
-    public void start(Stage notificationsStage){
+    //public void start(Stage notificationsStage){
+    public NotificationsScreen(final Stage notificationsStage){
         GridPane editGrid = new GridPane();
         editGrid.setHgap(5);
         editGrid.setVgap(5);
@@ -22,6 +23,7 @@ public class NotificationsScreen extends Application {
 
         for(int i = 1; i < 5/*notifications.length()*/; i++){
             button = new Button();
+            //TEXT SHOULD BE DESCRIPTION FROM EVENT?
             button.setText("Notification "+i);
             button.setMinWidth(300);
             editGrid.add(button, 0,i);
@@ -29,11 +31,12 @@ public class NotificationsScreen extends Application {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     /*if (userIsOwner()){
-                        SHOW EDITSCREEN
+                        new EditScreen(new Stage());
                     }
                     else{
-                        SHOW VIEWSCREEN
+                        new ViewScreen(new Stage());
                     }*/
+                    new AlarmScreen(new Stage());
                     Stage stage = (Stage) button.getScene().getWindow();
                     stage.close();
                 }
@@ -44,8 +47,9 @@ public class NotificationsScreen extends Application {
         notificationsStage.setScene(new Scene(editGrid, 300, 200));
         notificationsStage.show();
     }
-
+/*
     public static void main (String[] args){
         launch(args);
     }
+    */
 }

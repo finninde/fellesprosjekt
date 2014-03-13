@@ -14,7 +14,7 @@ import org.joda.time.DateTime;
 /**
  * Created by Wien on 11.03.14.
  */
-public class AlarmScreen extends Application{
+public class AlarmScreen /*extends Application*/{
 
     private Button okButton;
 
@@ -26,7 +26,8 @@ public class AlarmScreen extends Application{
     private Label dateLabel;
     private Label timeLabel;
 
-    public void start(Stage alarmStage){
+    //public void start(Stage alarmStage){
+    public AlarmScreen(Stage alarmStage){
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
@@ -76,8 +77,8 @@ public class AlarmScreen extends Application{
         alarmStage.setScene(new Scene(editGrid, 300, 200));
         alarmStage.show();
     }
-
+/*
     public static void main(String[] args){
         launch(args);
-    }
+    }*/
 }
