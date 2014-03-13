@@ -27,32 +27,30 @@ public class AlarmScreen /*extends Application*/{
     private Label timeLabel;
 
     //public void start(Stage alarmStage){
-    public AlarmScreen(Stage alarmStage){
+    public AlarmScreen(Stage alarmStage/*, Appointment appointment*/){
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
 
         description = new Text();
-        /* DESCRIPTION SHOULD COME FROM APPOINTMENT*/
         descriptionLabel = new Label("Description");
-        description.setText("troll");
-        editGrid.add(descriptionLabel, 0,0);
+        description.setText("appointment.getDescription()" /*DESCRIPTION TEXT SHOULD COME FROM APPOINTMENT*/);
+
+        editGrid.add(descriptionLabel, 0, 0);
         editGrid.add(description, 1,0);
 
         dateLabel = new Label("Date:");
-        /*DATE SHOULD COME FROM APPOINTMENT*/
         date = new Text();
-        date.setText("insert DateTime");
+        date.setText("appointment.getDate()" /*DATE TEXT SHOULD COME FROM APPOINTMENT*/);
 
-        editGrid.add(dateLabel,0,2);
+        editGrid.add(dateLabel, 0, 2);
         editGrid.add(date, 1,2);
 
         timeLabel = new Label("Time:");
-        /*TIME SHOULD COME FROM APPOINTMENT*/
         time = new Text();
-        time.setText("insert DateTime");
+        time.setText("appointment.getTime()" /* TIME TEXT SHOULD COME FROM APPOINTMENT*/);
 
-        editGrid.add(timeLabel, 0,3);
+        editGrid.add(timeLabel, 0, 3);
         editGrid.add(time, 1,3);
         
 
