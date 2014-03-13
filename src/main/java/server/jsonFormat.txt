@@ -1,11 +1,12 @@
 {
 'response': 'login',
-'username': <username>,
-'messages': [<messages>]
+'success': boolean,
+'error' : errormessage (only if success == false)
 }
 {
 'request': 'login',
 'username': <username>
+'password': "password"
 }
 
 ##### After successfull login

@@ -14,7 +14,7 @@ public class Main2000 {
             System.out.println(i);
         }
         try {
-            ThreadedTCPServer server = new ThreadedTCPServer();
+            Server server = new Server();
         } catch (IOException e) {
             e.printStackTrace();
         }

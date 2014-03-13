@@ -17,7 +17,6 @@ public interface UserService {
     public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(User user);
 //    public Alarm getAlarm(int id);
     public ArrayList<Alarm> getAllAlarmsForUser(User user);
-
     public void addUser(User user);
     public void addAlarm(Alarm alarm);
 

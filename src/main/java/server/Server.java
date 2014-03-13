@@ -7,17 +7,17 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.HashMap;
 
-public class ThreadedTCPServer
+public class Server
 {
-    private ArrayList<ClientHandler> clients;
+    private HashMap<String, Worker> clients;
     private final static Main2000 listener = new Main2000();
 
 
-    public ThreadedTCPServer() throws IOException {
+    public Server() throws IOException {
         printString("Server har startet!");
-        clients = new ArrayList<ClientHandler>();
+        clients = new HashMap<String, Worker>();
         ServerSocket welcomeSocket = new ServerSocket(6789);
         //System.out.println("Server up and running");
 
@@ -27,13 +27,20 @@ public class ThreadedTCPServer
             Socket connectionSocket = welcomeSocket.accept();
             if (connectionSocket != null)
             {
-                ClientHandler client = new ClientHandler(connectionSocket, this);
-                this.clients.add(client);
+                new LoginHandler(connectionSocket, this);
             }
         }
         //System.out.println("Server shutting down");
     }
     public void printString(String s){
         listener.printString(s);
+    }
+    public boolean usernameExists(String username) {
+
+        return clients.containsKey(username) ? true : false;
+
+    }
+    public void addWorker(String username, Worker worker) {
+        clients.put(username, worker);
     }
 }
