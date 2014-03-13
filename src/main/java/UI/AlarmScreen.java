@@ -27,14 +27,14 @@ public class AlarmScreen /*extends Application*/{
     private Label timeLabel;
 
     //public void start(Stage alarmStage){
-    public AlarmScreen(Stage alarmStage/*TODO , Appointment appointment*/){
+    public AlarmScreen(Stage alarmStage/*, Appointment appointment TODO FIX PARAMETERS*/){
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
 
         description = new Text();
         descriptionLabel = new Label("Description");
-        description.setText("appointment.getDescription()" /*TODO DESCRIPTION TEXT SHOULD COME FROM APPOINTMENT*/);
+        description.setText("appointment.getDescription()" /*TODO REMOVE QUOTATION MARKS*/);
 
         editGrid.add(descriptionLabel, 0, 0);
         editGrid.add(description, 1,0);
@@ -58,7 +58,7 @@ public class AlarmScreen /*extends Application*/{
         okButton.setOnMouseClicked(new javafx.event.EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                System.out.println("button clicked");
+                System.out.println("okButton clicked");
                 Stage stage = (Stage) okButton.getScene().getWindow();
                 stage.close();
             }

@@ -15,7 +15,7 @@ public class NotificationsScreen /*extends Application */{
 
     Button button;
     //public void start(Stage notificationsStage){
-    public NotificationsScreen(final Stage notificationsStage){
+    public NotificationsScreen(final Stage notificationsStage/*, User user, ArrayList<Appointment> notifications TODO EDIT PARAMETERS*/){
         GridPane editGrid = new GridPane();
         editGrid.setHgap(5);
         editGrid.setVgap(5);
@@ -30,14 +30,14 @@ public class NotificationsScreen /*extends Application */{
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    /*TODO
+                    /*TODO FIX LOGIC TO FIT EditScreen AND ViewScreen
                     GET FROM DATABASE
-                    Appointment appointment = buttonClicked.getAppointment();
-                    if (userIsOwner(appointment)){
-                        new EditScreen(new Stage());
+                    Appointment appointment = notifications[i];
+                    if (appointment.getOwner() == user){
+                        new EditScreen(new Stage(), appointment);
                     }
                     else{
-                        new ViewScreen(new Stage());
+                        new ViewScreen(new Stage(), appointment);
                     }*/
                     new AlarmScreen(new Stage());                         //TODO THIS IS JUST A TEST
                     Stage stage = (Stage) button.getScene().getWindow();  //TODO CLOSE WINDOW OR NOT?
