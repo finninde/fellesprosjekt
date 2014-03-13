@@ -27,28 +27,28 @@ public class AlarmScreen /*extends Application*/{
     private Label timeLabel;
 
     //public void start(Stage alarmStage){
-    public AlarmScreen(Stage alarmStage/*, Appointment appointment*/){
+    public AlarmScreen(Stage alarmStage/*TODO , Appointment appointment*/){
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
 
         description = new Text();
         descriptionLabel = new Label("Description");
-        description.setText("appointment.getDescription()" /*DESCRIPTION TEXT SHOULD COME FROM APPOINTMENT*/);
+        description.setText("appointment.getDescription()" /*TODO DESCRIPTION TEXT SHOULD COME FROM APPOINTMENT*/);
 
         editGrid.add(descriptionLabel, 0, 0);
         editGrid.add(description, 1,0);
 
         dateLabel = new Label("Date:");
         date = new Text();
-        date.setText("appointment.getDate()" /*DATE TEXT SHOULD COME FROM APPOINTMENT*/);
+        date.setText("appointment.getDate()" /*TODO DATE TEXT SHOULD COME FROM APPOINTMENT*/);
 
         editGrid.add(dateLabel, 0, 2);
         editGrid.add(date, 1,2);
 
         timeLabel = new Label("Time:");
         time = new Text();
-        time.setText("appointment.getTime()" /* TIME TEXT SHOULD COME FROM APPOINTMENT*/);
+        time.setText("appointment.getTime()" /* TODO TIME TEXT SHOULD COME FROM APPOINTMENT*/);
 
         editGrid.add(timeLabel, 0, 3);
         editGrid.add(time, 1,3);

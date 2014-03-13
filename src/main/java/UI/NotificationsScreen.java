@@ -21,16 +21,16 @@ public class NotificationsScreen /*extends Application */{
         editGrid.setVgap(5);
 
 
-        for(int i = 1; i < 5/*notifications.length()*/; i++){             //FIX MIDDLE PART WITH DATABASE INQUIRY
+        for(int i = 1; i < 5/*TODO notifications.length()*/; i++){
             button = new Button();
-                                                                          //TEXT SHOULD BE DESCRIPTION FROM EVENT?
-            button.setText("Notification "+i);
+
+            button.setText("Notification "/*TODO TEXT SHOULD BE DESCRIPTION FROM EVENT?*/+i);
             button.setMinWidth(300);
             editGrid.add(button, 0,i);
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    /*
+                    /*TODO
                     GET FROM DATABASE
                     Appointment appointment = buttonClicked.getAppointment();
                     if (userIsOwner(appointment)){
@@ -39,8 +39,8 @@ public class NotificationsScreen /*extends Application */{
                     else{
                         new ViewScreen(new Stage());
                     }*/
-                    new AlarmScreen(new Stage());                         //THIS IS JUST A TEST
-                    Stage stage = (Stage) button.getScene().getWindow();  //IF WE WANT TO CLOSE THE NOTIFICATIONS WINDOW
+                    new AlarmScreen(new Stage());                         //TODO THIS IS JUST A TEST
+                    Stage stage = (Stage) button.getScene().getWindow();  //TODO IF WE WANT TO CLOSE THE NOTIFICATIONS WINDOW
                     stage.close();
                 }
             });
