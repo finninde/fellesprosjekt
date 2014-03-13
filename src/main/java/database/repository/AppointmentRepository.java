@@ -137,4 +137,63 @@ public class AppointmentRepository implements AppointmentService {
         return users;
     }
 
+    @Override
+    public void updateAppointment(Appointment appointment) {
+        String sql = "UPDATE APPOINTMENT SET DESCRIPTION=?, LOCATION=?, OWNER=?, TIMEFRAMEID=?, MEETINGROOMID=?, TITLE=? WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, appointment.getDescription());
+            statement.setString(2, appointment.getLocation());
+            statement.setString(3, appointment.getOwner().getUsername());
+            statement.setInt(4, appointment.getTimeFrame().getId());
+            statement.setInt(5, appointment.getRoom().getId());
+            statement.setString(6, appointment.getTitle());
+            statement.setInt(7, appointment.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    @Override
+    public void updateTimeFrame(TimeFrame timeFrame) {
+        String sql = "UPDATE TIMEFRAME SET STARTDATE=?, ENDDATE=? WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setDate(1, new java.sql.Date(timeFrame.getStartDate().getMillis()));
+            statement.setDate(2, new java.sql.Date(timeFrame.getEndDate().getMillis()));
+            statement.setInt(3, timeFrame.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
+
+    @Override
+    public void deleteParticipant(User user, Appointment appointment) {
+        String sql = "DELETE FROM PARTICIPANT WHERE USERID=? AND APPOINTMENTID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, user.getUsername());
+            statement.setInt(2, appointment.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+
+    }
+
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+        String sql = "DELETE FROM APPOINTMENT WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setInt(1, appointment.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+
+    }
+
 }
