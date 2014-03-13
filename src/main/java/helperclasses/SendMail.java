@@ -17,19 +17,19 @@ package helperclasses;
 
 public class SendMail {
 
-    public SendMail(/*FILL IN DESIRED PARAMETERS*/String inviter, Appointment appointment, String invitedEmail) {
+    public SendMail(/*TODO FILL IN DESIRED PARAMETERS*/String inviter, Appointment appointment, String invitedEmail) {
 
         /**
          * Set up the mail sender.
          */
 
-        final String username = ""/*FILL IN DESIRED SENDER MAIL*/;			//mailadressen som sender mail
-        final String password = ""/*FILL IN PASSWORD TO SENDER MAIL*/;						//passord
+        final String username = ""/*TODO FILL IN DESIRED SENDER MAIL*/;			//mailadressen som sender mail
+        final String password = ""/*TODO FILL IN PASSWORD TO SENDER MAIL*/;						//passord
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "smtp.gmail.com"); //TODO CHANGE IF NOT USING GMAIL
         props.put("mail.smtp.port", "587");
 
         /**
@@ -49,14 +49,14 @@ public class SendMail {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(invitedEmail));					//mail-addresse til mottaker
             message.setSubject(inviter+" has invited you to his appointment");
-            message.setText(inviter	+ " wants you to participate in the appointment..."/*FILL IN REST OF MESSAGE*/);
+            message.setText(inviter	+ " wants you to participate in the appointment..."/*TODO FILL IN REST OF MESSAGE*/);
 
             Transport.send(message);
 
             System.out.println("Done");
 
         } catch (Exception e) {
-            //insert error message
+            //TODO insert error message
         }
     }
 }
