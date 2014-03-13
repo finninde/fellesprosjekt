@@ -1,5 +1,8 @@
 package helperclasses;
 
+import database.MeetingRoomService;
+import database.repository.MeetingRoomRepository;
+
 import java.util.ArrayList;
 
 /**
@@ -10,18 +13,12 @@ public class MeetingRoom {
     private Integer id;
     private String room;
     private Integer capacity;
-    private ArrayList<TimeFrame> reservations;
+    // I dont think we need this, it is probably more reasonable to calculate this every time.
+    //private ArrayList<TimeFrame> reservations;
 
     public MeetingRoom() {
     }
 
-    public boolean addReservation() {
-        return false;
-    }
-
-    public boolean removeReservation() {
-        return false;
-    }
 
     public String getRoom() {
         return room;
@@ -46,4 +43,12 @@ public class MeetingRoom {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public ArrayList<TimeFrame> getReservations() {
+        ArrayList<TimeFrame> reservations;
+        MeetingRoomService mrs = new MeetingRoomRepository();
+        reservations = mrs.getTimeFramesForMeetingRoom(this);
+        return reservations;
+    }
+
 }
