@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -27,12 +28,14 @@ public class NotificationsScreen /*extends Application */{
             button.setText("Notification "/*TODO TEXT SHOULD BE DESCRIPTION FROM EVENT?*/+i);
             button.setMinWidth(300);
             editGrid.add(button, 0,i);
+            setFont(Font.font("Helvetica-Ultra-Light", 13));
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
+                //Appointment appointment = new Appointment();
                 public void handle(ActionEvent actionEvent) {
                     /*TODO FIX LOGIC TO FIT EditScreen AND ViewScreen
                     GET FROM DATABASE
-                    Appointment appointment = notifications[i];
+                    appointment = notifications[i];
                     if (appointment.getOwner() == user){
                         new EditScreen(new Stage(), appointment);
                     }
@@ -46,9 +49,14 @@ public class NotificationsScreen /*extends Application */{
             });
         }
 
+
         notificationsStage.setTitle("Notifications");
         notificationsStage.setScene(new Scene(editGrid, 300, 200));
         notificationsStage.show();
+    }
+
+    private void setFont(Font font){
+        button.setFont(font);
     }
 /*
     public static void main (String[] args){

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -70,10 +71,20 @@ public class AlarmScreen /*extends Application*/{
         okButtonPane.add(okButton, 1,0);
         editGrid.add(okButtonPane, 1,5);
 
+        setFont(Font.font("Helvetica-Ultra-Light", 13));
 
         alarmStage.setTitle("Alarm!");
         alarmStage.setScene(new Scene(editGrid, 300, 200));
         alarmStage.show();
+    }
+
+    private void setFont(Font font){
+        date.setFont(font);
+        time.setFont(font);
+        timeLabel.setFont(font);
+        description.setFont(font);
+        okButton.setFont(font);
+        descriptionLabel.setFont(font);
     }
 /*
     public static void main(String[] args){
