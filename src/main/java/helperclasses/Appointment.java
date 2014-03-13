@@ -8,22 +8,21 @@ import java.util.ArrayList;
 public class Appointment {
 
     private String title;
-
-
-
     private String description;
     private TimeFrame timeFrame;
     private ArrayList<User> participants;
     private User owner;
     private MeetingRoom room;
     private String location;
+    private int id;
 
     public Appointment(String title) {
         this.title = title;
     }
 
-    public boolean addUser() {
-        return false;
+    public void addUser(User user) {
+        if (this.participants == null) this.participants = new ArrayList<User>();
+        this.participants.add(user);
     }
 
     public boolean removeUser() {
@@ -70,6 +69,11 @@ public class Appointment {
         this.timeFrame = timeFrame;
     }
 
+
+    public void setTimeFrame(TimeFrame timeFrame) {
+        this.timeFrame = timeFrame;
+    }
+
     public ArrayList<User> getParticipants() {
         return participants;
     }
@@ -100,5 +104,13 @@ public class Appointment {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
