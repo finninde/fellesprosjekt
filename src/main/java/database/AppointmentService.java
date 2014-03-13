@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public interface AppointmentService {
 
+
     public void addAppointment(Appointment appointment);
     public void addTimeFrame(TimeFrame timeFrame);
     public void addParticipant(User user, Appointment appointment);
@@ -20,4 +21,5 @@ public interface AppointmentService {
     public Appointment getAppointment(int id);
     public TimeFrame getTimeFrame(int id);
     public ArrayList<User> getParticipants(Appointment appointment);
+
 }

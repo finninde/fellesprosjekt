@@ -1,0 +1,8 @@
+user(username, password, name, email)
+group(groupid, groupName)
+timeframe(id, startDate,endDate)
+meetingRoom(meetingroomID, room, capacity)
+appointment(appointmentid, description, location, owner, timeFrameID, meetinRoomID)
+groupMember(username, groupid)
+participant(username, appointmentid, status)
+alarm(alarmid, username, appointmentid)

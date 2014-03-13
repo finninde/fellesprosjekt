@@ -23,6 +23,8 @@ public class User {
         this.name = name;
         this.email = email;
     }
+    //Extra dummy constructor for Json
+    public User() {}
 
 
     public String getUsername() {
@@ -63,5 +65,10 @@ public class User {
 
     public void setAlarms(ArrayList<Alarm> alarms) {
         this.alarms = alarms;
+    }
+
+    public String toString() {
+        return "User [username=" + username + ", name=" + name
+                + ", email=" + email+ ", alarms=" + alarms + "]";
     }
 }
