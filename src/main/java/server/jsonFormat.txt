@@ -1,0 +1,50 @@
+{
+'response': 'login',
+'username': <username>,
+'messages': [<messages>]
+}
+{
+'request': 'login',
+'username': <username>
+}
+
+##### After successfull login
+{
+'request': 'getData',
+}
+{
+'response': 'getData',
+'appointments': [{appointment json}, {appointment json}, ... ]
+'alarms': [ {alarm1 json,}, {alarm2 json}]
+}
+
+#### After clicking on an appointment
+{
+'request': 'getAppointmentData',
+'appointment' : {appointment json}
+}
+{
+'response': 'getAppointmentData',
+'appointment': {appointment json}
+'participants': [{username,status}, {participant json} ]
+}
+
+#### After creating an appointment
+{
+'request': 'newAppointment',
+'appointment': {newAppointment json}
+}
+{
+'response': 'newAppointment',
+'status': 'success'
+}
+#### After changing participant status on an appointment
+
+{'request': 'updateParticipantStatus',
+'status': 'newStatus'
+}
+
+
+
+
+{"password":null,"name":"Adolf Boss","email":"adolf@gmail.com","alarms":null,"username":"Adolf"}
