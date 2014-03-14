@@ -7,4 +7,6 @@ import org.json.simple.JSONObject;
  */
 public interface ConnectionListener {
     public void recievedMessage(JSONObject obj);
+    public boolean running();
+    public void disconnect();
 }

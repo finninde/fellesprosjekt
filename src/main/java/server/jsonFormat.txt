@@ -1,3 +1,4 @@
+#### Login
 {
 'response': 'login',
 'success': boolean,
@@ -8,7 +9,14 @@
 'username': <username>
 'password': "password"
 }
-
+#### Logout
+{
+'request': 'logout'
+}
+{
+'response': 'logout',
+'success': true
+}
 ##### After successfull login
 {
 'request': 'getData',

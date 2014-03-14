@@ -2,8 +2,6 @@ package server;
 
 import org.joda.time.DateTime;
 
-import java.io.IOException;
-
 /**
  * Created by espen on 12.03.14.
  */
@@ -13,11 +11,8 @@ public class Main2000 {
         for(int i = 0;i<5;i++) {
             System.out.println(i);
         }
-        try {
-            Server server = new Server();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Server server = new Server(6789);
+
         System.out.println("hey");
         int count = 0;
         while(true) {

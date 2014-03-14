@@ -12,29 +12,39 @@ import java.util.HashMap;
 public class Server
 {
     private HashMap<String, Worker> clients;
-    private final static Main2000 listener = new Main2000();
+    private boolean running;
 
-
-    public Server() throws IOException {
-        printString("Server har startet!");
+    public Server(int port) {
         clients = new HashMap<String, Worker>();
-        ServerSocket welcomeSocket = new ServerSocket(6789);
-        //System.out.println("Server up and running");
+        ServerSocket welcomeSocket = null;
+        try {
+            welcomeSocket = new ServerSocket(port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Server up and running");
+        running = true;
 
-        while(true)
+        while(running)
         {
 
-            Socket connectionSocket = welcomeSocket.accept();
+            Socket connectionSocket = null;
+            try {
+                connectionSocket = welcomeSocket.accept();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (connectionSocket != null)
             {
                 new LoginHandler(connectionSocket, this);
             }
         }
-        //System.out.println("Server shutting down");
+        System.out.println("Server shutting down");
     }
-    public void printString(String s){
-        listener.printString(s);
+    public static void main(String args[]) {
+        Server server = new Server(6789);
     }
+
     public boolean usernameExists(String username) {
 
         return clients.containsKey(username) ? true : false;
@@ -42,5 +52,13 @@ public class Server
     }
     public void addWorker(String username, Worker worker) {
         clients.put(username, worker);
+    }
+    public void removeWorker(String username) {
+        if(clients.containsKey(username)) {
+            clients.remove(username);
+        }
+    }
+    public void shutDown() {
+        running = false;
     }
 }
