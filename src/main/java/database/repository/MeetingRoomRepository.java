@@ -38,6 +38,26 @@ public class MeetingRoomRepository implements MeetingRoomService {
     }
 
     @Override
+    public ArrayList<MeetingRoom> getAllMeetingRooms() {
+        ArrayList<MeetingRoom> mrs = null;
+        String sql = "SELECT * FROM MEETINGROOM";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            mrs = new ArrayList<MeetingRoom>();
+            while (rs.next()) {
+                MeetingRoom mr = new MeetingRoom();
+                mr.setId(rs.getInt("ID"));
+                mr.setCapacity(rs.getInt("CAPACITY"));
+                mr.setRoom(rs.getString("ROOM"));
+                mrs.add(mr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mrs;
+    }
+
+    @Override
     public void addMeetingRoom(MeetingRoom mr) {
         String sql = "INSERT INTO MEETINGROOM (ROOM, CAPACITY) VALUES (?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {

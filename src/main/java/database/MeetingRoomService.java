@@ -12,6 +12,8 @@ public interface MeetingRoomService {
 
 
     public MeetingRoom getMeetingRoom(int id);
+    public ArrayList<MeetingRoom> getAllMeetingRooms();
+
 
     public void addMeetingRoom(MeetingRoom mr);
     public ArrayList<TimeFrame> getTimeFramesForMeetingRoom(MeetingRoom mr);
