@@ -51,4 +51,20 @@ public class MeetingRoom {
         return reservations;
     }
 
+
+    public static ArrayList<MeetingRoom> getAvailableMeetingRooms(TimeFrame timeFrame){
+        MeetingRoomService mrs = new MeetingRoomRepository();
+        ArrayList<MeetingRoom> meetingRooms = mrs.getAllMeetingRooms();
+        ArrayList<MeetingRoom> available = new ArrayList<MeetingRoom>();
+        for (MeetingRoom mr : meetingRooms) {
+            for (TimeFrame tf : mr.getReservations()) {
+                if (!timeFrame.getStartDate().isAfter(tf.getEndDate()) || !timeFrame.getEndDate().isBefore(tf.getStartDate())) {
+                    break;
+                }
+            }
+
+        }
+
+    }
+
 }
