@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class MeetingRoom {
 
-    private Integer id;
+    private int id;
     private String room;
     private Integer capacity;
     // I dont think we need this, it is probably more reasonable to calculate this every time.
@@ -37,7 +37,7 @@ public class MeetingRoom {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -50,5 +50,21 @@ public class MeetingRoom {
         reservations = mrs.getTimeFramesForMeetingRoom(this);
         return reservations;
     }
+
+
+//    public static ArrayList<MeetingRoom> getAvailableMeetingRooms(TimeFrame timeFrame){
+//        MeetingRoomService mrs = new MeetingRoomRepository();
+//        ArrayList<MeetingRoom> meetingRooms = mrs.getAllMeetingRooms();
+//        ArrayList<MeetingRoom> available = new ArrayList<MeetingRoom>();
+//        for (MeetingRoom mr : meetingRooms) {
+//            for (TimeFrame tf : mr.getReservations()) {
+//                if (!timeFrame.getStartDate().isAfter(tf.getEndDate()) || !timeFrame.getEndDate().isBefore(tf.getStartDate())) {
+//                    break;
+//                }
+//            }
+//
+//        }
+//
+//    }
 
 }

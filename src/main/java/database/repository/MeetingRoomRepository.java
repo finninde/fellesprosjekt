@@ -38,6 +38,26 @@ public class MeetingRoomRepository implements MeetingRoomService {
     }
 
     @Override
+    public ArrayList<MeetingRoom> getAllMeetingRooms() {
+        ArrayList<MeetingRoom> mrs = null;
+        String sql = "SELECT * FROM MEETINGROOM";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            mrs = new ArrayList<MeetingRoom>();
+            while (rs.next()) {
+                MeetingRoom mr = new MeetingRoom();
+                mr.setId(rs.getInt("ID"));
+                mr.setCapacity(rs.getInt("CAPACITY"));
+                mr.setRoom(rs.getString("ROOM"));
+                mrs.add(mr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mrs;
+    }
+
+    @Override
     public void addMeetingRoom(MeetingRoom mr) {
         String sql = "INSERT INTO MEETINGROOM (ROOM, CAPACITY) VALUES (?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -70,5 +90,19 @@ public class MeetingRoomRepository implements MeetingRoomService {
         }
 
         return tfs;
+    }
+
+    @Override
+    public void updateMeetingRoom(MeetingRoom mr) {
+        String sql = "UPDATE MEETINGROOM SET ROOM=?, CAPACITY=? WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, mr.getRoom());
+            statement.setInt(2, mr.getCapacity());
+            statement.setInt(3, mr.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 }
