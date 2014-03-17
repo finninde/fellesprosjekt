@@ -69,7 +69,7 @@ public class AppointmentRepository implements AppointmentService {
             statement.setInt(2, appointment.getId());
             statement.setString(3, "Invited");
             System.out.println(statement.toString());
-            statement.executeUpdate();            2
+            statement.executeUpdate();
 
 
         } catch (SQLException e) {
