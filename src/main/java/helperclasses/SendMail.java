@@ -25,9 +25,9 @@ public class SendMail{
         /**
          * Set up the mail sender.
          */
-
-        final String username = ""/*TODO FILL IN DESIRED SENDER MAIL*/;			//mailadressen som sender mail
-        final String password = ""/*TODO FILL IN PASSWORD TO SENDER MAIL*/;		//passord
+                                    //mailadressen som sender mail
+        final String username = "crazycalendarpartyedition@kradalby.no"/*TODO FILL IN DESIRED SENDER MAIL*/;
+        final String password = "crazyparty"/*TODO FILL IN PASSWORD TO SENDER MAIL*/;		//passord
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
