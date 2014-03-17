@@ -1,6 +1,8 @@
 package helperclasses;
-
 import java.io.Serializable;
+import database.MeetingRoomService;
+import database.repository.MeetingRoomRepository;
+
 import java.util.ArrayList;
 
 /**
@@ -8,23 +10,17 @@ import java.util.ArrayList;
  */
 public class MeetingRoom implements Serializable {
 
-    private Integer id;
+    private int id;
     private String room;
     private Integer capacity;
-    private ArrayList<TimeFrame> reservations;
+    // I dont think we need this, it is probably more reasonable to calculate this every time.
+    //private ArrayList<TimeFrame> reservations;
 
     public MeetingRoom()
 
     {
     }
 
-    public boolean addReservation() {
-        return false;
-    }
-
-    public boolean removeReservation() {
-        return false;
-    }
 
     public String getRoom() {
         return room;
@@ -43,10 +39,34 @@ public class MeetingRoom implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public ArrayList<TimeFrame> getReservations() {
+        ArrayList<TimeFrame> reservations;
+        MeetingRoomService mrs = new MeetingRoomRepository();
+        reservations = mrs.getTimeFramesForMeetingRoom(this);
+        return reservations;
+    }
+
+
+//    public static ArrayList<MeetingRoom> getAvailableMeetingRooms(TimeFrame timeFrame){
+//        MeetingRoomService mrs = new MeetingRoomRepository();
+//        ArrayList<MeetingRoom> meetingRooms = mrs.getAllMeetingRooms();
+//        ArrayList<MeetingRoom> available = new ArrayList<MeetingRoom>();
+//        for (MeetingRoom mr : meetingRooms) {
+//            for (TimeFrame tf : mr.getReservations()) {
+//                if (!timeFrame.getStartDate().isAfter(tf.getEndDate()) || !timeFrame.getEndDate().isBefore(tf.getStartDate())) {
+//                    break;
+//                }
+//            }
+//
+//        }
+//
+//    }
+
 }

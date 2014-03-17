@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -29,8 +31,8 @@ public class DatabaseProperties {
             this.dbpass = properties.getProperty("dbpass");
 
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new IllegalStateException("failed to load properties. ");
+            Logger.getLogger(DatabaseProperties.class.getName()).log(Level.SEVERE, "failed to load properties. ", e);
+            //throw new IllegalStateException("failed to load properties. ");
         }
 
 

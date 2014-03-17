@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -31,10 +33,30 @@ public class MeetingRoomRepository implements MeetingRoomService {
                 mr.setRoom(rs.getString("ROOM"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return mr;
+    }
+
+    @Override
+    public ArrayList<MeetingRoom> getAllMeetingRooms() {
+        ArrayList<MeetingRoom> mrs = null;
+        String sql = "SELECT * FROM MEETINGROOM";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            mrs = new ArrayList<MeetingRoom>();
+            while (rs.next()) {
+                MeetingRoom mr = new MeetingRoom();
+                mr.setId(rs.getInt("ID"));
+                mr.setCapacity(rs.getInt("CAPACITY"));
+                mr.setRoom(rs.getString("ROOM"));
+                mrs.add(mr);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return mrs;
     }
 
     @Override
@@ -49,7 +71,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
             key.next();
             mr.setId(key.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -66,9 +88,23 @@ public class MeetingRoomRepository implements MeetingRoomService {
                 tfs.add(tf);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return tfs;
+    }
+
+    @Override
+    public void updateMeetingRoom(MeetingRoom mr) {
+        String sql = "UPDATE MEETINGROOM SET ROOM=?, CAPACITY=? WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, mr.getRoom());
+            statement.setInt(2, mr.getCapacity());
+            statement.setInt(3, mr.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 }

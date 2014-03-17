@@ -14,7 +14,7 @@
 *  <http://www.gnu.org/licenses/>.
      
 */  
-package calendar;
+package UI;
 
 import java.util.Date;
 

@@ -50,17 +50,22 @@ public class Populate {
 //
         AppointmentService as = new AppointmentRepository();
         MeetingRoomService mrs = new MeetingRoomRepository();
-//
-//        MeetingRoom mr = new MeetingRoom();
+
+        Appointment a = as.getAppointment(9999);
+//        MeetingRoom mr = mrs.getMeetingRoom(9);
+//        System.out.println(mr.getRoom());
+//        System.out.println(mr.getId());
 //        mr.setRoom("p336");
 //        mr.setCapacity(5);
 //
-//        mrs.addMeetingRoom(mr);
+//        mrs.updateMeetingRoom(mr);
+//        System.out.println(mr.getRoom());
+//        System.out.println(mr.getId());
 //
 //
 //
 //
-        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
+//        TimeFrame tf = new TimeFrame(new DateTime(), new DateTime());
 //        Appointment app = new Appointment("Test");
 //        app.setTimeFrame(tf);
 //        app.setOwner(user);
@@ -72,12 +77,12 @@ public class Populate {
 //
 //        System.out.println(app.getId());
 
-        ArrayList<Appointment> owner = us.getAppointmentsWhereUserIsOwner(user);
-        System.out.println(owner);
-        ArrayList<Appointment> participant = us.getAppointmentsWhereUserIsParticipant(user2);
-        System.out.println(participant);
-
-        System.out.println(owner.get(0).getTitle());
-        System.out.println(participant.get(0).getId());
+//        ArrayList<Appointment> owner = us.getAppointmentsWhereUserIsOwner(user);
+//        System.out.println(owner);
+//        ArrayList<Appointment> participant = us.getAppointmentsWhereUserIsParticipant(user2);
+//        System.out.println(participant);
+//
+//        System.out.println(owner.get(0).getTitle());
+//        System.out.println(participant.get(0).getId());
     }
 }

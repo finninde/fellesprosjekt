@@ -7,13 +7,14 @@ import database.UserService;
 import helperclasses.Alarm;
 import helperclasses.Appointment;
 import helperclasses.User;
-import javafx.application.Application;
 import org.joda.time.DateTime;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -37,7 +38,7 @@ public class UserRepository implements UserService {
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return users;
@@ -57,7 +58,7 @@ public class UserRepository implements UserService {
                 user.setEmail(rs.getString("EMAIL"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return user;
@@ -78,7 +79,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return apps;
@@ -100,7 +101,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return apps;
@@ -120,7 +121,7 @@ public class UserRepository implements UserService {
 //                alarm.setExecuteAlarm();
 //            }
 //        } catch (SQLException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//    Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
 //        }
 //
 //        return alarm;
@@ -144,7 +145,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return alarms;
@@ -160,7 +161,7 @@ public class UserRepository implements UserService {
             statement.setString(4, user.getEmail());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -177,7 +178,37 @@ public class UserRepository implements UserService {
             alarm.setId(key.getInt(1));
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    @Override
+    public void updateAlarm(Alarm alarm) {
+        String sql = "UPDATE ALARM SET USERID=?, APPOINTMENTID=?, EXECUTEDATE=? WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, alarm.getUser().getUsername());
+            statement.setInt(2, alarm.getAppointment().getId());
+            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.setInt(4, alarm.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        String sql = "UPDATE USER SET PASSWORD=?, NAME=?, EMAIL=? WHERE USERNAME=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, user.getPassword());
+            statement.setString(2, user.getName());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getUsername());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
