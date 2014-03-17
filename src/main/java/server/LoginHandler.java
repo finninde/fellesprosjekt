@@ -1,5 +1,6 @@
 package server;
 
+import helperclasses.Request;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -60,8 +61,8 @@ public class LoginHandler extends Thread implements ConnectionListener{
     @Override
     public void recievedMessage(JSONObject obj) {
         System.out.println(obj);
-        String requestType = (String) obj.get("request");
-        if(!requestType.equals("login")) {
+        Request request = (Request) obj.get("request");
+        if(!request.equals(Request.LOGIN)) {
             sendError("unknown request");
             return;
         }
@@ -111,7 +112,7 @@ public class LoginHandler extends Thread implements ConnectionListener{
 
     public void sendError(String errorMessage) {
         JSONObject json = new JSONObject();
-        json.put("response", "login");
+        json.put("response", Request.LOGIN);
         json.put("success", false);
         json.put("error", errorMessage);
         sendJSON(json);

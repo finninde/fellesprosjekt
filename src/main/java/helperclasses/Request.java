@@ -9,7 +9,9 @@ public enum Request {
     PARTICIPANTSOFAPPOINTMENT,
     GETAPPOINTMENT,
     GETDATA,
-    LOGOUT;
+    LOGOUT,
+    LOGIN,
+    GETUSERS;
 
 
 }

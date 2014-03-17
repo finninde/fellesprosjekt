@@ -37,6 +37,9 @@ public class Receiver extends Thread{
                 if(!listener.running()) {
                     break;
                 }
+//                if(obj == null) {
+//                    continue;
+//                }
             listener.recievedMessage(obj);
         } catch(SocketException e ) {
             System.out.println("receiver stopped working");
@@ -51,7 +54,7 @@ public class Receiver extends Thread{
             e.printStackTrace();
                 break;
         } catch (Exception e) {
-                System.out.println("got unkownException");
+                System.out.println("got unknownException");
                 e.printStackTrace();
             }
 

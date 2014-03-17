@@ -52,7 +52,13 @@
 {'request': 'updateParticipantStatus',
 'status': 'newStatus'
 }
-
+#### Get all users available
+{ "request": GETUSERS,
+}
+{
+"response": GETUSERS,
+"users": ArrayList<User>
+}
 
 
 

@@ -1,10 +1,15 @@
 package server;
 
+import database.repository.UserRepository;
+import helperclasses.Appointment;
+import helperclasses.Request;
+import helperclasses.User;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by espen on 13.03.14.
@@ -43,7 +48,7 @@ public class Worker extends Thread implements ConnectionListener{
 
     public void sendJSON(JSONObject json) {
         try {
-            System.out.println("Sending welcome message");
+            System.out.println("Sending message"+ json);
             toClient.writeObject(json);
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,7 +57,7 @@ public class Worker extends Thread implements ConnectionListener{
 
     public void welcomeMessage() {
         JSONObject obj = new JSONObject();
-        obj.put("response", "login");
+        obj.put("response", Request.LOGIN);
         obj.put("success", true);
         sendJSON(obj);
 
@@ -62,12 +67,42 @@ public class Worker extends Thread implements ConnectionListener{
     public void recievedMessage(JSONObject obj) {
         //TODO not yet implemented... This method should handle all possible requests from the user...
         System.out.println(obj);
-        if(obj.get("request").equals("logout")) {
-            server.removeWorker(username);
-            JSONObject json = new JSONObject();
-            json.put("response", "logout");
-            json.put("success", true);
-            sendJSON(json);
+        JSONObject json = new JSONObject();
+        Request request = (Request) obj.get("request");
+        if(request==null) {
+            System.out.println("unkown request");
+        } else {
+            switch (request) {
+                case APPOINTMENTSOFUSER:
+                    break;
+                case GETUSERS:
+                    UserRepository ur = new UserRepository();
+                    ArrayList<User> users = ur.getUsers();
+                    json.put("response", request);
+                    json.put("users",users);
+                    sendJSON(json);
+                case ALARMOFAPPOINTMENT:
+                    break;
+                case PARTICIPANTSOFAPPOINTMENT:
+                    break;
+                case GETAPPOINTMENT:
+                    break;
+                case GETDATA:
+                    System.out.println("get data request");
+                    Appointment ap1 = new Appointment("Appointment1");
+                    ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+                    appointments.add(ap1);
+                    json.put("response",request);
+                    json.put("appointments",appointments);
+                    sendJSON(json);
+                    break;
+                case LOGOUT:
+                    server.removeWorker(username);
+                    json.put("response", Request.LOGOUT);
+                    json.put("success", true);
+                    sendJSON(json);
+                    break;
+            }
         }
     }
 

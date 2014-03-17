@@ -1,12 +1,14 @@
 package server;
 
-import org.joda.time.DateTime;
-import org.json.simple.JSONObject;
+import helperclasses.Appointment;
 import helperclasses.Request;
+import helperclasses.User;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -17,6 +19,7 @@ public class ClientConnection extends Thread implements ConnectionListener{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
     private int count;
+    private int key;
     private ObjectOutputStream toServer;
     private Socket clientSocket;
 
@@ -35,11 +38,11 @@ public class ClientConnection extends Thread implements ConnectionListener{
     public void run() {
         incomingObjects = new HashMap<Integer, Object>();
         new Receiver(this,clientSocket);
-        while(true) {
+        while(running) {
             try {
                 count += 1;
                 sleep(100);
-                if(count == 10) { logout(); }
+                if(count == 100) { logout(); }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -48,40 +51,88 @@ public class ClientConnection extends Thread implements ConnectionListener{
     public void logout() {
         System.out.println("about to logout");
         JSONObject json = new JSONObject();
-        json.put("request", "logout");
+        json.put("request", Request.LOGOUT);
         send(json);
     }
     public static void main(String args[]) {
         System.out.println("wallabaya!");
-        ClientConnection client = new ClientConnection("78.91.21.40", 6789);
+        ClientConnection client = new ClientConnection("78.91.21.135", 6789);
         JSONObject json = new JSONObject();
-        json.put("request","login");
+        json.put("request",Request.LOGIN);
         json.put("username", "espen");
         json.put("password", "1234");
         client.send(json);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Appointment> appointments = (ArrayList<Appointment>) client.request (Request.GETDATA);
+        System.out.println("Received appointments successfully, appointment received: " + appointments.get(0).getTitle());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ArrayList<User> users = client.getUsers();
+        System.out.println("users received successfully");
 
+    }
+
+    private ArrayList<User> getUsers() {
+        JSONObject json = new JSONObject();
+        json.put("request",Request.GETUSERS);
+        key += 1;
+        send(json);
+        ArrayList<User> users = (ArrayList<User>) waitForObject(key);
+        return users;
     }
 
 
     @Override
     public void recievedMessage(JSONObject obj) {
         System.out.println(obj);
-        String response = (String) obj.get("response");
-        if(response.equals("logout")) {
-            if((boolean)obj.get("success")) {
-                System.out.println("disconnecting....");
-                disconnect();
+        Request response = (Request) obj.get("response");
+        if(response == null) {
+            return;
+        } else {
+            switch (response) {
+                case APPOINTMENTSOFUSER:
+                    break;
+                case ALARMOFAPPOINTMENT:
+                    break;
+                case GETUSERS:
+                    incomingObjects.put(key,(ArrayList<User>) obj.get("users"));
+                    break;
+                case PARTICIPANTSOFAPPOINTMENT:
+                    break;
+                case GETAPPOINTMENT:
+                    break;
+                case GETDATA:
+                    System.out.println("getData json arrived");
+                    incomingObjects.put(key, (ArrayList<Appointment>) obj.get("appointments"));
+                    break;
+                case LOGOUT:
+                    if((boolean)obj.get("success")) {
+                        disconnect();
+                    }
+                    break;
+                case LOGIN:
+                    if((boolean)obj.get("success")) {
+                        System.out.println("login successful!");
+                    }
+                    break;
             }
         }
     }
     public Object waitForObject(Integer key) {
-        DateTime timer = new DateTime();
         while(true) {
+            System.out.println(incomingObjects);
             if(incomingObjects.containsKey(key)){
                 return incomingObjects.get(key);
             }
             try {
-                timer.wait(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -96,7 +147,7 @@ public class ClientConnection extends Thread implements ConnectionListener{
 
     @Override
     public void disconnect() {
-        System.out.println("Sorry, server shutted down, or error");
+        System.out.println("Disconnecting");
         running = false;
         try {
             toServer.close();
@@ -117,36 +168,31 @@ public class ClientConnection extends Thread implements ConnectionListener{
         }
     }
 
-    public void request(Request request) {
+    public Object request(Request request) {
         //TODO use all different requests...
         if(request == null) {
             System.out.println("unknown request...");
         } else {
+            JSONObject json = new JSONObject();
             switch (request) {
                 case APPOINTMENTSOFUSER:
                     break;
                 case ALARMOFAPPOINTMENT:
                     break;
-                case DATEOFAPPOINTMENT:
-                    break;
-                case TIMEOFAPPOINTMENT:
-                    break;
-                case DESCRIPTIONOFAPPOINTMENT:
-                    break;
-                case LISTOFAPPOINTMENTSFORNOTIFICATIONSOFUSER:
-                    break;
-                case FROMDATE:
-                    break;
-                case FROMTIME:
-                    break;
                 case PARTICIPANTSOFAPPOINTMENT:
-                    break;
-                case OWNEROFAPPOINTMENT:
                     break;
                 case GETAPPOINTMENT:
                     break;
+                case GETDATA:
+                    json.put("request", request);
+                    send(json);
+                    key += 1;
+                    return waitForObject(key);
             }
         }
+        return null;
     }
+
+
 
 }
