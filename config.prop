@@ -1,5 +1,14 @@
+#Database configuration
 dbname=calendar
 dbhost=localhost
 dbport=3306
 dbuser=calendar
 dbpass=wawwwawiwa
+
+
+#Server configuration
+
+
+#Client configuration
+
+

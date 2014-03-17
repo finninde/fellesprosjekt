@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -36,7 +38,7 @@ public class UserRepository implements UserService {
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return users;
@@ -56,7 +58,7 @@ public class UserRepository implements UserService {
                 user.setEmail(rs.getString("EMAIL"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return user;
@@ -77,7 +79,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return apps;
@@ -99,7 +101,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return apps;
@@ -119,7 +121,7 @@ public class UserRepository implements UserService {
 //                alarm.setExecuteAlarm();
 //            }
 //        } catch (SQLException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//    Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
 //        }
 //
 //        return alarm;
@@ -143,7 +145,7 @@ public class UserRepository implements UserService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return alarms;
@@ -159,7 +161,7 @@ public class UserRepository implements UserService {
             statement.setString(4, user.getEmail());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -176,7 +178,7 @@ public class UserRepository implements UserService {
             alarm.setId(key.getInt(1));
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -192,7 +194,7 @@ public class UserRepository implements UserService {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -206,7 +208,7 @@ public class UserRepository implements UserService {
             statement.setString(4, user.getUsername());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
