@@ -56,7 +56,7 @@ public class ClientConnection extends Thread implements ConnectionListener{
     }
     public static void main(String args[]) {
         System.out.println("wallabaya!");
-        ClientConnection client = new ClientConnection("78.91.21.135", 6789);
+        ClientConnection client = new ClientConnection("78.91.51.78", 6789);
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
         json.put("username", "espen");
