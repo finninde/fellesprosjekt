@@ -9,7 +9,9 @@ import javafx.stage.Stage;
 public class MainTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        new NotificationsScreen(stage);
+        new LoginScreen(stage);
+        Stage newStage = new Stage();
+        new NotificationsScreen(newStage);
     }
 
     public static void main(String[]args){
