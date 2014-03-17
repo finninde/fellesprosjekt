@@ -1,18 +1,21 @@
 package helperclasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class MeetingRoom {
+public class MeetingRoom implements Serializable {
 
     private Integer id;
     private String room;
     private Integer capacity;
     private ArrayList<TimeFrame> reservations;
 
-    public MeetingRoom() {
+    public MeetingRoom()
+
+    {
     }
 
     public boolean addReservation() {

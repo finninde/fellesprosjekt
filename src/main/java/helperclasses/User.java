@@ -1,11 +1,12 @@
 package helperclasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class User {
+public class User implements Serializable {
 
     private String username;
     private String password;
