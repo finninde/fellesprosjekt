@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -41,7 +43,7 @@ public class AppointmentRepository implements AppointmentService {
             addParticipants(appointment.getParticipants(), appointment);
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -56,7 +58,7 @@ public class AppointmentRepository implements AppointmentService {
             key.next();
             timeFrame.setId(key.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -73,7 +75,7 @@ public class AppointmentRepository implements AppointmentService {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -105,8 +107,9 @@ public class AppointmentRepository implements AppointmentService {
                 appointment.setRoom(mrs.getMeetingRoom(rs.getInt("a.MEETINGROOMID")));
 
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return appointment;
@@ -131,7 +134,7 @@ public class AppointmentRepository implements AppointmentService {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return users;
@@ -151,7 +154,7 @@ public class AppointmentRepository implements AppointmentService {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -164,7 +167,7 @@ public class AppointmentRepository implements AppointmentService {
             statement.setInt(3, timeFrame.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -177,7 +180,7 @@ public class AppointmentRepository implements AppointmentService {
             statement.setInt(2, appointment.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
 
@@ -190,7 +193,7 @@ public class AppointmentRepository implements AppointmentService {
             statement.setInt(1, appointment.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
 
