@@ -16,38 +16,41 @@ import javafx.scene.text.Font;
 /**
  * Created by jonasandredalseth on 11.03.14.
  */
-public class EditScreen extends Application {
+public class EditScreen /*extends Application*/ {
 
-    public EditScreen(){
+    protected Scene scene;
 
-    }
+    protected TextField eventName;
+    protected TextField locationText;
+    protected TextArea descriptionText;
 
-    private TextField eventName;
-    private TextField locationText;
-    private TextArea descriptionText;
+    protected SimpleCalendar fromDate;
+    protected SimpleCalendar toDate;
 
-    private SimpleCalendar fromDate;
-    private SimpleCalendar toDate;
+    protected ComboBox fromTime;
+    protected ComboBox toTime;
+    protected ComboBox alarmCombo;
+    protected ComboBox roomCombo;
+    protected ComboBox editUsers;
+    protected ComboBox editGroups;
 
-    private ComboBox fromTime;
-    private ComboBox toTime;
-    private ComboBox alarmCombo;
-    private ComboBox roomCombo;
-    private ComboBox editUsers;
-    private ComboBox editGroups;
+    protected Label date;
+    protected Label time;
+    protected Label alarmLabel;
+    protected Label location;
+    protected Label roomLabel;
+    protected Label descriptionLabel;
+    protected Label addRemoveUsers;
+    protected Label addRemoveGroup;
 
-    private Label date;
-    private Label time;
-    private Label alarmLabel;
-    private Label location;
-    private Label roomLabel;
-    private Label descriptionLabel;
-    private Label addRemoveUsers;
-    private Label addRemoveGroup;
+    protected Button cancelButton;
+    protected Button commitButton;
+    protected Button invisibleButton;
 
-    private Button cancelButton;
-    private Button commitButton;
-    private Button invisibleButton;
+    protected GridPane editGrid;
+    protected GridPane dateGrid;
+    protected GridPane timeGrid;
+    protected GridPane cancelButtonGrid;
 
 
     private ObservableList<String> timeOptions;
@@ -86,7 +89,8 @@ public class EditScreen extends Application {
     }
 
 
-    public void start (final Stage editStage){
+    /*public void start (final Stage editStage){*/
+    public EditScreen(final Stage editStage){
 
 
         timeOptions = FXCollections.observableArrayList(
@@ -120,20 +124,20 @@ public class EditScreen extends Application {
                 "Drivhuset"
         );
 
-        GridPane editGrid = new GridPane();
+        editGrid = new GridPane();
         editGrid.setPadding(new Insets(15,15,15,15));
         editGrid.setVgap(10);
         editGrid.setHgap(10);
 
-        GridPane dateGrid = new GridPane();
+        dateGrid = new GridPane();
         dateGrid.setHgap(60);
         editGrid.add(dateGrid,1,2);
 
-        GridPane timeGrid = new GridPane();
+        timeGrid = new GridPane();
         timeGrid.setHgap(10);
         editGrid.add(timeGrid,1,3);
 
-        GridPane cancelButtonGrid = new GridPane();
+        cancelButtonGrid = new GridPane();
         cancelButtonGrid.setHgap(10);
         editGrid.add(cancelButtonGrid,1,18);
 
@@ -145,6 +149,8 @@ public class EditScreen extends Application {
         date = new Label("Date:");
         fromDate = new SimpleCalendar();
         toDate = new SimpleCalendar();
+        //fromDate.getStylesheets().add("simple_calendar.css");
+
 
         editGrid.add(date,0,2);
         dateGrid.add(fromDate,0,0); //1,1
@@ -223,16 +229,17 @@ public class EditScreen extends Application {
 
 
         setFont(Font.font("Helvetica-Ultra-Light", 13));
+        scene = new Scene(editGrid,285,500);
 
         editStage.setTitle("Edit");
-        editStage.setScene(new Scene(editGrid, 285, 500));
+        editStage.setScene(scene);
         editStage.show();
 
 
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
        launch(args);
-    }
+    }*/
 
 }
