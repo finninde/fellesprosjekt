@@ -1,9 +1,9 @@
-package server;
+package client;
 
-import helperclasses.Appointment;
-import helperclasses.Request;
-import helperclasses.User;
+import helperclasses.*;
 import org.json.simple.JSONObject;
+import server.ConnectionListener;
+import server.Receiver;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 /**
  * Created by espen on 12.03.14.
  */
-public class ClientConnection extends Thread implements ConnectionListener{
+public class ClientConnection extends Thread implements ConnectionListener, GUIRequests{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
     private int count;
@@ -79,13 +79,43 @@ public class ClientConnection extends Thread implements ConnectionListener{
 
     }
 
-    private ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
         json.put("request",Request.GETUSERS);
         key += 1;
         send(json);
         ArrayList<User> users = (ArrayList<User>) waitForObject(key);
         return users;
+    }
+
+    @Override
+    public ArrayList<Group> getGroups() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Participant> getParticipantsOfAppointment(int id) {
+        return null;
+    }
+
+    @Override
+    public Appointment getAppointment() {
+        return null;
+    }
+
+    @Override
+    public Alarm getAlarm() {
+        return null;
+    }
+
+    @Override
+    public void updateAppointment(Appointment appointment) {
+
+    }
+
+    @Override
+    public ArrayList<Appointment> getUsersAppointments() {
+        return null;
     }
 
 

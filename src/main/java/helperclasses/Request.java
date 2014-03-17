@@ -11,7 +11,7 @@ public enum Request {
     GETDATA,
     LOGOUT,
     LOGIN,
-    GETUSERS;
+    GETUSERS, UPDATEAPPOINTMENT;
 
 
 }
