@@ -21,4 +21,8 @@ public interface UserService {
     public void addUser(User user);
     public void addAlarm(Alarm alarm);
 
+    public void updateAlarm(Alarm alarm);
+    public void updateUser(User user);
+
+
 }

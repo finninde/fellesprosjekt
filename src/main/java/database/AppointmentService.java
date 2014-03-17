@@ -22,4 +22,11 @@ public interface AppointmentService {
     public TimeFrame getTimeFrame(int id);
     public ArrayList<User> getParticipants(Appointment appointment);
 
+    public void updateAppointment(Appointment appointment);
+    public void updateTimeFrame(TimeFrame timeFrame);
+
+    public void deleteParticipant(User user, Appointment appointment);
+    public void deleteAppointment(Appointment appointment);
+
+
 }
