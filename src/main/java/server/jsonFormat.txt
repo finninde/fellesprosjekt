@@ -60,6 +60,9 @@
 "users": ArrayList<User>
 }
 
-
-
-{"password":null,"name":"Adolf Boss","email":"adolf@gmail.com","alarms":null,"username":"Adolf"}
+### Update appointment
+{"request": UPDATEAPPOINTMENT,
+"appointment": appointmentObject}
+{"response":UPDATEAPPOINTMENT,
+"success":boolean,
+eventuelt}

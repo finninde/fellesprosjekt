@@ -20,7 +20,7 @@ public interface AppointmentService {
 
     public Appointment getAppointment(int id);
     public TimeFrame getTimeFrame(int id);
-    public ArrayList<User> getParticipants(Appointment appointment);
+    public ArrayList<Participant> getParticipants(Appointment appointment);
 
     public void updateAppointment(Appointment appointment);
     public void updateTimeFrame(TimeFrame timeFrame);
