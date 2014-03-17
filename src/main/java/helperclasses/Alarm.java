@@ -2,10 +2,12 @@ package helperclasses;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
+
 /**
  * Created by kradalby on 05/03/14.
  */
-public class Alarm {
+public class Alarm implements Serializable {
 
     private int id;
     private DateTime executeAlarm;

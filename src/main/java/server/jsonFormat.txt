@@ -1,13 +1,22 @@
+#### Login
 {
 'response': 'login',
-'username': <username>,
-'messages': [<messages>]
+'success': boolean,
+'error' : errormessage (only if success == false)
 }
 {
 'request': 'login',
 'username': <username>
+'password': "password"
 }
-
+#### Logout
+{
+'request': 'logout'
+}
+{
+'response': 'logout',
+'success': true
+}
 ##### After successfull login
 {
 'request': 'getData',
@@ -43,7 +52,13 @@
 {'request': 'updateParticipantStatus',
 'status': 'newStatus'
 }
-
+#### Get all users available
+{ "request": GETUSERS,
+}
+{
+"response": GETUSERS,
+"users": ArrayList<User>
+}
 
 
 

@@ -3,6 +3,8 @@ package database;
 import database.repository.DatabaseProperties;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -30,8 +32,7 @@ public class DatabaseConnection {
             try {
                 connectionInstance = DriverManager.getConnection(url, dbp.getDbuser(), dbp.getDbpass());
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println(url);
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }

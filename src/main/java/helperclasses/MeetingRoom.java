@@ -1,5 +1,5 @@
 package helperclasses;
-
+import java.io.Serializable;
 import database.MeetingRoomService;
 import database.repository.MeetingRoomRepository;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by kradalby on 05/03/14.
  */
-public class MeetingRoom {
+public class MeetingRoom implements Serializable {
 
     private int id;
     private String room;
@@ -16,7 +16,9 @@ public class MeetingRoom {
     // I dont think we need this, it is probably more reasonable to calculate this every time.
     //private ArrayList<TimeFrame> reservations;
 
-    public MeetingRoom() {
+    public MeetingRoom()
+
+    {
     }
 
 

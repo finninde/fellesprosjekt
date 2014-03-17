@@ -3,6 +3,7 @@ package helperclasses;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by kradalby on 05/03/14.
  */
-public class TimeFrame {
+public class TimeFrame implements Serializable {
 
     private Integer id;
     private DateTime startDate;

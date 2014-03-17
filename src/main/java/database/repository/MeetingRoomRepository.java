@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -31,7 +33,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
                 mr.setRoom(rs.getString("ROOM"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return mr;
@@ -52,7 +54,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
                 mrs.add(mr);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
         return mrs;
     }
@@ -69,7 +71,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
             key.next();
             mr.setId(key.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -86,7 +88,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
                 tfs.add(tf);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return tfs;
@@ -102,7 +104,7 @@ public class MeetingRoomRepository implements MeetingRoomService {
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
