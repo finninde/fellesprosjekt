@@ -1,4 +1,4 @@
-package sample;
+package UI;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 
 
 
-public class Main extends Application {
+public class buttongrid extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
