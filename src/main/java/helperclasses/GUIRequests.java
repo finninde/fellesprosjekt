@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public interface GUIRequests {
     public ArrayList<User> getArrayListOfUsers();
     public ArrayList<Group> getArrayListOfGroups();
-    public ArrayList<Participant> getParticipantsOfAppointment(int id);
+    //public ArrayList<Participant> getParticipantsOfAppointment(int id); //TODO remove quotations when participant class is made
     public Appointment getAppointment();
     public Alarm getAlarm();
     public void updateAppointment(Appointment appointment);
-    public ArrayList<Appointment> getUsersAppointments();
+    public ArrayList<Appointment> getUsersAppointments(User user);
 
 }

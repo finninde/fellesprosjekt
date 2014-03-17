@@ -42,7 +42,7 @@ public class NotBeingUsedCalendarScreen {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 System.out.println("newAppointmentButton clicked");
-                //new EditScreen(new Stage(), new Appointment); //TODO remove quotations
+                //new EditScreen(new Stage(), new Appointment()); //TODO remove quotations
             }
         });
 
