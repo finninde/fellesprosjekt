@@ -6,3 +6,4 @@ package client;
 public interface OwnerOfClientConnection {
     public void messageFromServer(String notification);
 }
+

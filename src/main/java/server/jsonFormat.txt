@@ -60,7 +60,7 @@
 "users": ArrayList<User>
 }
 
-#### Update appointmetn
+#### Update appointment
 { "request": UPDATEAPPOINTMENT
 "appointment": appintmentObject
 }
@@ -70,4 +70,3 @@
 }
 
 
-{"password":null,"name":"Adolf Boss","email":"adolf@gmail.com","alarms":null,"username":"Adolf"}
