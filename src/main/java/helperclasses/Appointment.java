@@ -11,7 +11,7 @@ public class Appointment implements Serializable{
     private String title;
     private String description;
     private TimeFrame timeFrame;
-    private ArrayList<User> participants;
+    private ArrayList<Participant> participants;
     private User owner;
     private MeetingRoom room;
     private String location;
@@ -22,8 +22,12 @@ public class Appointment implements Serializable{
     }
 
     public void addUser(User user) {
-        if (this.participants == null) this.participants = new ArrayList<User>();
-        this.participants.add(user);
+        if (this.participants == null) this.participants = new ArrayList<Participant>();
+        Participant participant = new Participant();
+        participant.setUser(user);
+        participant.setStatus(Status.PENDING);
+
+        this.participants.add(participant);
     }
 
     public boolean removeUser() {
@@ -75,11 +79,11 @@ public class Appointment implements Serializable{
         this.timeFrame = timeFrame;
     }
 
-    public ArrayList<User> getParticipants() {
+    public ArrayList<Participant> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(ArrayList<User> participants) {
+    public void setParticipants(ArrayList<Participant> participants) {
         this.participants = participants;
     }
 
