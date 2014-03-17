@@ -1,5 +1,6 @@
 package server;
 
+import database.repository.AppointmentRepository;
 import database.repository.UserRepository;
 import helperclasses.Appointment;
 import helperclasses.Request;
@@ -81,7 +82,24 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("response", request);
                     json.put("users",users);
                     sendJSON(json);
+                case UPDATEAPPOINTMENT:
+                    AppointmentRepository ar = new AppointmentRepository();
+
                 case ALARMOFAPPOINTMENT:
+                    break;
+                case UPDATEAPPOINTMENT:
+                    AppointmentRepository ar = new AppointmentRepository();
+                    Appointment ap = (Appointment) obj.get("appointment");
+                    String message= ar.updateAppointment(ap);
+                    json.put("response", request);
+                    boolean success = message.equals("ok") ? true: false;
+                    json.put("success",success);
+                    if(success) {
+                        sendJSON(json);
+                        break;
+                    }
+                    json.put("error", message);
+                    sendJSON(json);
                     break;
                 case PARTICIPANTSOFAPPOINTMENT:
                     break;
