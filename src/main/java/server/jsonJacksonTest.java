@@ -2,13 +2,6 @@ package server;
 
 import helperclasses.MeetingRoom;
 import helperclasses.User;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,14 +10,13 @@ import java.util.ArrayList;
 /**
  * Created by espen on 11.03.14.
  */
+
+/*
 public class jsonJacksonTest {
     private static final String jsonFilePath = "C:/git/fellesprosjekt/src/main/java/server/usertest.json";
 
 
     public static void main(String[] args) {
-        ObjectMapper mapper = new ObjectMapper();
-        JSONObject obj = new JSONObject();
-        JSONArray userList = new JSONArray();
         ArrayList<String> userList2 = new ArrayList<String>();
         ArrayList<User> userList3 = new ArrayList<User>();
 
@@ -153,3 +145,4 @@ public class jsonJacksonTest {
         System.out.println("Not yet implemented....");
     }
 }
+*/
