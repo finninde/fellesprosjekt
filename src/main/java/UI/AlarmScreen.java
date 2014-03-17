@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -27,14 +28,14 @@ public class AlarmScreen /*extends Application*/{
     private Label timeLabel;
 
     //public void start(Stage alarmStage){
-    public AlarmScreen(Stage alarmStage/*TODO , Appointment appointment*/){
+    public AlarmScreen(Stage alarmStage/*, Appointment appointment TODO FIX PARAMETERS*/){
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
 
         description = new Text();
         descriptionLabel = new Label("Description");
-        description.setText("appointment.getDescription()" /*TODO DESCRIPTION TEXT SHOULD COME FROM APPOINTMENT*/);
+        description.setText("appointment.getDescription()" /*TODO REMOVE QUOTATION MARKS*/);
 
         editGrid.add(descriptionLabel, 0, 0);
         editGrid.add(description, 1,0);
@@ -58,7 +59,7 @@ public class AlarmScreen /*extends Application*/{
         okButton.setOnMouseClicked(new javafx.event.EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                System.out.println("button clicked");
+                System.out.println("okButton clicked");
                 Stage stage = (Stage) okButton.getScene().getWindow();
                 stage.close();
             }
@@ -70,10 +71,20 @@ public class AlarmScreen /*extends Application*/{
         okButtonPane.add(okButton, 1,0);
         editGrid.add(okButtonPane, 1,5);
 
+        setFont(Font.font("Helvetica-Ultra-Light", 13));
 
         alarmStage.setTitle("Alarm!");
         alarmStage.setScene(new Scene(editGrid, 300, 200));
         alarmStage.show();
+    }
+
+    private void setFont(Font font){
+        date.setFont(font);
+        time.setFont(font);
+        timeLabel.setFont(font);
+        description.setFont(font);
+        okButton.setFont(font);
+        descriptionLabel.setFont(font);
     }
 /*
     public static void main(String[] args){

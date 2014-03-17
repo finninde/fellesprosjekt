@@ -10,6 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by espen on 11.03.14.
  */
+
+
+
+
 public class jsonJacksonTest {
     private static final String jsonFilePath = "C:/git/fellesprosjekt/src/main/java/server/usertest.json";
 
@@ -24,6 +28,10 @@ public class jsonJacksonTest {
         mr.setCapacity(25);
         mr.setRoom("myRoom");
 
+
+
+
+        String stringRoom;
         User n1 = new User("Adolf");
         n1.setEmail("adolf@gmail.com");
         n1.setName("Adolf Boss");

@@ -24,7 +24,7 @@ public class SendMail {
          */
 
         final String username = ""/*TODO FILL IN DESIRED SENDER MAIL*/;			//mailadressen som sender mail
-        final String password = ""/*TODO FILL IN PASSWORD TO SENDER MAIL*/;						//passord
+        final String password = ""/*TODO FILL IN PASSWORD TO SENDER MAIL*/;		//passord
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -55,8 +55,8 @@ public class SendMail {
 
             System.out.println("Done");
 
-        } catch (Exception e) {
-            //TODO insert error message
+        } catch (Exception e) /*TODO DIFFERENT EXCEPTION?*/{
+            //TODO INSERT ERROR MESSAGE
         }
     }
 }
