@@ -110,6 +110,10 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     @Override
     public void updateAppointment(Appointment appointment) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEAPPOINTMENT);
+        json.put("appointment", appointment);
+        send(json);
 
     }
 

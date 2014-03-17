@@ -60,6 +60,14 @@
 "users": ArrayList<User>
 }
 
+#### Update appointmetn
+{ "request": UPDATEAPPOINTMENT
+"appointment": appintmentObject
+}
+{ "response: UPDATEAPPOINTMENT,
+"success": boolean, not success:
+"error": errormessage
+}
 
 
 {"password":null,"name":"Adolf Boss","email":"adolf@gmail.com","alarms":null,"username":"Adolf"}

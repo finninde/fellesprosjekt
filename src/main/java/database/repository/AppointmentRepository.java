@@ -143,7 +143,7 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public void updateAppointment(Appointment appointment) {
+    public String updateAppointment(Appointment appointment) {
         String sql = "UPDATE APPOINTMENT SET DESCRIPTION=?, LOCATION=?, OWNER=?, TIMEFRAMEID=?, MEETINGROOMID=?, TITLE=? WHERE ID=?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, appointment.getDescription());
@@ -157,7 +157,10 @@ public class AppointmentRepository implements AppointmentService {
 
         } catch (SQLException e) {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+            return "Something went wrong";
         }
+        return "ok";
+        //TODO a string shall be return if an error occurred. E.g. meeting room is occupied in the new timeframe...
     }
 
     @Override
