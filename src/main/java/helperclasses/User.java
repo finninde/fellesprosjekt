@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class User {
 
 
-
     private String password;
     private String name;
     private String email;
@@ -59,5 +58,10 @@ public class User {
 
     public void setAlarms(ArrayList<Alarm> alarms) {
         this.alarms = alarms;
+    }
+
+    @Override
+    public String toString(){
+        return this.username;
     }
 }

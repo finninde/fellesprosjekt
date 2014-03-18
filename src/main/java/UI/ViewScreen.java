@@ -1,5 +1,6 @@
 package UI;
 
+import helperclasses.Appointment;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,11 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 
 /**
  * Created by jonasandredalseth on 11.03.14.
  */
-public class ViewScreen {
+public class ViewScreen implements PropertyChangeListener {
     private EditScreen viewScreen;
 
     protected TextField fromDate;
@@ -36,6 +40,8 @@ public class ViewScreen {
     protected Label accepted;
     protected Label waiting;
 
+    private Appointment model;
+
     protected Scene viewScene;
 
 
@@ -45,6 +51,34 @@ public class ViewScreen {
     private Button accept;
     private Button decline;
     private Button hide;
+
+    private void setModel(Appointment model){
+        this.model = model;
+        model.addPropertyListener(this);
+        viewScreen.eventName.setText(model.getTitle());
+        //fromDate.setText(model.getTimeFrame()); TODO: Fix this timeframeshit
+        viewScreen.locationText.setText(model.getLocation());
+        room.setText(model.getRoom().getRoom());
+        viewScreen.descriptionText.setText(model.getDescription());
+        String accepted = "";
+        String declined = "";
+        String waiting = "";
+        for (int i = 0; i == model.getParticipants().size(); i++){
+            if (model.getParticipants().get(i).getStatus() == Status.ACCEPTED){
+               accepted += model.getParticipants().get(i) + "\n";
+            }
+            else if (model.getParticipants().get(i).getStatus() == Status.PENDING){
+                waiting += model.getParticipants().get(i) + "\n";
+            }
+            else if (model.getParticipants().get(i).getStatus() == Status.DECLINED){
+                declined += model.getParticipants().get(i) + "\n";
+            }
+        }
+        attendingUsers.setText(accepted);
+        declinedUsers.setText(declined);
+        waitingUsers.setText(waiting);
+
+    }
 
     private void setIrrelevantElementsFromEditScreenInvisble(){
         viewScreen.fromDate.setVisible(false);
@@ -180,5 +214,8 @@ public class ViewScreen {
     }
 
 
-
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if
+    }
 }

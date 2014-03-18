@@ -33,5 +33,5 @@ public class MeetingRoom {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
-    }
+    }*/
 }
