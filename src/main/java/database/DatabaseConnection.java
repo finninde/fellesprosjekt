@@ -1,6 +1,6 @@
 package database;
 
-import database.repository.DatabaseProperties;
+import helperclasses.CalendarProperties;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -27,7 +27,7 @@ public class DatabaseConnection {
 
     private static Connection createConnectionInstance() {
         if (connectionInstance == null) {
-            DatabaseProperties dbp = new DatabaseProperties();
+            CalendarProperties dbp = new CalendarProperties();
             String url = "jdbc:mysql://" + dbp.getDbhost() + ":" + dbp.getDbport() + "/" + dbp.getDbname();
             try {
                 connectionInstance = DriverManager.getConnection(url, dbp.getDbuser(), dbp.getDbpass());

@@ -57,8 +57,9 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
     }
     public static void main(String args[]) {
+        CalendarProperties properties = new CalendarProperties();
         System.out.println("wallabaya!");
-        ClientConnection client = new ClientConnection("78.91.51.78", 6789);
+        ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
         json.put("username", "espen");
