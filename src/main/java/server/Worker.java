@@ -3,6 +3,7 @@ package server;
 import database.repository.AppointmentRepository;
 import database.repository.UserRepository;
 import helperclasses.Appointment;
+import helperclasses.Participant;
 import helperclasses.Request;
 import helperclasses.User;
 import org.json.simple.JSONObject;
@@ -66,29 +67,36 @@ public class Worker extends Thread implements ConnectionListener{
 
     @Override
     public void recievedMessage(JSONObject obj) {
-        //TODO not yet implemented... This method should handle all possible requests from the user...
         System.out.println(obj);
         JSONObject json = new JSONObject();
+        UserRepository ur = new UserRepository();
+        AppointmentRepository ar = new AppointmentRepository();
         Request request = (Request) obj.get("request");
         if(request==null) {
             System.out.println("unkown request");
         } else {
             switch (request) {
-                case APPOINTMENTSOFUSER:
-                    break;
+                case APPOINTMENTSWHEREUSERISOWNER:
+                    ArrayList<Appointment> appointments = ur.getAppointmentsWhereUserIsOwner(username);
+                    json.put("response",request);
+                    json.put("appointments", appointments);
+                    json.put("key",obj.get("key"));
+                    sendJSON(json);
+                case APPOINTMENTSWHEREUSERISPARTICIPANT:
+                    ArrayList<Appointment> appointmentsP = ur.getAppointmentsWhereUserIsParticipant(username);
+                    json.put("response",request);
+                    json.put("appointments", appointmentsP);
+                    json.put("key",obj.get("key"));
+                    sendJSON(json);
                 case GETUSERS:
-                    UserRepository ur = new UserRepository();
                     ArrayList<User> users = ur.getUsers();
                     json.put("response", request);
                     json.put("users",users);
+                    json.put("key",obj.get("key"));
                     sendJSON(json);
-                case UPDATEAPPOINTMENT:
-                    AppointmentRepository ar = new AppointmentRepository();
-
                 case ALARMOFAPPOINTMENT:
                     break;
                 case UPDATEAPPOINTMENT:
-                    AppointmentRepository ar = new AppointmentRepository();
                     Appointment ap = (Appointment) obj.get("appointment");
                     String message= ar.updateAppointment(ap);
                     json.put("response", request);
@@ -102,16 +110,21 @@ public class Worker extends Thread implements ConnectionListener{
                     sendJSON(json);
                     break;
                 case PARTICIPANTSOFAPPOINTMENT:
-                    break;
+                    ArrayList<Participant> participants = ar.getParticipants((int)obj.get("appointmentid"));
+                    json.put("response", request);
+                    json.put("participants",participants);
+                    json.put("key",obj.get("key"));
+                    sendJSON(json);
                 case GETAPPOINTMENT:
                     break;
                 case GETDATA:
                     System.out.println("get data request");
                     Appointment ap1 = new Appointment("Appointment1");
-                    ArrayList<Appointment> appointments = new ArrayList<Appointment>();
-                    appointments.add(ap1);
+                    ArrayList<Appointment> appointments1 = new ArrayList<Appointment>();
+                    appointments1.add(ap1);
                     json.put("response",request);
-                    json.put("appointments",appointments);
+                    json.put("appointments",appointments1);
+                    json.put("key",obj.get("key"));
                     sendJSON(json);
                     break;
                 case LOGOUT:

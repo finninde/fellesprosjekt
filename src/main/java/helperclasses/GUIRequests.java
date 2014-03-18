@@ -12,6 +12,7 @@ public interface GUIRequests {
     public Appointment getAppointment();
     public Alarm getAlarm();
     public void updateAppointment(Appointment appointment);
-    public ArrayList<Appointment> getUsersAppointments();
+    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner();
+    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant();
 
 }
