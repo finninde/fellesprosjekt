@@ -1,0 +1,72 @@
+#### Login
+{
+'response': 'login',
+'success': boolean,
+'error' : errormessage (only if success == false)
+}
+{
+'request': 'login',
+'username': <username>
+'password': "password"
+}
+#### Logout
+{
+'request': 'logout'
+}
+{
+'response': 'logout',
+'success': true
+}
+##### After successfull login
+{
+'request': 'getData',
+}
+{
+'response': 'getData',
+'appointments': [{appointment json}, {appointment json}, ... ]
+'alarms': [ {alarm1 json,}, {alarm2 json}]
+}
+
+#### After clicking on an appointment
+{
+'request': 'getAppointmentData',
+'appointment' : {appointment json}
+}
+{
+'response': 'getAppointmentData',
+'appointment': {appointment json}
+'participants': [{username,status}, {participant json} ]
+}
+
+#### After creating an appointment
+{
+'request': 'newAppointment',
+'appointment': {newAppointment json}
+}
+{
+'response': 'newAppointment',
+'status': 'success'
+}
+#### After changing participant status on an appointment
+
+{'request': 'updateParticipantStatus',
+'status': 'newStatus'
+}
+#### Get all users available
+{ "request": GETUSERS,
+}
+{
+"response": GETUSERS,
+"users": ArrayList<User>
+}
+
+#### Update appointment
+{ "request": UPDATEAPPOINTMENT
+"appointment": appintmentObject
+}
+{ "response: UPDATEAPPOINTMENT,
+"success": boolean, not success:
+"error": errormessage
+}
+
+

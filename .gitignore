@@ -50,3 +50,4 @@ TSWLatexianTemp*
 *.out
 
 .vagrant/
+out/

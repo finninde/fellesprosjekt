@@ -1,14 +1,14 @@
 package helperclasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class User {
+public class User implements Serializable {
 
-
-
+    private String username;
     private String password;
     private String name;
     private String email;
@@ -16,10 +16,17 @@ public class User {
 
     public User(String username) {
         this.username = username;
-
     }
 
-    private String username;
+    public User(String username, String password, String name, String email) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+    //Extra dummy constructor for Json
+    public User() {}
+
 
     public String getUsername() {
         return username;
@@ -59,5 +66,10 @@ public class User {
 
     public void setAlarms(ArrayList<Alarm> alarms) {
         this.alarms = alarms;
+    }
+
+    public String toString() {
+        return "User [username=" + username + ", name=" + name
+                + ", email=" + email+ ", alarms=" + alarms + "]";
     }
 }

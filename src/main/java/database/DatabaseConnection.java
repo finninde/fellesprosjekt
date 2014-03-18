@@ -2,8 +2,9 @@ package database;
 
 import database.repository.DatabaseProperties;
 
-import java.beans.Statement;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by kradalby on 06/03/14.
@@ -31,28 +32,11 @@ public class DatabaseConnection {
             try {
                 connectionInstance = DriverManager.getConnection(url, dbp.getDbuser(), dbp.getDbpass());
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println(url);
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }
         return connectionInstance;
-    }
-
-    public static void main(String args[]) {
-        DatabaseConnection instance = new DatabaseConnection();
-        Connection con = instance.getConnectionInstance();
-        try {
-            System.out.println(con.getMetaData());
-            String q = "show databases;";
-            PreparedStatement statement = con.prepareStatement(q);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()) {
-                System.out.println(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 }
