@@ -1,0 +1,8 @@
+package helperclasses;
+
+/**
+ * Created by Wien on 17.03.14.
+ */
+public enum Notifications {
+    INVITEDTOAPPOINTMENT, REPLIEDTOAPPOINTMENT, APPOINTMENTCANCELLED, APPOINTMENTCONFIRMED, APPOINTMENTUPDATED;
+}

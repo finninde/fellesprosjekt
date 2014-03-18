@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by kradalby on 05/03/14.
  */
+
 public class User implements Serializable {
 
     private String username;
@@ -68,8 +69,8 @@ public class User implements Serializable {
         this.alarms = alarms;
     }
 
-    public String toString() {
-        return "User [username=" + username + ", name=" + name
-                + ", email=" + email+ ", alarms=" + alarms + "]";
+    @Override
+    public String toString(){
+        return this.username;
     }
 }

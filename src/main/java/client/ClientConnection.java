@@ -25,9 +25,8 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     private Socket clientSocket;
     public OwnerOfClientConnection owner;
 
-    public ClientConnection(String address, int port, OwnerOfClientConnection owner){
+    public ClientConnection(String address, int port){
         clientSocket = null;
-        this.owner = owner;
         try {
             clientSocket = new Socket(address, port);
             toServer = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -58,9 +57,9 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
     }
     public static void main(String args[]) {
+        CalendarProperties properties = new CalendarProperties();
         System.out.println("wallabaya!");
-        MainTest mainTest = new MainTest();
-        ClientConnection client = new ClientConnection("78.91.51.78", 6789, mainTest);
+        ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
         json.put("username", "espen");

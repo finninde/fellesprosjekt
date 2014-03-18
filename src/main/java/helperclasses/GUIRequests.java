@@ -14,5 +14,4 @@ public interface GUIRequests {
     public void updateAppointment(Appointment appointment);
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner();
     public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant();
-
 }
