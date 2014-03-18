@@ -1,6 +1,5 @@
 package helperclasses;
 
-import com.sun.tools.corba.se.idl.InterfaceGen;
 
 import java.io.FileInputStream;
 import java.io.IOException;
