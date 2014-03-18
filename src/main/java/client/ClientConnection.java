@@ -1,9 +1,9 @@
-package server;
+package client;
 
-import helperclasses.Appointment;
-import helperclasses.Request;
-import helperclasses.User;
+import helperclasses.*;
 import org.json.simple.JSONObject;
+import server.ConnectionListener;
+import server.Receiver;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -15,16 +15,18 @@ import java.util.HashMap;
 /**
  * Created by espen on 12.03.14.
  */
-public class ClientConnection extends Thread implements ConnectionListener{
+public class ClientConnection extends Thread implements ConnectionListener, GUIRequests{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
     private int count;
     private int key;
     private ObjectOutputStream toServer;
     private Socket clientSocket;
+    public OwnerOfClientConnection owner;
 
-    public ClientConnection(String address, int port){
+    public ClientConnection(String address, int port, OwnerOfClientConnection owner){
         clientSocket = null;
+        this.owner = owner;
         try {
             clientSocket = new Socket(address, port);
             toServer = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -56,7 +58,7 @@ public class ClientConnection extends Thread implements ConnectionListener{
     }
     public static void main(String args[]) {
         System.out.println("wallabaya!");
-        ClientConnection client = new ClientConnection("78.91.21.135", 6789);
+        ClientConnection client = new ClientConnection("78.91.51.78", 6789);
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
         json.put("username", "espen");
@@ -79,13 +81,47 @@ public class ClientConnection extends Thread implements ConnectionListener{
 
     }
 
-    private ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
         json.put("request",Request.GETUSERS);
         key += 1;
         send(json);
         ArrayList<User> users = (ArrayList<User>) waitForObject(key);
         return users;
+    }
+
+    @Override
+    public ArrayList<Group> getGroups() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Participant> getParticipantsOfAppointment(int id) {
+        return null;
+    }
+
+    @Override
+    public Appointment getAppointment() {
+        return null;
+    }
+
+    @Override
+    public Alarm getAlarm() {
+        return null;
+    }
+
+    @Override
+    public void updateAppointment(Appointment appointment) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEAPPOINTMENT);
+        json.put("appointment", appointment);
+        send(json);
+
+    }
+
+    @Override
+    public ArrayList<Appointment> getUsersAppointments() {
+        return null;
     }
 
 
@@ -195,4 +231,40 @@ public class ClientConnection extends Thread implements ConnectionListener{
 
 
 
+
+    @Override
+    public ArrayList<Group> getGroups() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Participant> getParticipantsOfAppointment(int id) {
+        return null;
+    }
+
+    @Override
+    public Appointment getAppointment() {
+        return null;
+    }
+
+    @Override
+    public Alarm getAlarm() {
+        return null;
+    }
+
+    @Override
+    public void updateAppointment(Appointment appointment) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEAPPOINTMENT);
+        json.put("appointment", appointment);
+        send(json);
+
+
+
+    }
+
+    @Override
+    public ArrayList<Appointment> getUsersAppointments() {
+        return null;
+    }
 }

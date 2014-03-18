@@ -5,9 +5,7 @@ import database.AppointmentService;
 import database.DatabaseConnection;
 import database.MeetingRoomService;
 import database.UserService;
-import helperclasses.Appointment;
-import helperclasses.TimeFrame;
-import helperclasses.User;
+import helperclasses.*;
 import org.joda.time.DateTime;
 
 import java.sql.PreparedStatement;
@@ -64,12 +62,12 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public void addParticipant(User user, Appointment appointment) {
+    public void addParticipant(Participant participant, Appointment appointment) {
         String sql = "INSERT INTO PARTICIPANT (USERID, APPOINTMENTID, STATUS) VALUES (?,?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setString(1, user.getUsername());
+            statement.setString(1, participant.getUser().getUsername());
             statement.setInt(2, appointment.getId());
-            statement.setString(3, "Invited");
+            statement.setString(3, participant.getStatus().toString());
             System.out.println(statement.toString());
             statement.executeUpdate();
 
@@ -81,9 +79,9 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public void addParticipants(ArrayList<User> users, Appointment appointment) {
-        for (User u : users) {
-             addParticipant(u, appointment);
+    public void addParticipants(ArrayList<Participant> participants, Appointment appointment) {
+        for (Participant p : participants) {
+             addParticipant(p, appointment);
         }
     }
 
@@ -121,27 +119,31 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public ArrayList<User> getParticipants(Appointment appointment) {
-        ArrayList<User> users = null;
+    public ArrayList<Participant> getParticipants(Appointment appointment) {
+        ArrayList<Participant> participants = null;
         UserService us = new UserRepository();
-    String sql = "SELECT * FROM PARTICIPANT WHERE APPOINTMENTID = ?";
+    String sql = "SELECT USERID, STATUS FROM PARTICIPANT WHERE APPOINTMENTID = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
             statement.setInt(1, appointment.getId());
             ResultSet rs = statement.executeQuery();
-            users = new ArrayList<User>();
+            participants = new ArrayList<Participant>();
             while (rs.next()) {
-                users.add(us.getUser(rs.getString("USERID")));
+                User user = new User();
+                user = us.getUser(rs.getString("USERID"));
+                Participant participant = new Participant();
+                participant.setUser(user);
+                participant.setStatus(Status.valueOf(rs.getString("STATUS")));
 
             }
         } catch (SQLException e) {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        return users;
+        return participants;
     }
 
     @Override
-    public void updateAppointment(Appointment appointment) {
+    public String updateAppointment(Appointment appointment) {
         String sql = "UPDATE APPOINTMENT SET DESCRIPTION=?, LOCATION=?, OWNER=?, TIMEFRAMEID=?, MEETINGROOMID=?, TITLE=? WHERE ID=?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, appointment.getDescription());
@@ -155,7 +157,10 @@ public class AppointmentRepository implements AppointmentService {
 
         } catch (SQLException e) {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+            return "Something went wrong";
         }
+        return "ok";
+        //TODO a string shall be return if an error occurred. E.g. meeting room is occupied in the new timeframe...
     }
 
     @Override
@@ -173,10 +178,10 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public void deleteParticipant(User user, Appointment appointment) {
+    public void deleteParticipant(Participant participant, Appointment appointment) {
         String sql = "DELETE FROM PARTICIPANT WHERE USERID=? AND APPOINTMENTID=?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setString(1, user.getUsername());
+            statement.setString(1, participant.getUser().getUsername());
             statement.setInt(2, appointment.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
