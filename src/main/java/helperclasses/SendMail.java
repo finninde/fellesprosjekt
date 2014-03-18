@@ -25,14 +25,14 @@ public class SendMail{
         /**
          * Set up the mail sender.
          */
-                                    //mailadressen som sender mail
-        final String username = "crazycalendarpartyedition@kradalby.no"/*TODO FILL IN DESIRED SENDER MAIL*/;
-        final String password = "crazyparty"/*TODO FILL IN PASSWORD TO SENDER MAIL*/;		//passord
+
+        final String username = "crazycalendarpartyedition@kradalby.no";  //mailadressen som sender mail
+        final String password = "crazyparty";		                      //passord
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com"); //TODO CHANGE IF NOT USING GMAIL
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
         /**
