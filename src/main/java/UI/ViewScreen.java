@@ -216,6 +216,6 @@ public class ViewScreen implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if
+
     }
 }
