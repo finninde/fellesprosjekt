@@ -42,24 +42,33 @@ If the username and/or password i incorrect, this popup screen will appear. When
 
 \newpage
 
+Enter username and password in their respective JTextFields. Press the "Log in"-button to log in.
+
+\newpage
+
 \begin{figure}[h!] 
     \begin{center} 
         \includegraphics[width=8cm]{img/IMG_5601.JPG}
-        \caption{Week view}
-    \label{weekview}
+        \caption{Main view}
+    \label{mainview}
     \end{center}
 \end{figure}
 
-This is the main screen. In this screen, the user can view his/her appoinments. By pressing the ``new  appointment'' - button, the user can make a new appointment. When pressing the arrow-buttons, the user can see the previous or next week. By pressing an appointment, the user can edit or view an appointment. The ``notification''-button make it possible to view the users notification.
+The main view. From here it's possible to click "new appointment"-button to make a new appointment. When pressing the arrowbuttons, the next week or previous week will be shown. By clicking an appointment in the calendar, it's possible to edit or view the appointment. From the show user JComboBox, you can view other users calendar. By clicking the "notification"-button, you can check your notifications.
+
 
 \begin{figure}[h!] 
     \begin{center} 
-        \includegraphics[width=8cm]{img/IMG_5602.JPG}
+        \includegraphics[width=8cm]{img/IMG_5602.png}
         \caption{Edit screen}
     \label{edit}
     \end{center}
 \end{figure}
 In the edit-screen, the user can make new appointments/change the existing ones. Date, time, room and alarm can be set from a dropdown menu, while location and description is textfields where the user can enter text. By pressing the ``commit''-button, the appointment will be made.
+
+\newpage
+
+From this editscreen it's possible to enter time, date, room and alarm from dropdown-menus. Location and description are textfields that may be filled with text. In addition it's possible to add users and groups, through dropdown-menus.
 
 \newpage
 
@@ -114,7 +123,48 @@ In this screen the user can view an appointment, in addition make a response if 
 \end{figure}
 The alarm popup is a popup which appears when a alarm goes off. By pressing the ``OK''-button, the popup will close.
 
+This is an example of a dropdownmenu.
+
 \newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5608.JPG}
+        \caption{Notification popup}
+    \label{notificationpopup}
+    \end{center}
+\end{figure}
+
+This is the notification popup screen. From here the users notifications will be listed. By clicking them, the user will be shown the view of the clicked appoiontment.
+
+\newpage
+
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5609.JPG}
+        \caption{Appointment view}
+    \label{appointmentview}
+    \end{center}
+\end{figure}
+
+When a user views an appointment, this is the screen presented. The marked out fields are non editable. The user can here press "accept" to accept the appointment, or press decline if the user is busy at the specified time for the meeting. By pressing "cancel", he will close the window without making any changes, and by pressing "Hide from calendar"-button, the appointment will be removed from this users calendar.
+
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{img/IMG_5611.JPG}
+        \caption{Alert}
+    \label{nalert}
+    \end{center}
+\end{figure}
+
+This is an alert. It appears at the preset time, which the user chose when he viewed/made the appointment. By pressing "OK", the window closes.
+
+\newpage
+
+
 
 \section{The task at hand}
 A usability test was performed to test the paperprototype. The tasks was as follows:
@@ -131,8 +181,6 @@ A usability test was performed to test the paperprototype. The tasks was as foll
 \item Yor businessconnection calls you, and tell you he's one hour late. Change this in the appointment in the calendar.
 \end{enumerate}
 
-
-Ole Halvor Dahl
 
 
 
@@ -151,6 +199,7 @@ Ole Halvor Dahl
 
 \subsubsection*{Exectution}
 The test with the student assistant wasn't very organized. First we thought we was just supposed to show him the paper model, so we didn't have any routines. Everybody on the group guided him through different scenarios, and we hadn't made any before we met him. After the test we asked him to fill out the SUS scheme and asked him what he thought about the system. We learned a lot about talking to him, and he told us how we should do it when we tested with the other group. 
+
 \subsection{With other group}
 \subsubsection*{Roles}
 \begin{itemize}
@@ -164,7 +213,7 @@ The test with the student assistant wasn't very organized. First we thought we w
 We met another group also working with the common project. The other group had chosen one person who would test our system. We chose one test leader, one "wizard of oz" and two people who wrote down the results from the test. The testleader presented how the test will work, what we are testing and how we are gonna do it. The test started, and the tester did the task presented above, without help from anyone of us. When the test was finished, he filled in a SUS diagram, and we asked him what he thought about the system.
 
 \section{Results}
-\subsection{With Student assistant}
+\subsection{With student assistant}
 Our student assistant gave us a lot of valued response on both how we executed the test and how our system worked. The changes suggested to our execution were extremely helpful before our second testgroup, and included the following:
 \begin{enumerate}
 \item Select a test leader and a person to serve as your system.
@@ -196,10 +245,6 @@ The suggestions for the paper prototype included the following points:
 \item Make a add all alternative in JComboBox
 \item The view will be changed so the size of the room will appear in the JComboBox, such that it appears next to the name om the meeting room
 \item Show dates next to the days in the calendar
-
-
-
-
 
 
 \end{document}

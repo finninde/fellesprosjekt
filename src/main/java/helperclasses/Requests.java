@@ -1,0 +1,13 @@
+package helperclasses;
+
+/**
+ * Created by Wien on 13.03.14.
+ */
+public enum Requests {
+    PARTICIPANTOFAPPOINTMENT,OWNEROFAPPOINTMENT,
+    GETALARM,
+    LISTOFAPPOINTMENTSFORNOTIFICATIONSOFUSER,
+    PARTICIPANTSOFAPPOINTMENT,
+
+    ;
+}

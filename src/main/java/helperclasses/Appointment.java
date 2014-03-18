@@ -1,49 +1,53 @@
 package helperclasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class Appointment {
+public class Appointment implements Serializable{
 
     private String title;
-
-
-
     private String description;
     private TimeFrame timeFrame;
-    private ArrayList<User> participants;
+    private ArrayList<Participant> participants;
     private User owner;
     private MeetingRoom room;
     private String location;
+    private int id;
 
     public Appointment(String title) {
         this.title = title;
     }
 
-    public boolean addUser() {
-        throw new NotYetImplementedException();
+    public void addUser(User user) {
+        if (this.participants == null) this.participants = new ArrayList<Participant>();
+        Participant participant = new Participant();
+        participant.setUser(user);
+        participant.setStatus(Status.PENDING);
+
+        this.participants.add(participant);
     }
 
     public boolean removeUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean addGroup() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeGroup() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public void alertChanges() {
-        throw new NotYetImplementedException();
+        System.out.println("dummy");
     }
 
     public boolean deleteAppointment() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public String getTitle() {
@@ -70,11 +74,16 @@ public class Appointment {
         this.timeFrame = timeFrame;
     }
 
-    public ArrayList<User> getParticipants() {
+
+    public void setTimeFrame(TimeFrame timeFrame) {
+        this.timeFrame = timeFrame;
+    }
+
+    public ArrayList<Participant> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(ArrayList<User> participants) {
+    public void setParticipants(ArrayList<Participant> participants) {
         this.participants = participants;
     }
 
@@ -100,5 +109,13 @@ public class Appointment {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -1,21 +1,22 @@
 package helperclasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class Group {
+public class Group implements Serializable {
 
     private String groupName;
     private ArrayList<User> users;
 
     public boolean addUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public boolean removeUser() {
-        throw new NotYetImplementedException();
+        return false;
     }
 
     public String getGroupName() {

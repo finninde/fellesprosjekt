@@ -49,3 +49,5 @@ TSWLatexianTemp*
 *.DS_Store
 *.out
 
+.vagrant/
+out/
