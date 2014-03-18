@@ -82,8 +82,6 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("response", request);
                     json.put("users",users);
                     sendJSON(json);
-                case UPDATEAPPOINTMENT:
-                    AppointmentRepository ar = new AppointmentRepository();
 
                 case ALARMOFAPPOINTMENT:
                     break;

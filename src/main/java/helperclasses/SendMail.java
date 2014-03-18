@@ -104,7 +104,7 @@ public class SendMail{
                 System.out.println("Done");
             }
 
-        } catch (Exception e) /*TODO DIFFERENT EXCEPTION?*/{
+        } catch (Exception e) {
             //TODO INSERT ERROR MESSAGE
         }
     }

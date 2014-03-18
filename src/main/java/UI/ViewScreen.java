@@ -1,6 +1,7 @@
 package UI;
 
 import helperclasses.Appointment;
+import helperclasses.Status;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -216,6 +217,5 @@ public class ViewScreen implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if
     }
 }
