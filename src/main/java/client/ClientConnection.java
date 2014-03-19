@@ -15,6 +15,7 @@ import java.util.HashMap;
 /**
  * Created by espen on 12.03.14.
  */
+
 public class ClientConnection extends Thread implements ConnectionListener, GUIRequests{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
@@ -23,6 +24,26 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     private ObjectOutputStream toServer;
     private Socket clientSocket;
     public OwnerOfClientConnection owner;
+
+    private static ClientConnection instance;
+
+    public static void setInstance(ClientConnection instance) {
+        ClientConnection.instance = instance;
+    }
+
+    public static ClientConnection getInstance() {
+        if (instance == null) createInstance();
+        return instance;
+    }
+
+    private static ClientConnection createInstance() {
+        CalendarProperties properties = new CalendarProperties();
+        System.out.println("derp " + properties.getSrvhost());
+        if (instance == null) {
+            instance = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
+        }
+        return instance;
+    }
 
     public ClientConnection(String address, int port){
         clientSocket = null;
@@ -54,14 +75,13 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
     }
     public static void main(String args[]) {
-        CalendarProperties properties = new CalendarProperties();
-        System.out.println("wallabaya!");
-        System.out.println("Ip: "+ properties.getSrvhost());
-        System.out.println("Port: "+ properties.getSrvport());
 
-        ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
-        client.start();
-        boolean successfullLogin = client.login("kradalby", "frozen");
+        ClientConnection client = getInstance();
+        JSONObject json = new JSONObject();
+        json.put("request",Request.LOGIN);
+        json.put("username", "espen");
+        json.put("password", "espen");
+        client.send(json);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -72,7 +92,53 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     }
 
+    @Override
+    public ArrayList<Group> getGroups() {
+        return null;
+    }
 
+
+
+    @Override
+    public Appointment getAppointment() {
+        return null;
+    }
+
+    @Override
+    public Alarm getAlarm() {
+        return null;
+    }
+
+    @Override
+    public void updateAppointment(Appointment appointment) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEAPPOINTMENT);
+        json.put("appointment", appointment);
+        send(json);
+
+    }
+
+    @Override
+    public User getLoggedInUser() {
+        return null;
+    }
+
+    @Override
+    public Participant getParticipants(Appointment appointment) {
+        return null;
+    }
+
+    public User getUserWhichViewAppointment() {
+        return null;
+    }
+
+    @Override
+    public void updateParticipantStatus(int appointmentID, Status status) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEPARTICIPANTSTATUS);
+        json.put("appointmentID", appointmentID);
+        json.put("status", status);
+    }
 
     @Override
     public void recievedMessage(JSONObject obj) {
@@ -181,6 +247,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         return (boolean)waitForObject(loginKey);
     }
 
+    @Override
+    public Status getStatusForAppointment(int ID) {
+        return null;
+    }
+
     public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
         json.put("request",Request.GETUSERS);
@@ -189,11 +260,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
         ArrayList<User> users = (ArrayList<User>) waitForObject(key);
         return users;
-    }
-
-    @Override
-    public ArrayList<Group> getGroups() {
-        return null;
     }
 
     @Override
@@ -208,22 +274,10 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         return participants;
     }
 
-    @Override
-    public Appointment getAppointment() {
-        return null;
-    }
 
     @Override
-    public Alarm getAlarm() {
+    public ArrayList<Appointment> getUsersAppointments(User user) {
         return null;
-    }
-
-    @Override
-    public void updateAppointment(Appointment appointment) {
-        JSONObject json = new JSONObject();
-        json.put("request", Request.UPDATEAPPOINTMENT);
-        json.put("appointment", appointment);
-        send(json);
     }
 
     @Override
@@ -231,7 +285,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         JSONObject json = new JSONObject();
         json.put("request", Request.APPOINTMENTSWHEREUSERISOWNER);
         key += 1;
-        json.put("key",key);
+        json.put("key", key);
         send(json);
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;
@@ -247,4 +301,10 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;
     }
+
+    //@Override
+    public ArrayList<Appointment> getUsersAppointments() {
+        return null;
+    }
+
 }

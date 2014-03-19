@@ -2,10 +2,7 @@ package server;
 
 import database.repository.AppointmentRepository;
 import database.repository.UserRepository;
-import helperclasses.Appointment;
-import helperclasses.Participant;
-import helperclasses.Request;
-import helperclasses.User;
+import helperclasses.*;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -109,6 +106,10 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("error", message);
                     sendJSON(json);
                     break;
+                case UPDATEPARTICIPANTSTATUS:
+                    int appointmentID = (int)json.get("appointmentID");
+                    Status status = (Status)json.get("status");
+                    ar.updateParticipantStatus(appointmentID, status, username);
                 case PARTICIPANTSOFAPPOINTMENT:
                     ArrayList<Participant> participants = ar.getParticipants((int)obj.get("appointmentid"));
                     json.put("response", request);

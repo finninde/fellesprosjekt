@@ -42,7 +42,7 @@ public class NotificationsScreen /*extends Application */{
                     else{
                         new ViewScreen(new Stage(), appointment);
                     }*/
-                    new AlarmScreen(new Stage());                         //TODO THIS IS JUST A TEST
+                    //new AlarmScreen(new Stage());                         //TODO THIS IS JUST A TEST
                     Stage stage = (Stage) button.getScene().getWindow();  //TODO CLOSE WINDOW OR NOT?
                     stage.close();
                 }

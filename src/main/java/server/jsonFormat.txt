@@ -74,3 +74,8 @@
 { "response": APPOINTMENTSWHEREUSERISOWNER,
 "appointments": ArrayList<Appoitment>
 }
+
+#### updateParticipantStatus
+{"request": UPDATEPARTICIPANTSTATUS,
+"appointmentID": int
+"status" : Status;

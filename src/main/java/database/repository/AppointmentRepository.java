@@ -86,6 +86,23 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
+    public void addAlarm(Alarm alarm) {
+        String sql = "INSERT INTO ALARM (USERID, APPOINTMENTID, EXECUTEDATE) VALUES (?,?,?)";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, alarm.getUser().getUsername());
+            statement.setInt(2, alarm.getAppointment().getId());
+            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.executeUpdate();
+            ResultSet key = statement.getGeneratedKeys();
+            key.next();
+            alarm.setId(key.getInt(1));
+        } catch (SQLException e) {
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    @Override
     public Appointment getAppointment(int id) {
         UserService us = new UserRepository();
         MeetingRoomService mrs = new MeetingRoomRepository();
@@ -133,6 +150,7 @@ public class AppointmentRepository implements AppointmentService {
                 Participant participant = new Participant();
                 participant.setUser(user);
                 participant.setStatus(Status.valueOf(rs.getString("STATUS")));
+                participants.add(participant);
 
             }
         } catch (SQLException e) {
@@ -140,6 +158,31 @@ public class AppointmentRepository implements AppointmentService {
         }
 
         return participants;
+    }
+
+    @Override
+    public Alarm getAlarm(String username, int appointmentID) {
+        Alarm alarm = null;
+        UserService us = new UserRepository();
+        AppointmentService as = new AppointmentRepository();
+        String sql = "SELECT * FROM ALARM WHERE USERID = ? AND APPOINTMENTID = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setString(1, username);
+            statement.setInt(2, appointmentID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                alarm = new Alarm();
+                alarm.setId(rs.getInt("ID"));
+                alarm.setUser(us.getUser(rs.getString("USERID")));
+                alarm.setAppointment(getAppointment(rs.getInt("APPOINTMENTID")));
+                alarm.setExecuteAlarm(new DateTime(rs.getDate("EXECUTEDATE")));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return alarm;
+
     }
 
     @Override
@@ -178,6 +221,19 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
+    public void updateAlarm(Alarm alarm) {
+        String sql = "UPDATE ALARM SET USERID=?, APPOINTMENTID=?, EXECUTEDATE=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, alarm.getUser().getUsername());
+            statement.setInt(2, alarm.getAppointment().getId());
+            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    @Override
     public void deleteParticipant(Participant participant, Appointment appointment) {
         String sql = "DELETE FROM PARTICIPANT WHERE USERID=? AND APPOINTMENTID=?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -201,6 +257,31 @@ public class AppointmentRepository implements AppointmentService {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
 
+
+    }
+
+    @Override
+    public void deleteAlarm(Alarm alarm) {
+        String sql = "DELETE FROM ALARM WHERE ID=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setInt(1, alarm.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    @Override
+    public void updateParticipantStatus(int AppointmentID, Status newStatus, String username) {
+        String sql = "UPDATE PARTICIPANT SET USERID=?, APPOINTMENTID=?, STATUS=?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, username);
+            statement.setInt(2, AppointmentID);
+            statement.setString(3, newStatus.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
 
     }
 
