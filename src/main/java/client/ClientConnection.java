@@ -19,7 +19,6 @@ import java.util.HashMap;
 public class ClientConnection extends Thread implements ConnectionListener, GUIRequests{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
-    private int count;
     private int key;
     private final int loginKey= 0;
     private ObjectOutputStream toServer;
@@ -55,7 +54,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
             e.printStackTrace();
         }
         running = true;
-        this.start();
         System.out.println("Done creating client connection");
     }
     public void run() {
@@ -64,9 +62,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         new Receiver(this,clientSocket);
         while(running) {
             try {
-                count += 1;
                 sleep(100);
-                if(count == 100) { logout(); }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -79,10 +75,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
     }
     public static void main(String args[]) {
-        CalendarProperties properties = new CalendarProperties();
-        System.out.println("wallabaya!");
-        System.out.println("Ip: "+ properties.getSrvhost());
-        System.out.println("Port: " + properties.getSrvport());
 
         ClientConnection client = getInstance();
         JSONObject json = new JSONObject();
@@ -95,8 +87,8 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ArrayList<User> users = client.getUsers();
-        System.out.println("users received successfully");
+        ArrayList<Participant> users = client.getParticipantsOfAppointment(1);
+        System.out.println(users.get(0).getStatus());
 
     }
 
@@ -150,7 +142,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     @Override
     public void recievedMessage(JSONObject obj) {
-        System.out.println(obj);
         int key;
         Request response = (Request) obj.get("response");
         if(response == null) {
@@ -199,10 +190,15 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         }
     }
     public Object waitForObject(Integer key) {
+        int waitTime = 1;
         while(true) {
             System.out.println(incomingObjects);
             if(incomingObjects.containsKey(key)){
                 return incomingObjects.get(key);
+            }
+            waitTime += 1;
+            if(waitTime > 5) {
+                return null;
             }
             try {
                 Thread.sleep(1000);
@@ -235,7 +231,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         try {
             System.out.println("about to send" + json);
             toServer.writeObject(json);
-            System.out.println("Sent successfully");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -249,7 +244,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         json.put("username", username);
         json.put("password", password);
         send(json);
-        return (boolean)waitForObject(key);
+        return (boolean)waitForObject(loginKey);
     }
 
     @Override
