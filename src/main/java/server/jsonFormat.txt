@@ -29,13 +29,12 @@
 
 #### After clicking on an appointment
 {
-'request': 'getAppointmentData',
-'appointment' : {appointment json}
+'request': PARTICIPANTSOFAPPOINTMENT,
+'appointmentid': id
 }
 {
-'response': 'getAppointmentData',
-'appointment': {appointment json}
-'participants': [{username,status}, {participant json} ]
+'response': PARTICIPANTSOFAPPOINTMENT,
+'participants': ArrayList<Participant>
 }
 
 #### After creating an appointment
@@ -69,4 +68,9 @@
 "error": errormessage
 }
 
-
+#### Get appointmentswhereuserisowner and APPOINTMENTWHEREUSERISPARTICIPANT
+{ "request": APPOINTMENTSWHEREUSERISOWNER,
+}
+{ "response": APPOINTMENTSWHEREUSERISOWNER,
+"appointments": ArrayList<Appoitment>
+}

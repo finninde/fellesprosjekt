@@ -51,7 +51,7 @@ public class Populate {
         AppointmentService as = new AppointmentRepository();
         MeetingRoomService mrs = new MeetingRoomRepository();
 
-        Appointment a = as.getAppointment(9999);
+//        Appointment a = as.getAppointment(9999);
 //        MeetingRoom mr = mrs.getMeetingRoom(9);
 //        System.out.println(mr.getRoom());
 //        System.out.println(mr.getId());

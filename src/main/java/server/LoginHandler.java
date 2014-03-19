@@ -1,6 +1,8 @@
 package server;
 
+import database.repository.UserRepository;
 import helperclasses.Request;
+import helperclasses.User;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -81,16 +83,14 @@ public class LoginHandler extends Thread implements ConnectionListener{
         if(username.equals("espen")) {
             System.out.println("Success!");
         }
-
-//        UserRepository ur = new UserRepository();
-//        User user = ur.getUser(username);
-//        if(!user.getPassword().equals(password)) {
-//            sendError("Wrong password");
-//        }
-
-
-        new Worker(server,connectionSocket, username, receiver,toClient);
-        running = false;
+        UserRepository ur = new UserRepository();
+        User user = ur.getUser(username);
+        if(user.getPassword().equals(password)) {
+            new Worker(server,connectionSocket,username,receiver,toClient);
+            running = false;
+        } else {
+            sendError("Wrong password");
+        }
     }
 
     @Override

@@ -55,7 +55,7 @@ public class ViewScreen implements PropertyChangeListener {
 
     private void setModel(Appointment model){
         this.model = model;
-        model.addPropertyListener(this);
+        //model.addPropertyListener(this);
         viewScreen.eventName.setText(model.getTitle());
         //fromDate.setText(model.getTimeFrame()); TODO: Fix this timeframeshit
         viewScreen.locationText.setText(model.getLocation());
