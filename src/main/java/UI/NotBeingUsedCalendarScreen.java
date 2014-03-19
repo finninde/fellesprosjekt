@@ -1,5 +1,7 @@
 package UI;
 
+import helperclasses.Appointment;
+import helperclasses.User;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -19,7 +21,7 @@ import java.awt.event.MouseEvent;
 
 public class NotBeingUsedCalendarScreen {
     private Button notificationsButton;
-    //private JComboBox<User> otherUsersComboBox;   //TODO get list from database
+    private JComboBox<User> otherUsersComboBox;
     private Button newAppointmentButton;
     private Button logOutButton;
     private Button previousWeekButton;
@@ -42,7 +44,7 @@ public class NotBeingUsedCalendarScreen {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 System.out.println("newAppointmentButton clicked");
-                //new EditScreen(new Stage(), new Appointment()); //TODO remove quotations
+                new EditScreen(new Stage());
             }
         });
 
@@ -52,5 +54,7 @@ public class NotBeingUsedCalendarScreen {
         calendarStage.setTitle(calendarTitle);
         calendarStage.setScene(new Scene(calendarGrid, 1024, 683));
         calendarStage.show();
+
+
     }
 }

@@ -15,6 +15,7 @@ import java.util.HashMap;
 /**
  * Created by espen on 12.03.14.
  */
+
 public class ClientConnection extends Thread implements ConnectionListener, GUIRequests{
     private boolean running;
     private HashMap<Integer, Object> incomingObjects;
