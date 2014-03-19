@@ -26,6 +26,26 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     private Socket clientSocket;
     public OwnerOfClientConnection owner;
 
+    private static ClientConnection instance;
+
+    public static void setInstance(ClientConnection instance) {
+        ClientConnection.instance = instance;
+    }
+
+    public static ClientConnection getInstance() {
+        if (instance == null) createInstance();
+        return instance;
+    }
+
+    private static ClientConnection createInstance() {
+        CalendarProperties properties = new CalendarProperties();
+        System.out.println("derp " + properties.getSrvhost());
+        if (instance == null) {
+            instance = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
+        }
+        return instance;
+    }
+
     public ClientConnection(String address, int port){
         clientSocket = null;
         try {
@@ -64,11 +84,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         System.out.println("Ip: "+ properties.getSrvhost());
         System.out.println("Port: "+ properties.getSrvport());
 
-        ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
+        ClientConnection client = getInstance();
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
         json.put("username", "espen");
-        json.put("password", "1234");
+        json.put("password", "espen");
         client.send(json);
         try {
             Thread.sleep(2000);
@@ -78,64 +98,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         ArrayList<User> users = client.getUsers();
         System.out.println("users received successfully");
 
-    }
-
-    public ArrayList<User> getUsers() {
-        JSONObject json = new JSONObject();
-        json.put("request",Request.GETUSERS);
-        key += 1;
-        send(json);
-        ArrayList<User> users = (ArrayList<User>) waitForObject(key);
-        return users;
-    }
-
-    @Override
-    public ArrayList<Group> getGroups() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Participant> getParticipantsOfAppointment(int id) {
-        return null;
-    }
-
-    @Override
-    public Appointment getAppointment() {
-        return null;
-    }
-
-    @Override
-    public Alarm getAlarm() {
-        return null;
-    }
-
-    @Override
-    public void updateAppointment(Appointment appointment) {
-        JSONObject json = new JSONObject();
-        json.put("request", Request.UPDATEAPPOINTMENT);
-        json.put("appointment", appointment);
-        send(json);
-
-    }
-
-    @Override
-    public User getUserWhichViewAppointment() {
-        return null;
-    }
-
-    @Override
-    public Participant getParticipants(Appointment appointment) {
-        return null;
-    }
-
-    @Override
-    public void updateParticipantStatus(int appointmentID, Status status) {
-
-    }
-
-    @Override
-    public ArrayList<Appointment> getUsersAppointments() {
-        return null;
     }
 
 
@@ -289,11 +251,16 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     @Override
+    public ArrayList<Appointment> getUsersAppointments(User user) {
+        return null;
+    }
+
+    @Override
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner() {
         JSONObject json = new JSONObject();
         json.put("request", Request.APPOINTMENTSWHEREUSERISOWNER);
         key += 1;
-        json.put("key",key);
+        json.put("key", key);
         send(json);
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;
@@ -309,4 +276,27 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;
     }
+
+
+
+    @Override
+    public User getUserWhichViewAppointment() {
+        return null;
+    }
+
+    @Override
+    public Participant getParticipants(Appointment appointment) {
+        return null;
+    }
+
+    @Override
+    public void updateParticipantStatus(int appointmentID, Status status) {
+
+    }
+
+    //@Override
+    public ArrayList<Appointment> getUsersAppointments() {
+        return null;
+    }
+
 }
