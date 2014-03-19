@@ -139,13 +139,13 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
     private void acceptButtonLogic(){
         User user = clientConnection.getLoggedInUser();
-        //Alarm(executeAlarm, user, model);
+        //Alarm(executeAlarm, user, model); //TODO
         clientConnection.updateParticipantStatus(model.getId(), Status.ACCEPTED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
 
     private void declineButtonLogic(){
-        //User user = helperclasses.getUserWhichViewAppointment();
+        //User user = helperclasses.getUserWhichViewAppointment();  //TODO
         clientConnection.updateParticipantStatus(model.getId(), Status.DECLINED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
@@ -241,7 +241,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
 
 
-        //setIrrelevantElementsFromEditScreenInvisble();
+        //setIrrelevantElementsFromEditScreenInvisble();    //TODO
         setObjectsNonEditable();
 
         viewStage.setTitle("View");
