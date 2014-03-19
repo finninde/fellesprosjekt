@@ -26,6 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by jonasandredalseth on 11.03.14.
  */
+
 public class ViewScreen implements PropertyChangeListener, ActionListener {
     private Appointment model;
     private ClientConnection clientConnection;
@@ -138,13 +139,13 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
     private void acceptButtonLogic(){
         User user = clientConnection.getLoggedInUser();
-        Alarm(executeAlarm, user, model);
+        //Alarm(executeAlarm, user, model); //TODO
         clientConnection.updateParticipantStatus(model.getId(), Status.ACCEPTED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
 
     private void declineButtonLogic(){
-        User user = helperclasses.getUserWhichViewAppointment();
+        //User user = helperclasses.getUserWhichViewAppointment();  //TODO
         clientConnection.updateParticipantStatus(model.getId(), Status.DECLINED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
@@ -155,7 +156,8 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
 
-    public ViewScreen(viewStage) {
+    public ViewScreen(Stage stage) {
+        viewStage = stage;
         viewScreen = new EditScreen(viewStage);
         clientConnection = ClientConnection.getInstance();
 
@@ -239,7 +241,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
 
 
-        //setIrrelevantElementsFromEditScreenInvisble();
+        //setIrrelevantElementsFromEditScreenInvisble();    //TODO
         setObjectsNonEditable();
 
         viewStage.setTitle("View");
@@ -252,9 +254,9 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         String property = evt.getPropertyName();
         if (property == "title")
             viewScreen.eventName.setText((String) evt.getNewValue());
-        else if (property == "date")
+        else if (property == "date");
            //TODO fix this shit viewScreen.eventName.setDate();
-        else if (property == "time")
+        else if (property == "time");
            //TODO this.fromTime.fixtimeframeshit
         else if (property == "location")
             viewScreen.locationText.setText((String) evt.getNewValue());

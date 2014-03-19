@@ -205,4 +205,9 @@ public class AppointmentRepository implements AppointmentService {
 
     }
 
+    @Override
+    public void updateParticipantStatus(int AppointmentID, Status newStatus, String username) {
+
+    }
+
 }
