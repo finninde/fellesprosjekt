@@ -133,6 +133,7 @@ public class AppointmentRepository implements AppointmentService {
                 Participant participant = new Participant();
                 participant.setUser(user);
                 participant.setStatus(Status.valueOf(rs.getString("STATUS")));
+                participants.add(participant);
 
             }
         } catch (SQLException e) {
