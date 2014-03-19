@@ -1,21 +1,17 @@
-package sample;
+package UI;
 
-import UI.AppointmentButton;
 import client.ClientConnection;
 import helperclasses.Appointment;
 import helperclasses.Status;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 
 public class Calendar {
