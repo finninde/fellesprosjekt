@@ -14,7 +14,12 @@ public class MainTest extends Application {
     public void start(Stage stage) throws Exception {
         new LoginScreen(stage);
         Appointment a = new Appointment("Supertitle!!!");
-        a.setTimeFrame(new TimeFrame(new DateTime(),(new DateTime())));
+        //DateTime dt = new DateTime().withDate(year, month, day).withHourOfDay(hour);
+        a.setTimeFrame(new TimeFrame(new DateTime(),new DateTime()));
+        //System.out.println(dt);
+        //dt.withHourOfDay(20);
+        //System.out.println(dt);
+
         a.setLocation("not here but there");
         a.setDescription("julekakesukkerlaketroikabolleballe");
         new AlarmScreen(a);
