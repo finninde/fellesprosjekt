@@ -14,4 +14,5 @@ public interface GUIRequests {
     public void updateAppointment(Appointment appointment);
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner();
     public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant();
+    public boolean login(String username, String password);
 }

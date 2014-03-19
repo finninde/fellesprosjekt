@@ -1,6 +1,5 @@
 package client;
 
-import UI.MainTest;
 import helperclasses.*;
 import org.json.simple.JSONObject;
 import server.ConnectionListener;
@@ -21,6 +20,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     private HashMap<Integer, Object> incomingObjects;
     private int count;
     private int key;
+    private final int loginKey= 0;
     private ObjectOutputStream toServer;
     private Socket clientSocket;
     public OwnerOfClientConnection owner;
@@ -39,6 +39,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
     public void run() {
         incomingObjects = new HashMap<Integer, Object>();
+        key = 1;
         new Receiver(this,clientSocket);
         while(running) {
             try {
@@ -59,6 +60,9 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     public static void main(String args[]) {
         CalendarProperties properties = new CalendarProperties();
         System.out.println("wallabaya!");
+        System.out.println("Ip: "+ properties.getSrvhost());
+        System.out.println("Port: "+ properties.getSrvport());
+
         ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
         JSONObject json = new JSONObject();
         json.put("request",Request.LOGIN);
@@ -117,6 +121,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 case LOGIN:
                     if((boolean)obj.get("success")) {
                         System.out.println("login successful!");
+                        incomingObjects.put(loginKey,true);
+                    } else {
+                        String errormessage = (String) obj.get("error");
+                        incomingObjects.put(loginKey,false);
+                        //TODO send errormessage to ownerOfClientConnection
                     }
                     break;
             }
@@ -166,6 +175,15 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
 ////////////////////// From here on out all the different GUI request comes ////////////////////////
+
+    public boolean login(String username, String password) {
+        JSONObject json = new JSONObject();
+        json.put("request",Request.LOGIN);
+        json.put("username", username);
+        json.put("password", password);
+        send(json);
+        return (boolean)waitForObject(key);
+    }
 
     public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
