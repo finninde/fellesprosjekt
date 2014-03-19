@@ -1,5 +1,7 @@
 package helperclasses;
 
+import UI.ViewScreen;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
@@ -131,5 +133,9 @@ public class Appointment implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void addPropertyListener(ViewScreen viewScreen) {
+
     }
 }

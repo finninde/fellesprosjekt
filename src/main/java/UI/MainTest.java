@@ -1,6 +1,7 @@
 package UI;
 
-import client.OwnerOfClientConnection;
+import helperclasses.Appointment;
+import helperclasses.TimeFrame;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.joda.time.DateTime;
@@ -8,24 +9,18 @@ import org.joda.time.DateTime;
 /**
  * Created by Wien on 12.03.14.
  */
-public class MainTest extends Application implements OwnerOfClientConnection {
+public class MainTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         new LoginScreen(stage);
-        Stage newStage = new Stage();
-        new NotificationsScreen(newStage);
+        Appointment a = new Appointment("Supertitle!!!");
+        a.setTimeFrame(new TimeFrame(new DateTime(),(new DateTime())));
+        a.setLocation("not here but there");
+        a.setDescription("julekakesukkerlaketroikabolleballe");
+        new AlarmScreen(a);
     }
 
     public static void main(String[]args){
-        //launch(args);
-        DateTime startDate = new DateTime();
-        System.out.println(startDate.toDate());
-    }
-
-    @Override
-    public void messageFromServer(String notification) {
-        //TODO this is messages from the server. E.g. errors when trying to update the time for an appointment
-        System.out.println(notification);
-
+        launch(args);
     }
 }

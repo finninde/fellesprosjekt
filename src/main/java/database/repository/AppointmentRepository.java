@@ -101,7 +101,7 @@ public class AppointmentRepository implements AppointmentService {
                 appointment.setLocation(rs.getString("a.LOCATION"));
                 appointment.setOwner(us.getUser(rs.getString("a.OWNER")));
                 appointment.setTimeFrame(new TimeFrame(new DateTime(rs.getDate("t.STARTDATE")), new DateTime(rs.getDate("t.ENDDATE"))));
-                appointment.setParticipants(getParticipants(appointment));
+                appointment.setParticipants(getParticipants(appointment.getId()));
                 appointment.setRoom(mrs.getMeetingRoom(rs.getInt("a.MEETINGROOMID")));
 
             }
@@ -119,12 +119,12 @@ public class AppointmentRepository implements AppointmentService {
     }
 
     @Override
-    public ArrayList<Participant> getParticipants(Appointment appointment) {
+    public ArrayList<Participant> getParticipants(int id) {
         ArrayList<Participant> participants = null;
         UserService us = new UserRepository();
     String sql = "SELECT USERID, STATUS FROM PARTICIPANT WHERE APPOINTMENTID = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
-            statement.setInt(1, appointment.getId());
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             participants = new ArrayList<Participant>();
             while (rs.next()) {
@@ -133,6 +133,7 @@ public class AppointmentRepository implements AppointmentService {
                 Participant participant = new Participant();
                 participant.setUser(user);
                 participant.setStatus(Status.valueOf(rs.getString("STATUS")));
+                participants.add(participant);
 
             }
         } catch (SQLException e) {

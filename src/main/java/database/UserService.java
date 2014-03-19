@@ -13,8 +13,8 @@ public interface UserService {
 
     public ArrayList<User> getUsers();
     public User getUser(String username);
-    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(User user);
-    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(User user);
+    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(String username);
+    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(String userame);
 //    public Alarm getAlarm(int id);
     public ArrayList<Alarm> getAllAlarmsForUser(User user);
     public void addUser(User user);
@@ -22,6 +22,4 @@ public interface UserService {
 
     public void updateAlarm(Alarm alarm);
     public void updateUser(User user);
-
-
 }

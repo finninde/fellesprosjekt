@@ -4,6 +4,8 @@ package server;
  * Created by espen on 12.03.14.
  */
 
+import helperclasses.CalendarProperties;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,7 +44,8 @@ public class Server
         System.out.println("Server shutting down");
     }
     public static void main(String args[]) {
-        Server server = new Server(6789);
+        CalendarProperties properties = new CalendarProperties();
+        Server server = new Server(properties.getListenport());
     }
 
     public boolean usernameExists(String username) {

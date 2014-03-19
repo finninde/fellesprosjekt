@@ -65,12 +65,12 @@ public class UserRepository implements UserService {
     }
 
     @Override
-    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(User user) {
+    public ArrayList<Appointment> getAppointmentsWhereUserIsOwner(String username) {
         ArrayList<Appointment> apps = null;
         AppointmentService as = new AppointmentRepository();
         String sql = "select a.ID from USER u, APPOINTMENT a where u.USERNAME = a.OWNER and u.USERNAME = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
-            statement.setString(1, user.getUsername());
+            statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             apps = new ArrayList<Appointment>();
             while (rs.next()) {
@@ -87,12 +87,12 @@ public class UserRepository implements UserService {
     }
 
     @Override
-    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(User user) {
+    public ArrayList<Appointment> getAppointmentsWhereUserIsParticipant(String username) {
         ArrayList<Appointment> apps = null;
         AppointmentService as = new AppointmentRepository();
         String sql = "select a.ID from USER u, APPOINTMENT a, PARTICIPANT p where u.USERNAME = p.USERID and a.ID = p.APPOINTMENTID and u.USERNAME = ?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
-            statement.setString(1, user.getUsername());
+            statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             apps = new ArrayList<Appointment>();
             while (rs.next()) {

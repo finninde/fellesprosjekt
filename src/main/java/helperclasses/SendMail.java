@@ -3,18 +3,14 @@ package helperclasses;
 /**
  * Created by Wien on 10.03.14.
  */
-        import org.joda.time.DateTime;
 
-        import java.io.UnsupportedEncodingException;
         import java.util.Date;
         import java.util.Properties;
 
         import javax.mail.Message;
-        import javax.mail.MessagingException;
         import javax.mail.PasswordAuthentication;
         import javax.mail.Session;
         import javax.mail.Transport;
-        import javax.mail.internet.AddressException;
         import javax.mail.internet.InternetAddress;
         import javax.mail.internet.MimeMessage;
 
@@ -26,8 +22,10 @@ public class SendMail{
          * Set up the mail sender.
          */
 
-        final String username = "crazycalendarpartyedition@kradalby.no";  //mailadressen som sender mail
-        final String password = "crazyparty";		                      //passord
+        CalendarProperties properties = new CalendarProperties();
+
+        final String username = properties.getEmailuser();  //mailadressen som sender mail
+        final String password = properties.getEmailpass();  //passord
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -104,8 +102,8 @@ public class SendMail{
                 System.out.println("Done");
             }
 
-        } catch (Exception e) /*TODO DIFFERENT EXCEPTION?*/{
-            //TODO INSERT ERROR MESSAGE
+        } catch (Exception e) {
+            System.out.println("Some error occurred when attempting to send mail.");
         }
     }
 }

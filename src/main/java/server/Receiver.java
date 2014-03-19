@@ -56,6 +56,7 @@ public class Receiver extends Thread{
         } catch (Exception e) {
                 System.out.println("got unknownException");
                 e.printStackTrace();
+                break;
             }
 
         }
