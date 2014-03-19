@@ -1,4 +1,6 @@
 package UI;
+import client.ClientConnection;
+import helperclasses.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,12 +19,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
 
 
-public class LoginScreen/* extends Application*/ {
+public class LoginScreen {
+    ArrayList<User> users;
+    User user;
 
-
-public LoginScreen(final Stage primaryStage) {
+    public LoginScreen(final Stage primaryStage, final ClientConnection clientConnection) {
     primaryStage.setTitle("LoginScreen");
 
     GridPane grid = new GridPane();
@@ -35,7 +39,10 @@ public LoginScreen(final Stage primaryStage) {
     primaryStage.setScene(scene);
     scene.getStylesheets().add(LoginScreen.class.getResource(("Login.css")).toExternalForm());
 
-
+    users = new ArrayList<User>();      //TODO remove or change with proper database call
+    users.add(new User("Paal"));
+    users.add(new User("Fredrik"));
+    users.add(new User("Pelle Parafin"));
 
     Text scenetitle = new Text("Welcome");
     scenetitle.setId("welcome-text");
@@ -72,20 +79,15 @@ public LoginScreen(final Stage primaryStage) {
 
         @Override
         public void handle(ActionEvent e) {
+            user = new User("Tester");          //TODO get from ClientConnection
             actiontarget.setFill(Color.FIREBRICK);
             actiontarget.setText("Wrong username or password");
 
-            new NotBeingUsedCalendarScreen(primaryStage);
+            new CalendarScreen(primaryStage, users, user, true, clientConnection); //TODO get user and users from database
             // queue function for verification, switch view if verified.
             // also needs to destroy this view
         }
     });
     primaryStage.show();
-}
-
-
-/*
-    public static void main(String[] args) {
-        launch(args);
-    }*/
+    }
 }
