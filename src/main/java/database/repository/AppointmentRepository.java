@@ -282,6 +282,7 @@ public class AppointmentRepository implements AppointmentService {
         } catch (SQLException e) {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
         }
+
     }
 
 }

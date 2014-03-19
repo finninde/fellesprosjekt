@@ -100,24 +100,12 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     }
 
-    public ArrayList<User> getUsers() {
-        JSONObject json = new JSONObject();
-        json.put("request",Request.GETUSERS);
-        key += 1;
-        send(json);
-        ArrayList<User> users = (ArrayList<User>) waitForObject(key);
-        return users;
-    }
-
     @Override
     public ArrayList<Group> getGroups() {
         return null;
     }
 
-    @Override
-    public ArrayList<Participant> getParticipantsOfAppointment(int id) {
-        return null;
-    }
+
 
     @Override
     public Appointment getAppointment() {
@@ -144,12 +132,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     @Override
-    public User getUserWhichViewAppointment() {
+    public Participant getParticipants(Appointment appointment) {
         return null;
     }
 
-    @Override
-    public Participant getParticipants(Appointment appointment) {
+    public User getUserWhichViewAppointment() {
         return null;
     }
 
@@ -159,11 +146,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         json.put("request", Request.UPDATEPARTICIPANTSTATUS);
         json.put("appointmentID", appointmentID);
         json.put("status", status);
-    }
-
-    @Override
-    public ArrayList<Appointment> getUsersAppointments() {
-        return null;
     }
 
     @Override
@@ -270,6 +252,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         return (boolean)waitForObject(key);
     }
 
+    @Override
+    public Status getStatusForAppointment(int ID) {
+        return null;
+    }
+
     public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
         json.put("request",Request.GETUSERS);
@@ -278,11 +265,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
         ArrayList<User> users = (ArrayList<User>) waitForObject(key);
         return users;
-    }
-
-    @Override
-    public ArrayList<Group> getGroups() {
-        return null;
     }
 
     @Override
@@ -297,23 +279,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         return participants;
     }
 
-    @Override
-    public Appointment getAppointment() {
-        return null;
-    }
-
-    @Override
-    public Alarm getAlarm() {
-        return null;
-    }
-
-    @Override
-    public void updateAppointment(Appointment appointment) {
-        JSONObject json = new JSONObject();
-        json.put("request", Request.UPDATEAPPOINTMENT);
-        json.put("appointment", appointment);
-        send(json);
-    }
 
     @Override
     public ArrayList<Appointment> getUsersAppointments(User user) {
@@ -340,23 +305,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;
-    }
-
-
-
-    @Override
-    public User getUserWhichViewAppointment() {
-        return null;
-    }
-
-    @Override
-    public Participant getParticipants(Appointment appointment) {
-        return null;
-    }
-
-    @Override
-    public void updateParticipantStatus(int appointmentID, Status status) {
-
     }
 
     //@Override
