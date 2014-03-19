@@ -44,7 +44,7 @@ public class Server
         System.out.println("Server shutting down");
     }
     public static void main(String args[]) {
-        CalendarProperties properties = new CalendarProperties();
+        CalendarProperties properties = CalendarProperties.getInstance();
         Server server = new Server(properties.getListenport());
     }
 
