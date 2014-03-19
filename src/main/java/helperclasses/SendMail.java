@@ -22,7 +22,7 @@ public class SendMail{
          * Set up the mail sender.
          */
 
-        CalendarProperties properties = new CalendarProperties();
+        CalendarProperties properties = CalendarProperties.getInstance();
 
         final String username = properties.getEmailuser();  //mailadressen som sender mail
         final String password = properties.getEmailpass();  //passord

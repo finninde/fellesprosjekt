@@ -37,7 +37,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     private static ClientConnection createInstance() {
-        CalendarProperties properties = new CalendarProperties();
+        CalendarProperties properties = CalendarProperties.getInstance();
         System.out.println("derp " + properties.getSrvhost());
         if (instance == null) {
             instance = new ClientConnection(properties.getSrvhost(), properties.getSrvport());

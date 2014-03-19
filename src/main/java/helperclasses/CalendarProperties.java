@@ -31,6 +31,8 @@ public class CalendarProperties {
     private int listenport;
     private String listenaddress;
 
+    private static CalendarProperties instance;
+
 
     public CalendarProperties(){
 
@@ -63,6 +65,23 @@ public class CalendarProperties {
         }
 
 
+    }
+
+
+    public static void setInstance(CalendarProperties instance) {
+        CalendarProperties.instance = instance;
+    }
+
+    public static CalendarProperties getInstance() {
+        if (instance == null) createInstance();
+        return instance;
+    }
+
+    private static CalendarProperties createInstance() {
+        if (instance == null) {
+            instance = new CalendarProperties();
+        }
+        return instance;
     }
 
     public String getDbname() {

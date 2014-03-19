@@ -27,7 +27,7 @@ public class DatabaseConnection {
 
     private static Connection createConnectionInstance() {
         if (connectionInstance == null) {
-            CalendarProperties dbp = new CalendarProperties();
+            CalendarProperties dbp = CalendarProperties.getInstance();
             String url = "jdbc:mysql://" + dbp.getDbhost() + ":" + dbp.getDbport() + "/" + dbp.getDbname();
             try {
                 connectionInstance = DriverManager.getConnection(url, dbp.getDbuser(), dbp.getDbpass());
