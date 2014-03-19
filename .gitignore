@@ -49,5 +49,6 @@ TSWLatexianTemp*
 *.DS_Store
 *.out
 
+config.prop
 .vagrant/
 out/
