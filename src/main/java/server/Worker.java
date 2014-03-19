@@ -107,8 +107,8 @@ public class Worker extends Thread implements ConnectionListener{
                     sendJSON(json);
                     break;
                 case UPDATEPARTICIPANTSTATUS:
-                    int appointmentID = json.get("appointmentID");
-                    Status status = json.get("status");
+                    int appointmentID = (int)json.get("appointmentID");
+                    Status status = (Status)json.get("status");
                     ar.updateParticipantStatus(appointmentID, status, username);
                 case PARTICIPANTSOFAPPOINTMENT:
                     ArrayList<Participant> participants = ar.getParticipants((int)obj.get("appointmentid"));
