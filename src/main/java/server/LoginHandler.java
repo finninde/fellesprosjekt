@@ -64,6 +64,12 @@ public class LoginHandler extends Thread implements ConnectionListener{
     public void recievedMessage(JSONObject obj) {
         System.out.println(obj);
         Request request = (Request) obj.get("request");
+        if(request.equals(Request.LOGOUT)) {
+            JSONObject json = new JSONObject();
+            json.put("response", request);
+            json.put("success",true);
+            disconnect();
+        }
         if(!request.equals(Request.LOGIN)) {
             sendError("unknown request");
             return;
@@ -79,9 +85,6 @@ public class LoginHandler extends Thread implements ConnectionListener{
         if(server.usernameExists(username)) {
             sendError("Username already logged in!");
             return;
-        }
-        if(username.equals("espen")) {
-            System.out.println("Success!");
         }
         UserRepository ur = new UserRepository();
         User user = ur.getUser(username);
