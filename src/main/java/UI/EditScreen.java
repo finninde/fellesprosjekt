@@ -19,7 +19,6 @@ import javafx.scene.text.Font;
 public class EditScreen /*extends Application*/ {
 
     protected Scene scene;
-
     protected TextField eventName;
     protected TextField locationText;
     protected TextArea descriptionText;
@@ -70,7 +69,7 @@ public class EditScreen /*extends Application*/ {
         addRemoveGroup.setFont(font);
     }
 
-    private void closeButtonLogic(Stage stage){
+    protected void closeButtonLogic(Stage stage){
         stage.close();
     }
 

@@ -2,11 +2,15 @@ package helperclasses;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
+
 
 /**
  * Created by kradalby on 05/03/14.
  */
-public class Appointment implements Serializable{
+public class Appointment implements Serializable {
 
     private String title;
     private String description;
@@ -16,9 +20,11 @@ public class Appointment implements Serializable{
     private MeetingRoom room;
     private String location;
     private int id;
+    private PropertyChangeSupport pcs;
 
     public Appointment(String title) {
         this.title = title;
+        pcs = new PropertyChangeSupport(this);
     }
 
     public void addUser(User user) {
@@ -55,6 +61,7 @@ public class Appointment implements Serializable{
     }
 
     public void setTitle(String title) {
+        pcs.firePropertyChange("title", this.title, title);
         this.title = title;
     }
 
@@ -63,6 +70,7 @@ public class Appointment implements Serializable{
     }
 
     public void setDescription(String description) {
+        pcs.firePropertyChange("description", this.description, description);
         this.description = description;
     }
 
@@ -71,11 +79,13 @@ public class Appointment implements Serializable{
     }
 
     public void changeTimeFrame(TimeFrame timeFrame) {
+        pcs.firePropertyChange("timeframe", this.timeFrame, timeFrame);
         this.timeFrame = timeFrame;
     }
 
 
     public void setTimeFrame(TimeFrame timeFrame) {
+        pcs.firePropertyChange("timeframe", this.timeFrame, timeFrame);
         this.timeFrame = timeFrame;
     }
 
@@ -84,6 +94,7 @@ public class Appointment implements Serializable{
     }
 
     public void setParticipants(ArrayList<Participant> participants) {
+        pcs.firePropertyChange("participants", this.participants, participants);
         this.participants = participants;
     }
 
@@ -92,6 +103,7 @@ public class Appointment implements Serializable{
     }
 
     public void setOwner(User owner) {
+        pcs.firePropertyChange("owner", this.owner, owner);
         this.owner = owner;
     }
 
@@ -100,6 +112,7 @@ public class Appointment implements Serializable{
     }
 
     public void setRoom(MeetingRoom room) {
+        pcs.firePropertyChange("room", this.room, room);
         this.room = room;
     }
 
@@ -108,6 +121,7 @@ public class Appointment implements Serializable{
     }
 
     public void setLocation(String location) {
+        pcs.firePropertyChange("location", this.location, location);
         this.location = location;
     }
 

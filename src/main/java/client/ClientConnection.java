@@ -120,6 +120,21 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     @Override
+    public User getUserWhichViewAppointment() {
+        return null;
+    }
+
+    @Override
+    public Participant getParticipants(Appointment appointment) {
+        return null;
+    }
+
+    @Override
+    public void updateParticipantStatus(int appointmentID, Status status) {
+
+    }
+
+    @Override
     public ArrayList<Appointment> getUsersAppointments() {
         return null;
     }
