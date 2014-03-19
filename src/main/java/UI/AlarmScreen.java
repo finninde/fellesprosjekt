@@ -1,17 +1,13 @@
 package UI;
 
 import helperclasses.Appointment;
-import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.joda.time.DateTime;
 
 /**
  * Created by Wien on 11.03.14.
@@ -30,7 +26,8 @@ public class AlarmScreen {
     private Label timeLabel;
     private Label locationLabel;
 
-    public AlarmScreen(Stage alarmStage, Appointment appointment){
+    public AlarmScreen(Appointment appointment){
+        Stage alarmStage = new Stage();
         GridPane editGrid = new GridPane();
         editGrid.setVgap(20);
         editGrid.setHgap(20);
