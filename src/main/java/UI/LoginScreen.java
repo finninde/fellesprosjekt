@@ -1,4 +1,5 @@
 package UI;
+import client.ClientConnection;
 import helperclasses.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,7 +26,7 @@ public class LoginScreen {
     ArrayList<User> users;
     User user;
 
-    public LoginScreen(final Stage primaryStage) {
+    public LoginScreen(final Stage primaryStage, final ClientConnection clientConnection) {
     primaryStage.setTitle("LoginScreen");
 
     GridPane grid = new GridPane();
@@ -82,7 +83,7 @@ public class LoginScreen {
             actiontarget.setFill(Color.FIREBRICK);
             actiontarget.setText("Wrong username or password");
 
-            new CalendarScreen(primaryStage, users, user, true); //TODO get user and users from database
+            new CalendarScreen(primaryStage, users, user, true, clientConnection); //TODO get user and users from database
             // queue function for verification, switch view if verified.
             // also needs to destroy this view
         }

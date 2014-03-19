@@ -1,5 +1,6 @@
 package UI;
 
+import client.ClientConnection;
 import helperclasses.Appointment;
 import helperclasses.TimeFrame;
 import javafx.application.Application;
@@ -12,7 +13,8 @@ import org.joda.time.DateTime;
 public class MainTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        new LoginScreen(stage);
+        ClientConnection clientConnection = new ClientConnection("Shfdiush",9999);
+        new LoginScreen(stage, clientConnection);
         Appointment a = new Appointment("Supertitle!!!");
         //DateTime dt = new DateTime().withDate(year, month, day).withHourOfDay(hour);
         a.setTimeFrame(new TimeFrame(new DateTime(),new DateTime()));
@@ -27,5 +29,6 @@ public class MainTest extends Application {
 
     public static void main(String[]args){
         launch(args);
+
     }
 }

@@ -1,5 +1,6 @@
 package UI;
 
+import client.ClientConnection;
 import helperclasses.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +31,7 @@ public class CalendarScreen {
 
     private ArrayList<User> allUsers;
 
-    public CalendarScreen(Stage calendarStage, ArrayList<User> users, User user, boolean owner){
+    public CalendarScreen(Stage calendarStage, ArrayList<User> users, User user, boolean owner, final ClientConnection clientConnection){
 
         allUsers = users;
 
@@ -53,6 +54,14 @@ public class CalendarScreen {
             logOutButton = new Button("Logout");
             logOutButton.setFont(Font.font("Helvetica-Light", 15));
             logOutButton.setMaxSize(120,20);
+            logOutButton.setOnMouseClicked(new javafx.event.EventHandler<javafx.scene.input.MouseEvent>() {
+                @Override
+                public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+                    clientConnection.logout();
+                    Stage stage = (Stage) closeButton.getScene().getWindow();
+                    stage.close();
+                }
+            });
 
             calendarGrid.add(logOutButton, 70,0);
         }
@@ -90,7 +99,7 @@ public class CalendarScreen {
         otherUsersChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>(){
             @Override
             public void changed(ObservableValue observableValue, User o, User o2) {
-                new CalendarScreen(new Stage(), allUsers, o2, false);
+                new CalendarScreen(new Stage(), allUsers, o2, false, clientConnection);
             }
         });
         otherUsersLabel = new Label();
