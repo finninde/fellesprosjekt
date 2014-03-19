@@ -1,5 +1,6 @@
 package UI;
 
+import client.ClientConnection;
 import helperclasses.User;
 import helperclasses.MeetingRoom;
 import helperclasses.Appointment;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
  */
 public class ViewScreen implements PropertyChangeListener, ActionListener {
     private Appointment model;
+    private ClientConnection clientConnection;
 
     private EditScreen viewScreen;
     private final Stage viewStage;
@@ -135,16 +137,15 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
     private void acceptButtonLogic(){
-        User user = helperclasses.getUserWhichViewAppoinment();
-        user.setAlarm //TODO fix set one alram instead of replacing a list
-        updateParticipantStatus(model.getId(), Status.ACCEPTED);
+        User user = clientConnection.getLoggedInUser();
+        Alarm(executeAlarm, user, model);
+        clientConnection.updateParticipantStatus(model.getId(), Status.ACCEPTED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
 
     private void declineButtonLogic(){
         User user = helperclasses.getUserWhichViewAppointment();
-        user.setAlarm();
-        upDateParticipantStatus(model.getId(), Status.DECLINED);
+        clientConnection.updateParticipantStatus(model.getId(), Status.DECLINED);
         viewScreen.closeButtonLogic(this.viewStage);
     }
 
@@ -156,6 +157,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
     public ViewScreen(viewStage) {
         viewScreen = new EditScreen(viewStage);
+        clientConnection = ClientConnection.getInstance();
 
         viewGrid = new GridPane();
         viewDateGrid = new GridPane();

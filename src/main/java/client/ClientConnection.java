@@ -62,7 +62,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         CalendarProperties properties = new CalendarProperties();
         System.out.println("wallabaya!");
         System.out.println("Ip: "+ properties.getSrvhost());
-        System.out.println("Port: "+ properties.getSrvport());
+        System.out.println("Port: " + properties.getSrvport());
 
         ClientConnection client = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
         JSONObject json = new JSONObject();
@@ -119,6 +119,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     @Override
+    public User getLoggedInUser() {
+        return null;
+    }
+
+    @Override
     public User getUserWhichViewAppointment() {
         return null;
     }
@@ -130,7 +135,10 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     @Override
     public void updateParticipantStatus(int appointmentID, Status status) {
-
+        JSONObject json = new JSONObject();
+        json.put("request", Request.UPDATEPARTICIPANTSTATUS);
+        json.put("appointmentID", appointmentID);
+        json.put("status", status);
     }
 
     @Override
@@ -293,7 +301,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         JSONObject json = new JSONObject();
         json.put("request", Request.APPOINTMENTSWHEREUSERISOWNER);
         key += 1;
-        json.put("key",key);
+        json.put("key", key);
         send(json);
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) waitForObject(key);
         return appointments;

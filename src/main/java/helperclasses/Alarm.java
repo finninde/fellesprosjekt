@@ -17,6 +17,12 @@ public class Alarm implements Serializable {
     public Alarm() {
     }
 
+    public Alarm(DateTime executeAlarm, User user, Appointment appointment){
+        this.executeAlarm = executeAlarm;
+        this.user = user;
+        this.appointment = appointment;
+    }
+
     public boolean executeAlarm() throws NotYetImplementedException {
         throw new NotYetImplementedException();
     }

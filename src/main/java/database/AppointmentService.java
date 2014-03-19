@@ -1,9 +1,6 @@
 package database;
 
-import helperclasses.Appointment;
-import helperclasses.Participant;
-import helperclasses.TimeFrame;
-import helperclasses.User;
+import helperclasses.*;
 
 import java.util.ArrayList;
 
@@ -28,5 +25,6 @@ public interface AppointmentService {
     public void deleteParticipant(Participant participant, Appointment appointment);
     public void deleteAppointment(Appointment appointment);
 
+    public void updateParticipantStatus(int AppointmentID, Status newStatus, String username);
 
 }

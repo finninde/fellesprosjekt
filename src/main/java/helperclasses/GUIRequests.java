@@ -13,7 +13,7 @@ public interface GUIRequests {
     public Alarm getAlarm();
     public void updateAppointment(Appointment appointment);
     public ArrayList<Appointment> getUsersAppointments(User user);
-    public User getUserWhichViewAppointment();
+    public User getLoggedInUser();
     public Participant getParticipants(Appointment appointment);
     public void updateParticipantStatus(int appointmentID, Status status);
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner();

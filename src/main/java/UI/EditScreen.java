@@ -193,6 +193,7 @@ public class EditScreen /*extends Application*/ {
         addRemoveUsers = new Label("Invite users:");
         editUsers = new ComboBox(userOptions);
         editUsers.setMinWidth(160);
+        editUsers.setSelectionModel();
         editUsers.setValue(userOptions.get(0));
         editGrid.add(addRemoveUsers, 0, 14);
         editGrid.add(editUsers, 1, 14);
