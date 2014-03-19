@@ -1,11 +1,17 @@
 package UI;
 
 import client.ClientConnection;
+import com.sun.javafx.geom.BaseBounds;
+import com.sun.javafx.geom.transform.BaseTransform;
+import com.sun.javafx.jmx.MXNodeAlgorithm;
+import com.sun.javafx.jmx.MXNodeAlgorithmContext;
+import com.sun.javafx.sg.PGNode;
 import helperclasses.Appointment;
 import helperclasses.Status;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import org.joda.time.DateTime;
@@ -14,7 +20,7 @@ import java.util.ArrayList;
 
 
 
-public class Calendar {
+public class Calendar extends Node {
     
     private AppointmentButton[][] btn = new AppointmentButton[7][8];
     private DateTime startOfWeek ;
@@ -38,9 +44,9 @@ public class Calendar {
 
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(25, 25, 25, 25));
-        Scene scene = new Scene(gridPane, 800, 600 );
+        //Scene scene = new Scene(gridPane, 800, 600 );
 
-        scene.getStylesheets().add(Calendar.class.getResource(("calendar.css")).toExternalForm());
+        gridPane.getStylesheets().add(Calendar.class.getResource(("calendar.css")).toExternalForm());
 
 
 
@@ -124,5 +130,23 @@ public class Calendar {
     }
 
 
+    @Override
+    protected PGNode impl_createPGNode() {
+        return null;
+    }
 
+    @Override
+    public BaseBounds impl_computeGeomBounds(BaseBounds baseBounds, BaseTransform baseTransform) {
+        return null;
+    }
+
+    @Override
+    protected boolean impl_computeContains(double v, double v2) {
+        return false;
+    }
+
+    @Override
+    public Object impl_processMXNode(MXNodeAlgorithm mxNodeAlgorithm, MXNodeAlgorithmContext mxNodeAlgorithmContext) {
+        return null;
+    }
 }

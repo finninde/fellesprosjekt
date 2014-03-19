@@ -13,8 +13,8 @@ import org.joda.time.DateTime;
 public class MainTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        ClientConnection clientConnection = new ClientConnection("Shfdiush",9999);
-        new LoginScreen(stage, clientConnection);
+        //ClientConnection clientConnection = ClientConnection.getInstance();
+        new LoginScreen(stage/*, clientConnection*/);
         Appointment a = new Appointment("Supertitle!!!");
         //DateTime dt = new DateTime().withDate(year, month, day).withHourOfDay(hour);
         a.setTimeFrame(new TimeFrame(new DateTime(),new DateTime()));
