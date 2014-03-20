@@ -32,16 +32,16 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
     public static ClientConnection getInstance() {
-        if (instance == null) createInstance();
-        return instance;
+        //if (instance == null) createInstance();
+        return createInstance();
     }
 
     private static ClientConnection createInstance() {
         CalendarProperties properties = CalendarProperties.getInstance();
         System.out.println("derp " + properties.getSrvhost());
-        if (instance == null) {
+        //if (instance == null) {
             instance = new ClientConnection(properties.getSrvhost(), properties.getSrvport());
-        }
+        //}
         return instance;
     }
 
@@ -67,7 +67,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 e.printStackTrace();
             }
         }
-    }
+    }/*
     public static void main(String args[]) {
 
         ClientConnection client = getInstance();
@@ -85,7 +85,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         System.out.println(users.get(0).getStatus());
 
     }
-
+*/
 
     @Override
     public void recievedMessage(JSONObject obj) {
@@ -137,7 +137,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     public Object waitForObject(Integer key) {
         int waitTime = 1;
         while(true) {
-            System.out.println(incomingObjects);
+            //System.out.println(incomingObjects);
             if(incomingObjects.containsKey(key)){
                 return incomingObjects.get(key);
             }
@@ -146,7 +146,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 return null;
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -237,6 +237,14 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         send(json);
         Status status =(Status) waitForObject(key);
         return status;
+    }
+
+    @Override
+    public void newAppointment(Appointment appointment) {
+        JSONObject json = new JSONObject();
+        json.put("request", Request.ADDAPPOINTMENT);
+        json.put("appointment", appointment);
+        send(json);
     }
 
     public ArrayList<User> getUsers() {

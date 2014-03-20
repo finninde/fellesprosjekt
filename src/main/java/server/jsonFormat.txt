@@ -90,3 +90,9 @@ No response unless error
 "key": key,
 "status": status
 }
+
+#### addAppointment
+{"request": ADDAPPOINTMENT,
+"appointment": appointmentObject
+}
+}

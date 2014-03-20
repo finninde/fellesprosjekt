@@ -1,5 +1,7 @@
 package UI;
 import client.ClientConnection;
+import helperclasses.Appointment;
+import helperclasses.TimeFrame;
 import helperclasses.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
@@ -26,9 +29,8 @@ public class LoginScreen {
     ArrayList<User> users;
     User user;
 
-    public LoginScreen(final Stage primaryStage/*, final ClientConnection clientConnection*/) { //TODO
+    public LoginScreen(final Stage primaryStage) { //TODO
     primaryStage.setTitle("LoginScreen");
-
     GridPane grid = new GridPane();
     grid.setAlignment(Pos.CENTER);
     grid.setHgap(10);
@@ -43,6 +45,7 @@ public class LoginScreen {
     users.add(new User("Paal"));
     users.add(new User("Fredrik"));
     users.add(new User("Pelle Parafin"));
+
 
     Text scenetitle = new Text("Welcome");
     scenetitle.setId("welcome-text");
@@ -79,11 +82,14 @@ public class LoginScreen {
 
         @Override
         public void handle(ActionEvent e) {
-            user = new User("Tester");          //TODO get from ClientConnection
+            ClientConnection clientConnection = ClientConnection.getInstance();
+            clientConnection.start();
+            boolean test = clientConnection.login("espen","espen");          //TODO get from ClientConnection
+            System.out.println(test);
             actiontarget.setFill(Color.FIREBRICK);
             actiontarget.setText("Wrong username or password");
-
-            new CalendarScreen(primaryStage, users, user, true/*, clientConnection*/); //TODO get user and users from database
+            user = clientConnection.getLoggedInUser();
+            new CalendarScreen(primaryStage, users, user, true, clientConnection); //TODO get user and users from database
             // queue function for verification, switch view if verified.
             // also needs to destroy this view
         }

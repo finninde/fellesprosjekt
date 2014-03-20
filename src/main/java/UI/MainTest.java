@@ -13,8 +13,8 @@ import org.joda.time.DateTime;
 public class MainTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        //ClientConnection clientConnection = ClientConnection.getInstance();
-        new LoginScreen(stage/*, clientConnection*/);
+
+        new LoginScreen(stage);
         Appointment a = new Appointment("Supertitle!!!");
         //DateTime dt = new DateTime().withDate(year, month, day).withHourOfDay(hour);
         a.setTimeFrame(new TimeFrame(new DateTime(),new DateTime()));
@@ -24,7 +24,7 @@ public class MainTest extends Application {
 
         a.setLocation("not here but there");
         a.setDescription("julekakesukkerlaketroikabolleballe");
-        new AlarmScreen(a);
+        //new AlarmScreen(a);
     }
 
     public static void main(String[]args){

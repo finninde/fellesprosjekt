@@ -6,8 +6,7 @@ package helperclasses;
 public enum Request {
     ALARMOFAPPOINTMENT,
     PARTICIPANTSOFAPPOINTMENT,
-    GETAPPOINTMENT,
-    GETDATA,
+    ADDAPPOINTMENT,
     LOGOUT,
     LOGIN,
     GETUSERS,
