@@ -9,11 +9,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -39,18 +39,20 @@ public class CalendarScreen {
     private ArrayList<Appointment> appointmentsWhereUserIsOwner;
     private ArrayList<Appointment> appointmentsWhereUserIsParticipant;
     private ClientConnection connection;
+    private GridPane calendarGrid;
+    private int week;
 
     private Label hour;
-    private Label day;
+    private ArrayList<Label> days;
     private Label otherUsersLabel;
 
     private ArrayList<User> allUsers;
 
-    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User user, boolean owner/*, final ClientConnection clientConnection*/){ //TODO
-
+    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User user, final boolean owner/*, final ClientConnection clientConnection*/){ //TODO
+        week = 0;
         allUsers = users;
-
-        GridPane calendarGrid = new GridPane();
+        days = new ArrayList<Label>();
+        calendarGrid = new GridPane();
         calendarGrid.setHgap(10);
         calendarGrid.setVgap(10);
 
@@ -95,9 +97,19 @@ public class CalendarScreen {
 
         previousWeekButton = new Button("Previous week");
         previousWeekButton.setFont(Font.font("Helvetica-Light", 11));
+        previousWeekButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                week--;
+                updateView();}});
 
         nextWeekButton = new Button("Next week");
         nextWeekButton.setFont(Font.font("Helvetica-Light", 11));
+        nextWeekButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                week++;
+                updateView();}  });
 
         previousWeekButton.setMaxSize(80, 20);
         nextWeekButton.setMaxSize(80, 20);
@@ -131,19 +143,17 @@ public class CalendarScreen {
         //this.appointmentsWhereUserIsOwner = clientConnection.getAppointmentsWhereUserIsOwner();   //TODO
         //this.appointmentsWhereUserIsParticipant = clientConnection.getAppointmentsWhereUserIsParticipant();   //TODO
 
-        //GridPane gridPane = new GridPane();
-        //gridPane.setPadding(new Insets(25, 25, 25, 25));
-
         calendarGrid.getStylesheets().add(Calendar.class.getResource(("calendar.css")).toExternalForm());
 
 
-        for (int i=0; i<7; i++){
-            day = new Label(String.valueOf(new DateTime().withDayOfWeek(i+1).getDayOfWeek()));
-            calendarGrid.add(day, i+1, 3);
-        }
 
+
+        for (int i=0; i<7; i++){
+            initDateLabels(week, i);
+        }
         for (int i=0; i<btn[0].length; i++){
-            hour = new Label(String.valueOf(new DateTime().withHourOfDay(8+i).getHourOfDay()));
+            DateTime dt = new DateTime().withHourOfDay(8+i);
+            hour = new Label(dt.toString("HH:00"));
             calendarGrid.add(hour, 0, i+4);
         }
 
@@ -183,21 +193,31 @@ public class CalendarScreen {
         calendarStage.setScene(new Scene(calendarGrid, 1024, 683));
         calendarStage.show();
         //show appointments in calendar
-        //updateView(); //TODO
+        updateView();
     }
+
+    private void initDateLabels(int week, int i) {
+        DateTime dt = new DateTime().withDayOfWeek(i + 1).plusWeeks(week);
+        Label day = new Label(dt.toString("dd-MMMM-yyyy"));
+        days.add(day);
+        calendarGrid.add(day, i+1, 3);
+    }
+
     public void updateView() {
-        for(Appointment appointment: this.appointmentsWhereUserIsOwner) {
+        startOfWeek = new DateTime().withDayOfWeek(1).plusWeeks(week);
+        endOfWeek = startOfWeek.plusDays(7);
+        int i = 0;
+        for (Label label: days){
+            DateTime dt = new DateTime().withDayOfWeek(i + 1).plusWeeks(week);
+            label.setText(dt.toString("dd-MMMM.yyyy"));
+            i++;
+        }
+        for(Appointment appointment: this.appointmentsWhereUserIsOwner) {   //TODO blank out calendar
             showAppointmentInCalendar(appointment);
         }
         for(Appointment appointment: appointmentsWhereUserIsParticipant) {
             showAppointmentInCalendar(appointment);
         }
-    }
-
-    public void changeDate(DateTime newStartDate) {
-        startOfWeek = newStartDate;
-        //updateView(); //TODO
-
     }
 
     public void showAppointmentInCalendar(Appointment appointment){
@@ -212,7 +232,7 @@ public class CalendarScreen {
 
             btn[row][column].setText(appointment.getTitle());
 
-            if (appointment.getOwner().equals(username) ){
+            if (appointment.getOwner().getName().equals(username) ){
                 btn[row][column].setId("accepted");
                 return;
             }
