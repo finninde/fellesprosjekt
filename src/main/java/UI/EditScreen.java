@@ -269,7 +269,7 @@ public void  makeTimeFrameFromTextFields(){
 
                 //TODO: send to database
 
-         tonLogic(editStage);
+                commitButtonLogic(editStage);
             }
         });
         editGrid.add(commitButton, 0, 18);
