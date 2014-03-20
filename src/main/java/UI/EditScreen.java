@@ -1,6 +1,9 @@
 package UI;
 
+import helperclasses.Appointment;
+import helperclasses.TimeFrame;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import org.joda.time.DateTime;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -23,8 +30,14 @@ public class EditScreen /*extends Application*/ {
     protected TextField locationText;
     protected TextArea descriptionText;
 
-    protected SimpleCalendar fromDate;
-    protected SimpleCalendar toDate;
+    private Appointment model;
+
+    protected TextField fromDate;
+    protected TextField toDate;
+
+    private DateTime fromDateTime;
+    private DateTime toDateTime;
+
 
     protected ComboBox fromTime;
     protected ComboBox toTime;
@@ -71,6 +84,22 @@ public class EditScreen /*extends Application*/ {
 
     protected void closeButtonLogic(Stage stage){
         stage.close();
+    }
+public void  makeTimeFrameFromTextFields(){
+        int startYear = Integer.parseInt(fromDate.getText().substring(0, 2));
+        int startMonth = Integer.parseInt(fromDate.getText().substring(3,5));
+        int startDay = Integer.parseInt(fromDate.getText().substring(6,8));
+        int startHour = Integer.parseInt(fromTime.getValue().toString().substring(0, 2));
+
+        int endYear = Integer.parseInt(toDate.getText().substring(0,2));
+        int endMonth = Integer.parseInt(toDate.getText().substring(3,5));
+        int endDay = Integer.parseInt(toDate.getText().substring(6,8));
+        int endHour = Integer.parseInt(toTime.getValue().toString().substring(0, 2));
+
+        //Setter Appointment sin startdate lik startdaten
+        model.getTimeFrame().setStartDate(new DateTime().withDate(startYear, startMonth, startDay).withHourOfDay(startHour));
+        //Setter appointment sin enddate lik enddaten
+        model.getTimeFrame().setEndDate(new DateTime().withDate(endYear, endMonth, endDay).withHourOfDay(endHour));
     }
 
 
@@ -146,10 +175,10 @@ public class EditScreen /*extends Application*/ {
         editGrid.add(eventName, 0, 0, 2, 1);
 
         date = new Label("Date:");
-        fromDate = new SimpleCalendar();
-        toDate = new SimpleCalendar();
-        //fromDate.getStylesheets().add("simple_calendar.css");
-
+        fromDate = new TextField();
+        toDate = new TextField();
+        fromTime.setPromptText("dd.mm.yyyy");
+        toTime.setPromptText("dd.mm.yyyy");
 
         editGrid.add(date,0,2);
         dateGrid.add(fromDate,0,0); //1,1
@@ -235,11 +264,8 @@ public class EditScreen /*extends Application*/ {
         editStage.setScene(scene);
         editStage.show();
 
+        //TODO Choose groups and users
+        //TODO Make alarm and notify the database
 
     }
-
-    /*public static void main(String[] args){
-       launch(args);
-    }*/
-
 }
