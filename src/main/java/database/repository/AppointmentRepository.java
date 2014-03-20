@@ -8,9 +8,7 @@ import database.UserService;
 import helperclasses.*;
 import org.joda.time.DateTime;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +30,11 @@ public class AppointmentRepository implements AppointmentService {
             statement.setString(3, appointment.getOwner().getUsername());
             addTimeFrame(appointment.getTimeFrame());
             statement.setInt(4, appointment.getTimeFrame().getId());
-            statement.setInt(5, appointment.getRoom().getId());
+            if (appointment.getRoom() == null) {
+                statement.setNull(5, Types.INTEGER);
+            } else {
+                statement.setInt(5, appointment.getRoom().getId());
+            }
             statement.setString(6, appointment.getTitle());
             statement.executeUpdate();
             ResultSet key = statement.getGeneratedKeys();
@@ -49,8 +51,8 @@ public class AppointmentRepository implements AppointmentService {
     public void addTimeFrame(TimeFrame timeFrame) {
         String sql = "INSERT INTO TIMEFRAME (STARTDATE, ENDDATE) VALUES (?,?)";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setDate(1, new java.sql.Date(timeFrame.getStartDate().getMillis()));
-            statement.setDate(2, new java.sql.Date(timeFrame.getEndDate().getMillis()));
+            statement.setTimestamp(1, new Timestamp(timeFrame.getStartDate().getMillis()));
+            statement.setTimestamp(2, new Timestamp(timeFrame.getEndDate().getMillis()));
             statement.executeUpdate();
             ResultSet key = statement.getGeneratedKeys();
             key.next();
@@ -175,7 +177,7 @@ public class AppointmentRepository implements AppointmentService {
                 alarm.setId(rs.getInt("ID"));
                 alarm.setUser(us.getUser(rs.getString("USERID")));
                 alarm.setAppointment(getAppointment(rs.getInt("APPOINTMENTID")));
-                alarm.setExecuteAlarm(new DateTime(rs.getDate("EXECUTEDATE")));
+                alarm.setExecuteAlarm(new DateTime(rs.getTimestamp("EXECUTEDATE")));
             }
         } catch (SQLException e) {
             Logger.getLogger(MeetingRoomRepository.class.getName()).log(Level.SEVERE, null, e);
@@ -210,8 +212,8 @@ public class AppointmentRepository implements AppointmentService {
     public void updateTimeFrame(TimeFrame timeFrame) {
         String sql = "UPDATE TIMEFRAME SET STARTDATE=?, ENDDATE=? WHERE ID=?";
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setDate(1, new java.sql.Date(timeFrame.getStartDate().getMillis()));
-            statement.setDate(2, new java.sql.Date(timeFrame.getEndDate().getMillis()));
+            statement.setTimestamp(1, new Timestamp(timeFrame.getStartDate().getMillis()));
+            statement.setTimestamp(2, new Timestamp(timeFrame.getEndDate().getMillis()));
             statement.setInt(3, timeFrame.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -226,7 +228,7 @@ public class AppointmentRepository implements AppointmentService {
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, alarm.getUser().getUsername());
             statement.setInt(2, alarm.getAppointment().getId());
-            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.setTimestamp(3, new Timestamp(alarm.getExecuteAlarm().getMillis()));
             statement.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
