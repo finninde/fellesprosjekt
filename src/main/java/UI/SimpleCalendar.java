@@ -36,7 +36,7 @@ import javafx.stage.Popup;
 public class SimpleCalendar extends VBox{
 
 	private Popup popup;
-	final DatePicker datePicker;
+	protected final DatePicker datePicker;
 	
 	public SimpleCalendar() {
 		popup = new Popup();
