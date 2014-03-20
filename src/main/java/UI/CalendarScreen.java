@@ -3,6 +3,7 @@ package UI;
 import client.ClientConnection;
 import helperclasses.Appointment;
 import helperclasses.Status;
+import helperclasses.TimeFrame;
 import helperclasses.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,13 +49,19 @@ public class CalendarScreen {
 
     private ArrayList<User> allUsers;
 
-    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User user, final boolean owner/*, final ClientConnection clientConnection*/){ //TODO
+    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User user, final boolean owner, final ClientConnection clientConnection){
         week = 0;
         allUsers = users;
         days = new ArrayList<Label>();
         calendarGrid = new GridPane();
         calendarGrid.setHgap(10);
         calendarGrid.setVgap(10);
+
+
+        Appointment q = new Appointment("julekake");
+        q.setTimeFrame(new TimeFrame(new DateTime(), new DateTime()));
+        q.setOwner(users.get(1));
+        clientConnection.newAppointment(q);
 
         if (owner){
             newAppointmentButton = new Button("New Appointment");
@@ -74,7 +81,7 @@ public class CalendarScreen {
             logOutButton.setOnMouseClicked(new javafx.event.EventHandler<javafx.scene.input.MouseEvent>() {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                    //clientConnection.logout();    //TODO
+                    clientConnection.logout();
                     new LoginScreen(calendarStage);
                 }
             });
@@ -125,7 +132,7 @@ public class CalendarScreen {
         otherUsersChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>(){
             @Override
             public void changed(ObservableValue observableValue, User o, User o2) {
-                new CalendarScreen(new Stage(), allUsers, o2, false/*, clientConnection*/); //TODO
+                new CalendarScreen(new Stage(), allUsers, o2, false, clientConnection);
             }
         });
         otherUsersLabel = new Label();
@@ -139,10 +146,19 @@ public class CalendarScreen {
         this.startOfWeek = new DateTime().withDayOfWeek(1);
         this.endOfWeek = startOfWeek.plusDays(7);
         this.username = user.getUsername();
-        //this.connection = clientConnection;   //TODO
-        //this.appointmentsWhereUserIsOwner = clientConnection.getAppointmentsWhereUserIsOwner();   //TODO
-        //this.appointmentsWhereUserIsParticipant = clientConnection.getAppointmentsWhereUserIsParticipant();   //TODO
+        this.connection = clientConnection;
+        this.appointmentsWhereUserIsOwner = clientConnection.getAppointmentsWhereUserIsOwner();
+        this.appointmentsWhereUserIsParticipant = clientConnection.getAppointmentsWhereUserIsParticipant();
 
+
+        for (Appointment a: appointmentsWhereUserIsOwner){
+            System.out.println(a.getTimeFrame().getStartDate().toString("HH:mm:ss"));
+            System.out.println(a.getTitle());
+        }
+        for (Appointment b: appointmentsWhereUserIsParticipant){
+            System.out.println(b.getTimeFrame().getStartDate().toString("HH:mm:ss"));
+            System.out.println(b.getTitle());
+        }
         calendarGrid.getStylesheets().add(Calendar.class.getResource(("calendar.css")).toExternalForm());
 
 
@@ -181,6 +197,7 @@ public class CalendarScreen {
                         } else if (((AppointmentButton)(event.getSource())).getId() == "pending") {
                             //TODO:handle whatever yellow event is.
                         } else {
+                            new EditScreen(new Stage());
                             //TODO:make new appointment.
                         }
                     }
@@ -212,10 +229,20 @@ public class CalendarScreen {
             label.setText(dt.toString("dd-MMMM.yyyy"));
             i++;
         }
-        for(Appointment appointment: this.appointmentsWhereUserIsOwner) {   //TODO blank out calendar
+        for(int j=0; j<btn.length; j++){
+            for(int k=0; k<btn[j].length; k++){
+                if (btn[j][k].getAppointment() != null){
+                    btn[j][k].setText("");
+                    btn[j][k].setAppointment(null);
+                    btn[j][k].setId(null);
+                    System.out.println("resetting");
+                }
+            }
+        }
+        for(Appointment appointment: this.appointmentsWhereUserIsOwner) {
             showAppointmentInCalendar(appointment);
         }
-        for(Appointment appointment: appointmentsWhereUserIsParticipant) {
+        for(Appointment appointment: this.appointmentsWhereUserIsParticipant) {
             showAppointmentInCalendar(appointment);
         }
     }
@@ -228,21 +255,26 @@ public class CalendarScreen {
                 return;
             }
             int column = startDate.getDayOfWeek() - 1;
-            int row = startDate.getHourOfDay() -8;
-
-            btn[row][column].setText(appointment.getTitle());
-
-            if (appointment.getOwner().getName().equals(username) ){
-                btn[row][column].setId("accepted");
+            int row = startDate.getHourOfDay()-8;
+            System.out.println("row"+row);
+            System.out.println("column"+column);
+            if (column>btn.length || row>btn[column].length || column < 0 || row < 0){
                 return;
             }
-
+            btn[column][row].setText(appointment.getTitle());
+            btn[column][row].setAppointment(appointment);
+            if (appointment.getOwner().getUsername().equals(username) ){
+                System.out.println("waolsdjiaoshd");
+                System.out.println("wololo: " + appointment.getTimeFrame().getStartDate().toString("dd- HH:00"));
+                btn[column][row].setId("accepted");
+                return;
+            }
             if(status==Status.PENDING) {
-                btn[row][column].setId("pending");
+                btn[column][row].setId("pending");
             } else if(status == Status.ACCEPTED) {
-                btn[row][column].setId("accepted");
+                btn[column][row].setId("accepted");
             }else if(status == Status.DECLINED) {
-                btn[row][column].setId("important");
+                btn[column][row].setId("important");
             }
 
         }

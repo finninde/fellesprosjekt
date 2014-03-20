@@ -139,6 +139,8 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("user",user);
                     json.put("key",obj.get("key"));
                     sendJSON(json);
+                case ADDAPPOINTMENT:
+                    ar.addAppointment((Appointment) obj.get("appointment"));
             }
         }
     }
