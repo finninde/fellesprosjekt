@@ -99,7 +99,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         System.out.println("users received successfully");
 
     }
-a
+
     public ArrayList<User> getUsers() {
         JSONObject json = new JSONObject();
         json.put("request",Request.GETUSERS);
@@ -352,11 +352,6 @@ a
     @Override
     public Participant getParticipants(Appointment appointment) {
         return null;
-    }
-
-    @Override
-    public void updateParticipantStatus(int appointmentID, Status status) {
-
     }
 
     //@Override

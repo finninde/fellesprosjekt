@@ -99,7 +99,7 @@ public void  makeTimeFrameFromTextFields(){
 
         int endYear = Integer.parseInt(toDate.getText().substring(0,2));
         int endMonth = Integer.parseInt(toDate.getText().substring(3,5));
-        int endDay = Integer.parseInt(toDate.getText().substring(6,8));
+        int endDay = Integer.parseInt(toDate.getText().substring(6,10));
         int endHour = Integer.parseInt(toTime.getValue().toString().substring(0, 2));
 
         //Setter Appointment sin startdate lik startdaten
@@ -128,20 +128,16 @@ public void  makeTimeFrameFromTextFields(){
 
 
         timeOptions = FXCollections.observableArrayList(
-                "00:00", "01:00", "02:00", "03:00",
-                "04:00", "05:00", "06:00", "07:00",
                 "08:00", "09:00", "10:00", "11:00",
-                "12:00", "13:00", "14:00", "15:00",
-                "16:00", "17:00", "18:00", "19:00",
-                "20:00", "21:00", "22:00", "23:00"
+                "12:00", "13:00", "14:00", "15:00"
         );
 
         alarmOptions = FXCollections.observableArrayList(
+                "No alarm",
                 "1 hour before",
                 "2 hours before",
                 "1 day before",
-                "2 days before",
-                "1 week before"
+                "2 days before"
         );
 
         //TODO Fill these lists with data from the database

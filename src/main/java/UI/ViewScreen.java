@@ -27,8 +27,8 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     private Appointment model;
     private ClientConnection clientConnection;
 
+    private Stage viewStage;
     private EditScreen viewScreen;
-    private final Stage viewStage = new Stage();
 
     protected TextField fromDate;
     protected TextField toDate;
@@ -80,7 +80,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
     private String fromTimeFrameToFromDateString(){
-        String fromDateString = "";
+        String fromDateString;
         int day = model.getTimeFrame().getStartDate().getDayOfMonth();
         int month = model.getTimeFrame().getStartDate().getMonthOfYear();
         int year = model.getTimeFrame().getStartDate().getYear();
@@ -89,7 +89,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
     private String fromTimeFrameToToDateString(){
-        String toDateString = "";
+        String toDateString;
         int day = model.getTimeFrame().getEndDate().getDayOfMonth();
         int month = model.getTimeFrame().getEndDate().getMonthOfYear();
         int year = model.getTimeFrame().getEndDate().getYear();
@@ -98,14 +98,14 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
     private String fromTimeFrameToFromTimeString(){
-        String fromTime = "";
+        String fromTime;
         int hour = model.getTimeFrame().getStartDate().getHourOfDay();
         fromTime = Integer.toString(hour) + ":00";
         return fromTime;
     }
 
     private String fromTimeFrameToToTimeString(){
-        String toTime = "";
+        String toTime;
         int hour = model.getTimeFrame().getEndDate().getHourOfDay();
         toTime = Integer.toString(hour) + ":00";
         return toTime;
@@ -125,7 +125,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         fillUserStatusFields(model.getParticipants());
     }
 
-    private void setIrrelevantElementsFromEditScreenInvisble(){
+    /*private void setIrrelevantElementsFromEditScreenInvisble(){
         viewScreen.fromDate.setVisible(false);
         viewScreen.toDate.setVisible(false);
         viewScreen.fromTime.setVisible(false);
@@ -133,7 +133,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         viewScreen.roomCombo.setVisible(false);
         viewScreen.editUsers.setVisible(false);
         viewScreen.editGroups.setVisible(false);
-    }
+    }*/
 
     private void setObjectsNonEditable(){
         viewScreen.eventName.setEditable(false);
@@ -168,27 +168,36 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         viewGrid.add(new Label(),0,18);
     }
 
+//TODO: fix alarmlogic if we get time
+/*
+    private void alarmLogic(){
+        if (viewScreen.alarmCombo.getValue() == "No alarm")
+
+        int alarmHour = model.getTimeFrame().getStartDate().getHourOfDay();
+        int alarmDay = model.getTimeFrame().getStartDate().getDayOfMonth();
+        int alarmMonth = model.getTimeFrame().getStartDate().getMonthOfYear();
+        int alarmYear = model.getTimeFrame().getStartDate().getYear();
+    }*/
+
+
     private void acceptButtonLogic(){
-        User user = clientConnection.getLoggedInUser();
-        DateTime executeAlarm = model.getStart //TODO ifWeGetTime: Fix month changing
-        Alarm(viewScreen., user, model);
         clientConnection.updateParticipantStatus(model.getId(), Status.ACCEPTED);
-        viewScreen.closeButtonLogic(this.viewStage);
+        viewScreen.closeButtonLogic(viewStage);
     }
 
     private void declineButtonLogic(){
-      //  User user = helperclasses.getUserWhichViewAppointment();
         clientConnection.updateParticipantStatus(model.getId(), Status.DECLINED);
-        viewScreen.closeButtonLogic(this.viewStage);
+        viewScreen.closeButtonLogic(viewStage);
     }
 
     private void hideButtonLogic(){
-
-        viewScreen.closeButtonLogic(this.viewStage);
+        clientConnection.updateParticipantStatus(model.getId(), Status.HIDE);
+        viewScreen.closeButtonLogic(viewStage);
     }
 
 
-    public ViewScreen(viewStage) {
+    public ViewScreen(Stage viewStage, Appointment model) {
+        this.viewStage = viewStage;
         viewScreen = new EditScreen(viewStage);
         clientConnection = ClientConnection.getInstance();
 
@@ -266,7 +275,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         fillSpaces();
 
 
-        setModel(model); //TODO model should be the actual appointment which is supposed to be viewed.
+        setModel(model);
         viewScene = new Scene(viewGrid,305,670);
         viewStage.setScene(viewScene);
 
