@@ -70,7 +70,8 @@ public class EditScreen /*extends Application*/ {
     protected GridPane timeGrid;
     protected GridPane cancelButtonGrid;
 
-
+    private ObservableList<String> finalGroupList;
+    private ObservableList<String> finalUserList;
     private ObservableList<String> timeOptions;
     private ObservableList<String> alarmOptions;
     private ObservableList<String> userOptions; //Change to User instead of String when implemented
@@ -160,7 +161,7 @@ public void  makeTimeFrameFromTextFields(){
         ); //TODO Fill these lists with data from the database
 
         editGrid = new GridPane();
-        editGrid.setPadding(new Insets(15,15,15,15));
+        editGrid.setPadding(new Insets(15, 15, 15, 15));
         editGrid.setVgap(10);
         editGrid.setHgap(10);
 
@@ -221,7 +222,7 @@ public void  makeTimeFrameFromTextFields(){
 
         descriptionLabel = new Label("Description:");
         descriptionText = new TextArea();
-        descriptionText.setPrefSize(160,90);
+        descriptionText.setPrefSize(160, 90);
         descriptionText.setWrapText(true);
         editGrid.add(descriptionLabel,0,11);
         editGrid.add(descriptionText,1,11);
@@ -229,7 +230,7 @@ public void  makeTimeFrameFromTextFields(){
         addRemoveUsers = new Label("Invite users:");
         userListView = new ListView(userOptions);
         userListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        editGrid.add(userListView,1,14);
+        editGrid.add(userListView, 1, 14);
         editGrid.add(addRemoveUsers, 0, 14);
 
 
@@ -259,7 +260,21 @@ public void  makeTimeFrameFromTextFields(){
         commitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                commitButtonLogic(editStage);}
+                finalGroupList = groupListView.getSelectionModel().getSelectedItems();
+                finalUserList = userListView.getSelectionModel().getSelectedItems();
+                Appointment appointment = new Appointment(eventName.getText());
+                appointment.setDescription(descriptionText.getText());
+                appointment.setLocation(locationText.getText());
+                appointment.setOwner(clientConnection.getLoggedInUser());
+                //appointment.setRoom();
+                //appointment.setTimeFrame();
+                // newAppointment(appointment);
+
+
+                //TODO: send to database
+
+         tonLogic(editStage);
+            }
         });
         editGrid.add(commitButton, 0, 18);
 
@@ -267,14 +282,15 @@ public void  makeTimeFrameFromTextFields(){
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                closeButtonLogic(editStage);}
+                closeButtonLogic(editStage);
+            }
         });
         cancelButtonGrid.add(cancelButton,1,0);
 
         //Make invisible button to push the cancel button to the left
         invisibleButton = new Button("invisblebu");
         invisibleButton.setVisible(false);
-        cancelButtonGrid.add(invisibleButton,0,0);
+        cancelButtonGrid.add(invisibleButton, 0, 0);
 
 
 
