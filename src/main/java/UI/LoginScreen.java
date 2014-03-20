@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 
 public class LoginScreen {
-    ArrayList<User> users;
-    User user;
+    private TextField userTextField;
+    private PasswordField pwBox;
 
     public LoginScreen(final Stage primaryStage) { //TODO
     primaryStage.setTitle("LoginScreen");
@@ -41,11 +41,6 @@ public class LoginScreen {
     primaryStage.setScene(scene);
     scene.getStylesheets().add(LoginScreen.class.getResource(("Login.css")).toExternalForm());
 
-    users = new ArrayList<User>();      //TODO remove or change with proper database call
-    users.add(new User("Paal"));
-    users.add(new User("Fredrik"));
-    users.add(new User("Pelle Parafin"));
-
 
     Text scenetitle = new Text("Welcome");
     scenetitle.setId("welcome-text");
@@ -56,7 +51,7 @@ public class LoginScreen {
     userName.setFont(Font.font("Helvetica-Light", 15));
     grid.add(userName, 0, 1);
 
-    TextField userTextField = new TextField();
+    userTextField = new TextField();
     grid.add(userTextField, 1, 1);
 
     Label pw = new Label("Password:");
@@ -65,7 +60,7 @@ public class LoginScreen {
     grid.add(pw, 0, 2);
 
 
-    PasswordField pwBox = new PasswordField();
+    pwBox = new PasswordField();
     grid.add(pwBox, 1, 2);
 
     Button btn = new Button("Sign in");
@@ -82,16 +77,20 @@ public class LoginScreen {
 
         @Override
         public void handle(ActionEvent e) {
-            ClientConnection clientConnection = ClientConnection.getInstance();
-            clientConnection.start();
-            boolean test = clientConnection.login("espen","espen");          //TODO get from ClientConnection
-            System.out.println(test);
-            actiontarget.setFill(Color.FIREBRICK);
-            actiontarget.setText("Wrong username or password");
-            user = clientConnection.getLoggedInUser();
-            new CalendarScreen(primaryStage, users, user, true, clientConnection); //TODO get user and users from database
-            // queue function for verification, switch view if verified.
-            // also needs to destroy this view
+            ClientConnection clientConnection;
+            if (userTextField.getText() != null || pwBox.getText() != null){
+                clientConnection = ClientConnection.getInstance();
+                clientConnection.start();
+                try{
+                    boolean test = clientConnection.login(userTextField.getText(),pwBox.getText());
+                    System.out.println(test);
+                    new CalendarScreen(primaryStage, clientConnection.getUsers(), clientConnection.getLoggedInUser(), true, clientConnection);
+                }
+                catch(Exception e1){
+                    actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("Wrong username or password");
+                }
+            }
         }
     });
     primaryStage.show();

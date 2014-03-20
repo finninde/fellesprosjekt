@@ -142,7 +142,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 return incomingObjects.get(key);
             }
             waitTime += 1;
-            if(waitTime > 5) {
+            if(waitTime > 10) {
                 return null;
             }
             try {

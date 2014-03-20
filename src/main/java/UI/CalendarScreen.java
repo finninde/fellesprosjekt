@@ -59,8 +59,8 @@ public class CalendarScreen {
 
 
         Appointment q = new Appointment("julekake");
-        q.setTimeFrame(new TimeFrame(new DateTime(), new DateTime()));
-        q.setOwner(users.get(1));
+        q.setTimeFrame(new TimeFrame(new DateTime().withTime(8,0,0,0), new DateTime()));
+        q.setOwner(user);
         clientConnection.newAppointment(q);
 
         if (owner){
