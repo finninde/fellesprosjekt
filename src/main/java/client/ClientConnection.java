@@ -110,14 +110,12 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 case PARTICIPANTSOFAPPOINTMENT:
                     key = (int) obj.get("key");
                     incomingObjects.put(key, (ArrayList<Participant>)obj.get("participants"));
-                    break;
-                case GETAPPOINTMENT:
-                    break;
-                case GETDATA:
-                    System.out.println("getData json arrived");
+                case GETSTATUSFORAPPOINTMENT:
                     key = (int) obj.get("key");
-                    incomingObjects.put(key, (ArrayList<Appointment>) obj.get("appointments"));
-                    break;
+                    incomingObjects.put(key, (Status) obj.get("status"));
+                case GETLOGGEDINUSER:
+                    key = (int) obj.get("key");
+                    incomingObjects.put(key,(User)obj.get("user"));
                 case LOGOUT:
                     if((boolean)obj.get("success")) {
                         disconnect();
@@ -201,7 +199,13 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
     @Override
     public User getLoggedInUser() {
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("request",Request.GETLOGGEDINUSER);
+        key += 1;
+        json.put("key",key);
+        send(json);
+        User user = (User)waitForObject(key);
+        return user;
     }
     @Override
     public ArrayList<Group> getGroups() {
@@ -225,7 +229,14 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
 
     @Override
     public Status getStatusForAppointment(int ID) {
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("request", Request.GETSTATUSFORAPPOINTMENT);
+        json.put("appointmentid", ID);
+        key += 1;
+        json.put("key",key);
+        send(json);
+        Status status =(Status) waitForObject(key);
+        return status;
     }
 
     public ArrayList<User> getUsers() {

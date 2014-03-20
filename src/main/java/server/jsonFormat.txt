@@ -17,15 +17,6 @@
 'response': 'logout',
 'success': true
 }
-##### After successfull login
-{
-'request': 'getData',
-}
-{
-'response': 'getData',
-'appointments': [{appointment json}, {appointment json}, ... ]
-'alarms': [ {alarm1 json,}, {alarm2 json}]
-}
 
 #### After clicking on an appointment
 {
@@ -79,3 +70,23 @@
 {"request": UPDATEPARTICIPANTSTATUS,
 "appointmentID": int
 "status" : Status;
+}
+No response unless error
+#### getLoggedInUser
+{"request": GETLOGGEDINUSER,
+"key": key
+}
+{"response": GETLOGGEDINUSER,
+"key": key,
+"user": userObject
+]
+
+#### getStatusForAppointment
+{"request": GETSTATUSFORAPPOINTMENT,
+"key": key,
+"appointmentid":int id
+}
+{ "response": GETSTATUSFORAPPOINTMENT,
+"key": key,
+"status": status
+}

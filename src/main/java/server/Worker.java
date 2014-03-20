@@ -106,6 +106,17 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("error", message);
                     sendJSON(json);
                     break;
+                case GETSTATUSFORAPPOINTMENT:
+                    ArrayList<Participant> participantsForAppointment = ar.getParticipants((int)obj.get("appointmentid"));
+                    User thisUser = ur.getUser(username);
+                    for(Participant participant: participantsForAppointment) {
+                        if(participant.getUser().equals(thisUser)) {
+                            json.put("status",participant.getStatus());
+                        }
+                    json.put("response",request);
+                    json.put("key",obj.get("key"));
+                    sendJSON(json);
+                    }
                 case UPDATEPARTICIPANTSTATUS:
                     int appointmentID = (int)json.get("appointmentID");
                     Status status = (Status)json.get("status");
@@ -116,24 +127,18 @@ public class Worker extends Thread implements ConnectionListener{
                     json.put("participants",participants);
                     json.put("key",obj.get("key"));
                     sendJSON(json);
-                case GETAPPOINTMENT:
-                    break;
-                case GETDATA:
-                    System.out.println("get data request");
-                    Appointment ap1 = new Appointment("Appointment1");
-                    ArrayList<Appointment> appointments1 = new ArrayList<Appointment>();
-                    appointments1.add(ap1);
-                    json.put("response",request);
-                    json.put("appointments",appointments1);
-                    json.put("key",obj.get("key"));
-                    sendJSON(json);
-                    break;
                 case LOGOUT:
                     server.removeWorker(username);
                     json.put("response", Request.LOGOUT);
                     json.put("success", true);
                     sendJSON(json);
                     break;
+                case GETLOGGEDINUSER:
+                    User user = ur.getUser(username);
+                    json.put("response",request);
+                    json.put("user",user);
+                    json.put("key",obj.get("key"));
+                    sendJSON(json);
             }
         }
     }
