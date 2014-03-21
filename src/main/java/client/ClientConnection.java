@@ -62,7 +62,7 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
         new Receiver(this,clientSocket);
         while(running) {
             try {
-                sleep(100);
+                sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -142,11 +142,11 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
                 return incomingObjects.get(key);
             }
             waitTime += 1;
-            if(waitTime > 10) {
+            if(waitTime > 20) {
                 return null;
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

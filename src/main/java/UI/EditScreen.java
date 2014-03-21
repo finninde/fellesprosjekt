@@ -25,12 +25,14 @@ import java.util.GregorianCalendar;
 /**
  * Created by jonasandredalseth on 11.03.14.
  */
-public class EditScreen /*extends Application*/ {
+public class EditScreen  {
 
     protected Scene scene;
     protected TextField eventName;
     protected TextField locationText;
     protected TextArea descriptionText;
+
+    private int appointmentID = 0;
 
     private ClientConnection clientConnection;
 
@@ -71,10 +73,10 @@ public class EditScreen /*extends Application*/ {
     protected GridPane cancelButtonGrid;
 
     private ObservableList<String> finalGroupList;
-    private ObservableList<String> finalUserList;
+    private ObservableList<User> finalUserList;
     private ObservableList<String> timeOptions;
     private ObservableList<String> alarmOptions;
-    private ObservableList<String> userOptions; //Change to User instead of String when implemented
+    private ObservableList<User> userOptions; //Change to User instead of String when implemented
     private ObservableList<String> groupOptions; //Change to User instead of String when implemented
     private ObservableList<String> roomOptions; //Change to User instead of String when implemented
 
@@ -92,42 +94,69 @@ public class EditScreen /*extends Application*/ {
     protected void closeButtonLogic(Stage stage){
         stage.close();
     }
-public void  makeTimeFrameFromTextFields(){
-        int startYear = Integer.parseInt(fromDate.getText().substring(0, 2));
+public void makeTimeFrameFromTextFields(){
+        int startDay = Integer.parseInt(fromDate.getText().substring(0, 2));
         int startMonth = Integer.parseInt(fromDate.getText().substring(3,5));
-        int startDay = Integer.parseInt(fromDate.getText().substring(6,8));
+        int startYear = Integer.parseInt(fromDate.getText().substring(6,10));
         int startHour = Integer.parseInt(fromTime.getValue().toString().substring(0, 2));
 
-        int endYear = Integer.parseInt(toDate.getText().substring(0,2));
+        int endDay = Integer.parseInt(toDate.getText().substring(0,2));
         int endMonth = Integer.parseInt(toDate.getText().substring(3,5));
-        int endDay = Integer.parseInt(toDate.getText().substring(6,10));
+        int endYear = Integer.parseInt(toDate.getText().substring(6,10));
         int endHour = Integer.parseInt(toTime.getValue().toString().substring(0, 2));
 
+        TimeFrame tf = new TimeFrame(new DateTime().withDate(startYear, startMonth, startDay).withHourOfDay(startHour),
+                                    new DateTime().withDate(endYear, endMonth, endDay).withHourOfDay(endHour));
         //Setter Appointment sin startdate lik startdaten
-        model.getTimeFrame().setStartDate(new DateTime().withDate(startYear, startMonth, startDay).withHourOfDay(startHour));
-        //Setter appointment sin enddate lik enddaten
-        model.getTimeFrame().setEndDate(new DateTime().withDate(endYear, endMonth, endDay).withHourOfDay(endHour));
+        model.setTimeFrame(tf);
+
     }
 
 
     private void commitButtonLogic(Stage stage){
-        //TODO make logic for saving the content in the editscreen
-    /*    Appointment(this.eventName.getText());
-        Appointment.setLocation(this.locationText.getText());
-        Appointment.setDescription(this.descriptionText.getText());
-        Appointment.changeTimeFrame(); //TODO fix logic
-        Appointment.alertChanges(this.alarmCombo.getValue());
-        Appointment.setRoom(roomCombo.getValue());
-        Appointment.addUser(editUsers.getValue());
-        Appointment.addGroup(editGroups.getValue()); */
+        model = new Appointment(this.eventName.getText());
+        model.setLocation(this.locationText.getText());
+        model.setDescription(this.descriptionText.getText());
+        makeTimeFrameFromTextFields();
+        finalGroupList = groupListView.getSelectionModel().getSelectedItems();
+        finalUserList = userListView.getSelectionModel().getSelectedItems();
+        //Appointment.alertChanges(this.alarmCombo.getValue());
+        //Appointment.setRoom(roomCombo.getValue());
+        for (int i=0; i<finalUserList.size(); i++)
+            model.addUser(finalUserList.get(i));
+        //Appointment.addGroup(editGroups.getValue());
+        model.setOwner(clientConnection.getLoggedInUser());
+        if (appointmentID != 0){
+            model.setId(appointmentID);
+            clientConnection.updateAppointment(model);
+        }
+        else
+            clientConnection.newAppointment(model);
         stage.close();
     }
 
 
-    /*public void start (final Stage editStage){*/
-    public EditScreen(final Stage editStage){
+    public EditScreen(Appointment appointment, ClientConnection cC){
+        this(new Stage(), cC);
+        if (appointment.getLocation() != null)
+            locationText.setText(appointment.getLocation());
 
+        eventName.setText(appointment.getTitle());
+        descriptionText.setText(appointment.getDescription() != null ? appointment.getDescription() : "");
+        //groupListView
+        for (int i=0; i<appointment.getParticipants().size(); i++);
 
+        fromDate.setText(appointment.getTimeFrame().getStartDate().toString("dd.MM.yyyy"));
+        toDate.setText(appointment.getTimeFrame().getEndDate().toString("dd.MM.yyyy"));
+        int dt = appointment.getTimeFrame().getStartDate().getHourOfDay()-8;
+        fromTime.setValue(timeOptions.get(dt));
+        dt = appointment.getTimeFrame().getEndDate().getHourOfDay()-8;
+        toTime.setValue(timeOptions.get(dt));
+        appointmentID = appointment.getId();
+    }
+
+    public EditScreen(final Stage editStage, ClientConnection cC){
+        clientConnection = cC;
         timeOptions = FXCollections.observableArrayList(
                 "08:00", "09:00", "10:00", "11:00",
                 "12:00", "13:00", "14:00", "15:00"
@@ -143,8 +172,7 @@ public void  makeTimeFrameFromTextFields(){
 
         //TODO Fill these lists with data from the database
         userOptions = FXCollections.observableArrayList(
-                "Jonas"
-
+                clientConnection.getUsers()
         );
 
         groupOptions = FXCollections.observableArrayList(
@@ -175,14 +203,14 @@ public void  makeTimeFrameFromTextFields(){
 
         eventName = new TextField();
         eventName.setPromptText("Name of event");
-        eventName.setMinWidth(200);
+        eventName.setMinSize(200, 30);
         editGrid.add(eventName, 0, 0, 2, 1);
 
         date = new Label("Date:");
         fromDate = new TextField();
         toDate = new TextField();
-        fromTime.setPromptText("dd.mm.yyyy");
-        toTime.setPromptText("dd.mm.yyyy");
+        fromDate.setPromptText("dd.mm.yyyy");
+        toDate.setPromptText("dd.mm.yyyy");
 
         editGrid.add(date,0,2);
         dateGrid.add(fromDate,0,0); //1,1
@@ -226,6 +254,7 @@ public void  makeTimeFrameFromTextFields(){
         addRemoveUsers = new Label("Invite users:");
         userListView = new ListView(userOptions);
         userListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        userListView.setMaxSize(160, 90);
         editGrid.add(userListView, 1, 14);
         editGrid.add(addRemoveUsers, 0, 14);
 
@@ -235,7 +264,8 @@ public void  makeTimeFrameFromTextFields(){
         addRemoveGroup = new Label("Invite group:");
         groupListView = new ListView(groupOptions);
         groupListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        editGrid.add(groupListView, 0, 15);
+        groupListView.setMaxSize(160,90);
+        editGrid.add(addRemoveGroup, 0, 15);
         editGrid.add(groupListView, 1, 15);
 
 
@@ -256,19 +286,6 @@ public void  makeTimeFrameFromTextFields(){
         commitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                finalGroupList = groupListView.getSelectionModel().getSelectedItems();
-                finalUserList = userListView.getSelectionModel().getSelectedItems();
-                Appointment appointment = new Appointment(eventName.getText());
-                appointment.setDescription(descriptionText.getText());
-                appointment.setLocation(locationText.getText());
-                appointment.setOwner(clientConnection.getLoggedInUser());
-                //appointment.setRoom();
-                //appointment.setTimeFrame();
-                // newAppointment(appointment);
-
-
-                //TODO: send to database
-
                 commitButtonLogic(editStage);
             }
         });
