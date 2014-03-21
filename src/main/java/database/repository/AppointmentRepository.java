@@ -119,7 +119,7 @@ public class AppointmentRepository implements AppointmentService {
                 appointment.setDescription(rs.getString("a.DESCRIPTION"));
                 appointment.setLocation(rs.getString("a.LOCATION"));
                 appointment.setOwner(us.getUser(rs.getString("a.OWNER")));
-                appointment.setTimeFrame(new TimeFrame(new DateTime(rs.getDate("t.STARTDATE")), new DateTime(rs.getDate("t.ENDDATE"))));
+                appointment.setTimeFrame(new TimeFrame(new DateTime(rs.getTimestamp("t.STARTDATE")), new DateTime(rs.getTimestamp("t.ENDDATE"))));
                 appointment.setParticipants(getParticipants(appointment.getId()));
                 appointment.setRoom(mrs.getMeetingRoom(rs.getInt("a.MEETINGROOMID")));
 
