@@ -107,7 +107,24 @@ View-screenet inneholder tekstfelt for navn på avtalen, fra og til dato, fra og
 
 
 \section{Konstruksjonsbeskrivelse}
-%Mens skjermdesignet fokuserer på brukerens opplevelse, skal dere her beskrive hvordan brukergrensesnittet er bygd opp, dvs. hvilke vinduer og dialogelementer som utgjør grensesnittet, og hvordan disse er koblet sammen i et hierarki og kommuniserer vha. metodekall og hendelser. Her er altså fokuset hvordan konstruksjonselementene fra Swing‐rammeverket benyttes for å realisere brukergrensesnittet. Detaljeringsnivået skal tilsvare formuleringen av konstruksjonsøvingene og i prinsippet gjøre det mulig å skrive en funksjonstest vha. JUnit/JFCUnit‐rammeverket.
+Oppbygningen er vist i \ref{uikonstruksjon}, og \ref{konstruksjond3} der vi har vist klassene som danner uiet i forhold til hverandre. ComboBoxer og knapper for de ulike viewene er gruppert sammen for bedre leselighet. 
+
+\begin{figure}[h!] 
+    \begin{center}  
+    	\includegraphics[width=8cm]{calendarStateDiagram.png}
+		\caption{Konstruksjon av UI}
+	\label{uikonstruksjon}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[h!] 
+    \begin{center}  
+    	\includegraphics[width=8cm]{Konstruksjond3.png}
+		\caption{Konstruksjon av UI}
+	\label{konstruksjond3}
+	\end{center}
+\end{figure}
 
 
 
