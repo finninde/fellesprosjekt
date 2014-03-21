@@ -1,7 +1,9 @@
 package UI;
 
+import client.ClientConnection;
 import helperclasses.Appointment;
 import helperclasses.TimeFrame;
+import helperclasses.User;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -30,6 +32,8 @@ public class EditScreen /*extends Application*/ {
     protected TextField locationText;
     protected TextArea descriptionText;
 
+    private ClientConnection clientConnection;
+
     private Appointment model;
 
     protected TextField fromDate;
@@ -43,8 +47,10 @@ public class EditScreen /*extends Application*/ {
     protected ComboBox toTime;
     protected ComboBox alarmCombo;
     protected ComboBox roomCombo;
-    protected ComboBox editUsers;
-    protected ComboBox editGroups;
+    //protected ComboBox editUsers;
+    //protected ComboBox editGroups;
+    protected ListView userListView;
+    protected ListView groupListView;
 
     protected Label date;
     protected Label time;
@@ -64,7 +70,8 @@ public class EditScreen /*extends Application*/ {
     protected GridPane timeGrid;
     protected GridPane cancelButtonGrid;
 
-
+    private ObservableList<String> finalGroupList;
+    private ObservableList<String> finalUserList;
     private ObservableList<String> timeOptions;
     private ObservableList<String> alarmOptions;
     private ObservableList<String> userOptions; //Change to User instead of String when implemented
@@ -93,7 +100,7 @@ public void  makeTimeFrameFromTextFields(){
 
         int endYear = Integer.parseInt(toDate.getText().substring(0,2));
         int endMonth = Integer.parseInt(toDate.getText().substring(3,5));
-        int endDay = Integer.parseInt(toDate.getText().substring(6,8));
+        int endDay = Integer.parseInt(toDate.getText().substring(6,10));
         int endHour = Integer.parseInt(toTime.getValue().toString().substring(0, 2));
 
         //Setter Appointment sin startdate lik startdaten
@@ -122,22 +129,19 @@ public void  makeTimeFrameFromTextFields(){
 
 
         timeOptions = FXCollections.observableArrayList(
-                "00:00", "01:00", "02:00", "03:00",
-                "04:00", "05:00", "06:00", "07:00",
                 "08:00", "09:00", "10:00", "11:00",
-                "12:00", "13:00", "14:00", "15:00",
-                "16:00", "17:00", "18:00", "19:00",
-                "20:00", "21:00", "22:00", "23:00"
+                "12:00", "13:00", "14:00", "15:00"
         );
 
         alarmOptions = FXCollections.observableArrayList(
+                "No alarm",
                 "1 hour before",
                 "2 hours before",
                 "1 day before",
-                "2 days before",
-                "1 week before"
+                "2 days before"
         );
 
+        //TODO Fill these lists with data from the database
         userOptions = FXCollections.observableArrayList(
                 "Jonas"
 
@@ -150,10 +154,10 @@ public void  makeTimeFrameFromTextFields(){
         roomOptions = FXCollections.observableArrayList(
                 "None",
                 "Drivhuset"
-        );
+        ); //TODO Fill these lists with data from the database
 
         editGrid = new GridPane();
-        editGrid.setPadding(new Insets(15,15,15,15));
+        editGrid.setPadding(new Insets(15, 15, 15, 15));
         editGrid.setVgap(10);
         editGrid.setHgap(10);
 
@@ -214,31 +218,59 @@ public void  makeTimeFrameFromTextFields(){
 
         descriptionLabel = new Label("Description:");
         descriptionText = new TextArea();
-        descriptionText.setPrefSize(160,90);
+        descriptionText.setPrefSize(160, 90);
         descriptionText.setWrapText(true);
         editGrid.add(descriptionLabel,0,11);
         editGrid.add(descriptionText,1,11);
 
         addRemoveUsers = new Label("Invite users:");
-        editUsers = new ComboBox(userOptions);
+        userListView = new ListView(userOptions);
+        userListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        editGrid.add(userListView, 1, 14);
+        editGrid.add(addRemoveUsers, 0, 14);
+
+
+
+
+        addRemoveGroup = new Label("Invite group:");
+        groupListView = new ListView(groupOptions);
+        groupListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        editGrid.add(groupListView, 0, 15);
+        editGrid.add(groupListView, 1, 15);
+
+
+        //Code for combobox
+
+        /*editUsers = new ComboBox(userOptions);
         editUsers.setMinWidth(160);
         //editUsers.setSelectionModel();
         editUsers.setValue(userOptions.get(0));
-        editGrid.add(addRemoveUsers, 0, 14);
-        editGrid.add(editUsers, 1, 14);
+        editGrid.add(editUsers, 1, 14);*/
 
-        addRemoveGroup = new Label("Invite group:");
-        editGroups = new ComboBox(groupOptions);
+        /*editGroups = new ComboBox(groupOptions);
         editGroups.setMinWidth(160);
-        editGroups.setValue(groupOptions.get(0));
-        editGrid.add(addRemoveGroup, 0, 15);
-        editGrid.add(editGroups, 1, 15);
+        editGroups.setValue(groupOptions.get(0));*/
+
 
         commitButton = new Button("Commit");
         commitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                commitButtonLogic(editStage);}
+                finalGroupList = groupListView.getSelectionModel().getSelectedItems();
+                finalUserList = userListView.getSelectionModel().getSelectedItems();
+                Appointment appointment = new Appointment(eventName.getText());
+                appointment.setDescription(descriptionText.getText());
+                appointment.setLocation(locationText.getText());
+                appointment.setOwner(clientConnection.getLoggedInUser());
+                //appointment.setRoom();
+                //appointment.setTimeFrame();
+                // newAppointment(appointment);
+
+
+                //TODO: send to database
+
+                commitButtonLogic(editStage);
+            }
         });
         editGrid.add(commitButton, 0, 18);
 
@@ -246,14 +278,15 @@ public void  makeTimeFrameFromTextFields(){
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                closeButtonLogic(editStage);}
+                closeButtonLogic(editStage);
+            }
         });
         cancelButtonGrid.add(cancelButton,1,0);
 
         //Make invisible button to push the cancel button to the left
         invisibleButton = new Button("invisblebu");
         invisibleButton.setVisible(false);
-        cancelButtonGrid.add(invisibleButton,0,0);
+        cancelButtonGrid.add(invisibleButton, 0, 0);
 
 
 
@@ -264,6 +297,7 @@ public void  makeTimeFrameFromTextFields(){
         editStage.setScene(scene);
         editStage.show();
 
+        //TODO make setModel-method
         //TODO Choose groups and users
         //TODO Make alarm and notify the database
 
