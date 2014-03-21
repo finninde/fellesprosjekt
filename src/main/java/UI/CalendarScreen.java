@@ -185,7 +185,7 @@ public class CalendarScreen {
         // make events highlighted
 
         for(int i=0; i<btn.length; i++){
-            for(int j=0; j<btn.length;j++){
+            for(int j=0; j<btn[i].length;j++){
 
                 btn[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
