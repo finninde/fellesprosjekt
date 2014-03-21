@@ -93,7 +93,7 @@ public class AppointmentRepository implements AppointmentService {
         try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             statement.setString(1, alarm.getUser().getUsername());
             statement.setInt(2, alarm.getAppointment().getId());
-            statement.setDate(3, new java.sql.Date(alarm.getExecuteAlarm().getMillis()));
+            statement.setTimestamp(3, new Timestamp(alarm.getExecuteAlarm().getMillis()));
             statement.executeUpdate();
             ResultSet key = statement.getGeneratedKeys();
             key.next();
@@ -134,7 +134,21 @@ public class AppointmentRepository implements AppointmentService {
 
     @Override
     public TimeFrame getTimeFrame(int id) {
-        return null;
+        TimeFrame timeFrame = null;
+        String sql = "SELECT * FROM TIMEFRAME WHERE ID = ?";
+        try (PreparedStatement statement = DatabaseConnection.getConnectionInstance().prepareStatement(sql);) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                timeFrame = new TimeFrame(new DateTime(rs.getTimestamp("STARTDATE")), new DateTime(rs.getTimestamp("ENDDATE")));
+
+            }
+
+        } catch (SQLException e) {
+            Logger.getLogger(AppointmentRepository.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return timeFrame;
     }
 
     @Override
