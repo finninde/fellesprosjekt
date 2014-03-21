@@ -270,8 +270,6 @@ public class ClientConnection extends Thread implements ConnectionListener, GUIR
     }
 
 
-
-
     @Override
     public ArrayList<Appointment> getAppointmentsWhereUserIsOwner() {
         JSONObject json = new JSONObject();
