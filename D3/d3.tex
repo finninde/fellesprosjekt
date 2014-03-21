@@ -18,14 +18,51 @@ Denne rapporten omhandler skjermdesignet og konstruksjonen av brukergrensesnitte
 
 
 \section{Skjermdesign}
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{LoginScreen.png}
+        \caption{Log in screen}
+    \label{login}
+    \end{center}
+\end{figure}
+
 Det første vinduet som møter brukeren er login vinduet. Fra dette vinduet kan brukeren skrive inn brukernavn og passord i de respektive username og password-feltene. Info fra disse feltene lagres som felter i en instans av userklassen. For å logge inn, må brukeren trykke på sign in knappen. Det sjekkes da om brukernavn eksisterer i databasen og om passord evt er riktig. Stemmer disse dataene, åpnes kalendervinduet.
 
+
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{MainView.png}
+        \caption{Calendar view}
+    \label{mainview}
+    \end{center}
+\end{figure}
 I kalendervinduet er det knapper på toppen, hvor det er mulighet til å opprette ny kalender og bla frem og tilbake en uke. I tillegg er det en dropdown meny oppe til høyre hvor du ved å trykke på andres brukernavn kan vise andre brukeres kalender.
 
 Hovedblikkfanget er dog ukeviewet, som er en grid med knapper. Her kan brukeren trykke på knappene for å opprette en avtale i det gitte tidspunktet. Brukeren får da opp et editscreen hvor det er mulig å legge inn data for å opprette en avtale. Om brukeren trykker på en eksisterende avtale får brukeren opp edit-screen hvor brukeren kan endre avtalen. Hvis ikke popper det opp et view-screen hvor brukeren kan vise avtalen.
 
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{EditScreen.png}
+        \caption{Edit screen}
+    \label{edit}
+    \end{center}
+\end{figure}
 I edtiscreenen er det øverste elementet et tekstfelt hvor brukeren fyller inn navn på avtalen. Deretter er det to tekstfelt for utfylling av dato. Brukeren må fylle inn dato på riktig format, altså :dd.mm.yyyy. Videre er det dropdownmenyer for klokkeslett til elelr fra, og sette tidspunkt for alarmen. I locationtekstfeltet kan brukeren skrive inn hvor avtalen skal foregå. I roomdropdownmenyen får brukeren opp møterom som er ledige i det gitte tidsintervallet avtalen er satt. I description-tekstfeltet kan brukeren legge inn en beskrivelse for arrangementet. I invite users/group-feltene kan man markere de brukerne/gruppene som skal inviteres. Ved å trykke commit-knappen  lagres all informasjonen i et appointmentobjekt og sendes til databasen.
 
+\newpage
+
+\begin{figure}[h!] 
+    \begin{center} 
+        \includegraphics[width=8cm]{ViewScreen.png}
+        \caption{Log in screen}
+    \label{login}
+    \end{center}
+\end{figure}
 View-screenet inneholder tekstfelt for navn på avtalen, fra og til dato, fra og til klokkeslett, sted, møterom, beskrivelse av arrangementet, hvem som har sagt at de kan komme, hvem som ikke har svart og hvem som ikke kan. I tillegg har vi en dropdownmeny hvor man kan velge når kalenderen skal minne deg på møtet.
 
 %Dere skal her ta utgangspunkt i kravspesifikasjonen og scenariene fra øving D2. I innleveringen skal dere beskrive grafisk struktur og utforming, kobling mot konseptuell modell, og hvordan alle deler av applikasjonen reagerer på relevante hendelser, som museklikk og tastetrykk. Målet er å spesifisere brukeropplevelsen, dvs. hva brukeren til enhver tid ser og kan gjøre.
