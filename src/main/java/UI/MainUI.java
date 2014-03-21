@@ -12,7 +12,7 @@ public class MainUI extends Application implements OwnerOfClientConnection {
     @Override
     public void start(Stage stage) throws Exception{
         //new EditScreen(stage);
-        new ViewScreen(stage);
+        //new ViewScreen(stage);
     }
 
     public static void main (String[] args){
