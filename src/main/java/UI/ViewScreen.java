@@ -2,21 +2,17 @@ package UI;
 
 import client.ClientConnection;
 import helperclasses.*;
-import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.joda.time.DateTime;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 
@@ -24,7 +20,7 @@ import java.util.ArrayList;
  * Created by jonasandredalseth on 11.03.14.
  */
 
-public class ViewScreen implements PropertyChangeListener, ActionListener {
+public class ViewScreen {
     private Appointment model;
     private ClientConnection clientConnection;
 
@@ -55,7 +51,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
 
 
 
-    //Try to user cancel button from EditScreen instead of making a new one
+    //Try to use cancel button from EditScreen instead of making a new one
     private Button accept;
     private Button decline;
     private Button hide;
@@ -64,7 +60,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         String accepted = "";
         String declined = "";
         String waiting = "";
-        for (int i = 0; i == participants.size(); i++){
+        for (int i = 0; i < participants.size(); i++){
             if (participants.get(i).getStatus() == Status.ACCEPTED){
                 accepted += participants.get(i) + "\n";
             }
@@ -121,7 +117,8 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         fromTime.setText(fromTimeFrameToFromTimeString());
         toTime.setText(fromTimeFrameToToTimeString());
         viewScreen.locationText.setText(model.getLocation());
-        room.setText(model.getRoom().getRoom());
+        if (model.getRoom() != null)
+            room.setText(model.getRoom().getRoom());
         viewScreen.descriptionText.setText(model.getDescription());
         fillUserStatusFields(model.getParticipants());
     }
@@ -197,10 +194,10 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
     }
 
 
-    public ViewScreen(Stage viewStage, Appointment model) {
+    public ViewScreen(final Stage viewStage, Appointment model, ClientConnection cC) {
+        clientConnection = cC;
         this.viewStage = viewStage;
-        viewScreen = new EditScreen(viewStage);
-        clientConnection = ClientConnection.getInstance();
+        viewScreen = new EditScreen(viewStage, clientConnection);
 
         viewGrid = new GridPane();
         viewDateGrid = new GridPane();
@@ -262,8 +259,20 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         viewGrid.add(declinedUsers,1,16);
 
         accept = new Button("Accept");
+        accept.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {acceptButtonLogic();}});
         decline = new Button("Decline");
+        decline.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {declineButtonLogic();}});
         hide = new Button("Hide");
+        hide.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {hideButtonLogic();}});
+        viewScreen.cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {viewScreen.closeButtonLogic(viewStage);}});
         viewGrid.add(buttonGrid,0,19,2,1);
 
         buttonGrid.add(accept,0,0);
@@ -286,7 +295,7 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         viewStage.setTitle("View");
     }
 
-
+/*
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String property = evt.getPropertyName();
@@ -306,17 +315,5 @@ public class ViewScreen implements PropertyChangeListener, ActionListener {
         }
         else if (property == "participants")
             fillUserStatusFields((ArrayList<Participant>)evt.getNewValue());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == accept)
-            acceptButtonLogic();
-        else if (e.getSource() == decline)
-            declineButtonLogic();
-        else if (e.getSource() == hide)
-            hideButtonLogic();
-        else if (e.getSource() == viewScreen.cancelButton)
-            viewScreen.closeButtonLogic(viewStage);
-    }
+    }*/
 }

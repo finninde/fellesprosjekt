@@ -42,14 +42,18 @@ public class CalendarScreen {
     private ClientConnection connection;
     private GridPane calendarGrid;
     private int week;
+    private User user;
 
     private Label hour;
     private ArrayList<Label> days;
     private Label otherUsersLabel;
+    private ClientConnection clientConnection;
 
     private ArrayList<User> allUsers;
 
-    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User user, final boolean owner, final ClientConnection clientConnection){
+    public CalendarScreen(final Stage calendarStage, ArrayList<User> users, User u, final boolean owner, ClientConnection cC){
+        user = u;
+        clientConnection = cC;
         week = 0;
         allUsers = users;
         days = new ArrayList<Label>();
@@ -57,11 +61,11 @@ public class CalendarScreen {
         calendarGrid.setHgap(10);
         calendarGrid.setVgap(10);
 
-
+/*
         Appointment q = new Appointment("julekake");
-        q.setTimeFrame(new TimeFrame(new DateTime().withTime(8,0,0,0), new DateTime()));
+        q.setTimeFrame(new TimeFrame(new DateTime().withTime(10,0,0,0), new DateTime().withTime(15,0,0,0)));
         q.setOwner(user);
-        clientConnection.newAppointment(q);
+        clientConnection.newAppointment(q);*/
 
         if (owner){
             newAppointmentButton = new Button("New Appointment");
@@ -72,7 +76,7 @@ public class CalendarScreen {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                     System.out.println("newAppointmentButton clicked");
-                    new EditScreen(new Stage());
+                    new EditScreen(new Stage(), clientConnection);
                 }
             });
             logOutButton = new Button("Logout");
@@ -189,15 +193,22 @@ public class CalendarScreen {
 
                 btn[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
+                        AppointmentButton a = (AppointmentButton) event.getSource();
+
                         System.out.println(event.getSource());
-                        if (((AppointmentButton)(event.getSource())).getId() == "important") {
+                        if (a.getId() == "important") {
+                            new ViewScreen(new Stage(), a.getAppointment(), clientConnection);
                             //TODO:handle red event
-                        } else if (((AppointmentButton)(event.getSource())).getId() == "accepted") {
+                        } else if (a.getId() == "accepted" && a.getAppointment().getOwner().getUsername().equals(user.getUsername())){
+                            new EditScreen(a.getAppointment(), clientConnection);
                             //TODO:all is fine, nothing to do.
-                        } else if (((AppointmentButton)(event.getSource())).getId() == "pending") {
+                        } else if (a.getId() == "accepted"){
+                            new ViewScreen(new Stage(), a.getAppointment(), clientConnection);
+                        } else if (a.getId() == "pending") {
+                            new ViewScreen(new Stage(), a.getAppointment(), clientConnection);
                             //TODO:handle whatever yellow event is.
                         } else {
-                            new EditScreen(new Stage());
+                            new EditScreen(new Stage(), clientConnection);
                             //TODO:make new appointment.
                         }
                     }
@@ -221,6 +232,8 @@ public class CalendarScreen {
     }
 
     public void updateView() {
+        this.appointmentsWhereUserIsOwner = clientConnection.getAppointmentsWhereUserIsOwner();
+        this.appointmentsWhereUserIsParticipant = clientConnection.getAppointmentsWhereUserIsParticipant();
         startOfWeek = new DateTime().withDayOfWeek(1).plusWeeks(week);
         endOfWeek = startOfWeek.plusDays(7);
         int i = 0;
@@ -249,7 +262,7 @@ public class CalendarScreen {
 
     public void showAppointmentInCalendar(Appointment appointment){
         DateTime startDate = appointment.getTimeFrame().getStartDate();
-        if (startDate.isBefore(endOfWeek) && startDate.isAfter(startOfWeek)){
+        if (startDate.isBefore(endOfWeek.plusDays(1)) && startDate.isAfter(startOfWeek.minusDays(1))){
             Status status = this.connection.getStatusForAppointment(appointment.getId());
             if(status == Status.HIDE) {
                 return;
