@@ -45,6 +45,7 @@ local.properties
 TSWLatexianTemp*
 *.aux
 *.log
+*.toc
 *.gz
 *.DS_Store
 *.out
